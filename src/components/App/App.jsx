@@ -1,12 +1,17 @@
-import './App.css'
+
+import { Route, Routes } from 'react-router-dom';
+import { lazy } from 'react';
+
+const HomePage = lazy(() => import('../../pages/HomePage/HomePage.jsx'));
+const NotFoundPage = lazy(() => import('../../pages/NotFoundPage/NotFoundPage.jsx'));
 
 function App() {
-
   return (
-    <>
-    <h1>Hello my team!</h1>
-    </>
-  )
+    <Routes>
+      <Route path="/" element={<HomePage />} />
+      <Route path="*" element={<NotFoundPage />} />
+    </Routes>
+  );
 }
 
-export default App
+export default App;
