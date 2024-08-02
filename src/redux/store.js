@@ -8,10 +8,12 @@ import {
     REGISTER,
 } from "redux-persist";
 import { waterReducer } from "./water/slice";
+import { authReducer } from "./auth/slice";
 
 export const store = configureStore({
     reducer: {
         water: waterReducer,
+        auth: authReducer,
     },
     middleware: (getDefaultMiddleware) =>
         getDefaultMiddleware({
