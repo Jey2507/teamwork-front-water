@@ -7,7 +7,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import * as Yup from "yup";
 import toast from "react-hot-toast";
 
-// import { signIn } from "src/redux/users/operations.js";
+import { login } from "../../../redux/auth/operations.js";
 
 const SignInForm = () => {
   const dispatch = useDispatch();
@@ -32,13 +32,17 @@ const SignInForm = () => {
   });
 
   const onSubmit = async (data) => {
-    // dispatch(signIn(data))
-    //   .unwrap()
-    //   .then((res) => {
-    //     toast.success(res.message);
-    //     reset();
-    //     navigate("/tracker");
-    //   });
+    console.log(data);
+    dispatch(login(data))
+      .unwrap()
+      .then((res) => {
+        toast.success(res.message);
+        reset();
+        navigate("/tracker");
+      })
+      .catch((err) => {
+        toast.error("Login failed");
+      });
   };
 
   const togglePasswordVisibility = () => {
@@ -49,7 +53,7 @@ const SignInForm = () => {
     <div className={css.signInContainer}>
       <div className={css.signInForm}>
         <div className={css.formSection}>
-          {/* <Logo / тут буде лого> */}
+          {/* <Logo /> тут буде лого */}
           <form className={css.form} onSubmit={handleSubmit(onSubmit)}>
             <h2 className={css.formTitle}>Sign In</h2>
             <div className={css.inputContainer}>
@@ -59,7 +63,9 @@ const SignInForm = () => {
                 placeholder="Enter your email"
                 {...register("email")}
               />
-              {errors.email && <p>{errors.email.message}</p>}
+              {errors.email && (
+                <p className={css.errorText}>{errors.email.message}</p>
+              )}
             </div>
             <div className={css.inputContainer}>
               <label className={css.formLabel}>Password</label>
@@ -73,10 +79,18 @@ const SignInForm = () => {
                   className={css.togglePassword}
                   onClick={togglePasswordVisibility}
                 >
-                  {/* <FontAwesomeIcon icon={showPassword ? faEye : faEyeSlash} /> */}
+                  <svg className={css.icon}>
+                    <use
+                      href={`../../../assets/sprite.svg#${
+                        showPassword ? "icon-eye" : "icon-eye-off"
+                      }`}
+                    />
+                  </svg>
                 </span>
               </div>
-              {errors.password && <p>{errors.password.message}</p>}
+              {errors.password && (
+                <p className={css.errorText}>{errors.password.message}</p>
+              )}
             </div>
             <button
               disabled={!isDirty || !isValid}
@@ -94,7 +108,7 @@ const SignInForm = () => {
           </form>
         </div>
         {/* <div className={css.imageSection}>
-          <AdvantagesSection / тут буде секція >
+          <AdvantagesSection /> тут буде секція
         </div> */}
       </div>
     </div>
