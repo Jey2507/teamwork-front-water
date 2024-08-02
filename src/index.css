@@ -1,5 +1,13 @@
 :root {
-  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
-  line-height: 1.5;
-  font-weight: 400;
+  font-family: "Poppins", sans-serif;
+
+  /* Юзайте змінні  */
+
+  --main: #323f47;
+	--main-text: #2f2f2f;
+	--accent: #9be1a0;
+	--background: #f0eff4;
+	--main-white: #fff;
 }
+
+/* І ніякий лишній СSS тут не пишіть!  */
