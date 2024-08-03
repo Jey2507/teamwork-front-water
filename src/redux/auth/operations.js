@@ -1,20 +1,26 @@
-import { createAsyncThunk } from '@reduxjs/toolkit';
-import axios from 'axios';
+import axios from "axios";
+import { createAsyncThunk } from "@reduxjs/toolkit";
 
-axios.defaults.baseURL = 'https://aqua-app-teamwork.onrender.com/';
+export const instance = axios.create({
+  baseURL: "https://665c87ca3e4ac90a04d9d4f0.mockapi.io/",
+});
 
-
-const clearAuthHeader = () => {
-    axios.defaults.headers.common.Authorization = '';
+export const setToken = (token) => {
+  instance.defaults.headers.common.Authorization = `Bearer ${token}`;
 };
 
-export const logOut = createAsyncThunk('auth/logout', async (_, thunkAPI) => {
+export const clearToken = () =>
+  (instance.defaults.headers.common.Authorization = "");
+
+export const login = createAsyncThunk(
+  "auth/login",
+  async (loginData, thunkAPI) => {
     try {
-        await axios.post('/users/logout');
-        clearAuthHeader();
-        thunkAPI.dispatch(clearStore()); // Очищення Redux store
-        localStorage.clear(); // Очищення localStorage
+      const response = await instance.post("/login", loginData);
+      setToken(response.data.token);
+      return response.data;
     } catch (error) {
-        return thunkAPI.rejectWithValue(error.message);
+      return thunkAPI.rejectWithValue(error.message);
     }
-}); 
+  }
+);
