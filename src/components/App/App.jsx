@@ -1,11 +1,11 @@
 import { Route, Routes } from "react-router-dom";
 import { lazy } from "react";
-import SignInPage from "../../pages/SignInPage/SignInPage.jsx";
 
 const HomePage = lazy(() => import("../../pages/HomePage/HomePage.jsx"));
 const NotFoundPage = lazy(() =>
   import("../../pages/NotFoundPage/NotFoundPage.jsx")
 );
+const SignInPage = lazy(() => import("../../pages/SignInPage/SignInPage.jsx"))
 
 function App() {
   return (
