@@ -10,7 +10,7 @@ import { getUser } from '../../redux/auth/operations';
 // import WaterMainInfo from '../../components/WaterMainInfo/WaterMainInfo';
 // import WaterDetailedInfo from '../../components/WaterDetailedInfo/WaterDetailedInfo';
 
-import css from './TrackerPage.module.css';
+// import css from './TrackerPage.module.css';
 
 const TrackerPage = () => {
   const dispatch = useDispatch();
