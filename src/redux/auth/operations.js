@@ -1,6 +1,10 @@
 import axios from "axios";
 import { createAsyncThunk } from "@reduxjs/toolkit";
 
+const clearAuthHeader = () => {
+    axios.defaults.headers.common.Authorization = '';
+};
+
 export const instance = axios.create({
   baseURL: "https://665c87ca3e4ac90a04d9d4f0.mockapi.io/",
 });
@@ -24,3 +28,12 @@ export const login = createAsyncThunk(
     }
   }
 );
+
+export const logOut = createAsyncThunk('auth/logout', async (_, thunkAPI) => {
+    try {
+        await axios.post('/users/logout');
+        clearAuthHeader();
+    } catch (error) {
+        return thunkAPI.rejectWithValue(error.message);
+    }
+});

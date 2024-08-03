@@ -22,10 +22,14 @@ const DeleteWaterModal = ({ entryId }) => {
   return (
     <div className={css.modalContainer}>
       <button className={css.closeButton} onClick={closeModal}>
-        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        {/* <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
           <path d="M18 6L6 18" stroke="#2F2F2F" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
           <path d="M6 6L18 18" stroke="#2F2F2F" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-        </svg>
+        </svg> */
+        <svg className={css.icon}>
+        <use xlinkHref="#icon-log-out"></use>
+      </svg>
+        }
       </button>
       <div className={css.coverText}>
         <h2 className={css.title}>Delete entry</h2>

@@ -1,4 +1,4 @@
-import { Route, Routes } from "react-router-dom";
+/* import { Route, Routes } from "react-router-dom";
 import { lazy } from "react";
 
 const HomePage = lazy(() => import("../../pages/HomePage/HomePage.jsx"));
@@ -16,9 +16,9 @@ function App() {
       <Route path="*" element={<NotFoundPage />} />
     </Routes>
   );
-}
+} */
 
-export default App; */
+/* export default App; */ 
 
 import { Route, Routes } from 'react-router-dom';
 import { lazy, Suspense } from 'react';
