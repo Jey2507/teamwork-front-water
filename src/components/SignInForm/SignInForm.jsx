@@ -1,4 +1,4 @@
-import css from "./signInForm.module.css";
+import css from "../SignInForm/SignInForm.module.css";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { useForm } from "react-hook-form";
