@@ -33,10 +33,12 @@
   position: relative;
 }
 
-.inputContainer .togglePassword {
+.inputWrapper svg {
   position: absolute;
   right: 18px;
   cursor: pointer;
+  fill: transparent;
+  stroke: currentColor;
 }
 
 .formSection {

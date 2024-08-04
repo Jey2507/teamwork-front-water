@@ -7,7 +7,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import * as Yup from "yup";
 import toast from "react-hot-toast";
 import Logo from "../Logo/Logo.jsx";
-
+import { icons as sprite } from "../../assets/index.js";
 import { login } from "../../redux/auth/operations.js";
 
 const SignInForm = () => {
@@ -76,18 +76,18 @@ const SignInForm = () => {
                   placeholder="Enter your password"
                   {...register("password")}
                 />
-                <span
+                <svg
+                  width="20"
+                  height="20"
                   className={css.togglePassword}
                   onClick={togglePasswordVisibility}
                 >
-                  <svg className={css.icon}>
-                    <use
-                      href={`../../../assets/sprite.svg#${
-                        showPassword ? "icon-eye" : "icon-eye-off"
-                      }`}
-                    />
-                  </svg>
-                </span>
+                  <use
+                    xlinkHref={`${sprite}#${
+                      showPassword ? "icon-eye" : "icon-eye-off"
+                    }`}
+                  />
+                </svg>
               </div>
               {errors.password && (
                 <p className={css.errorText}>{errors.password.message}</p>
