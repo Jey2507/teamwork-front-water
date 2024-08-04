@@ -164,6 +164,10 @@
 .btnform:disabled:focus {
   transform: scale(1);
 }
+.errorText {
+  height: 16px;
+  font-size: 14px;
+}
 
 @media (min-width: 768px) {
   .formSection {
