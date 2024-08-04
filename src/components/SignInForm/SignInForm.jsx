@@ -33,7 +33,6 @@ const SignInForm = () => {
   });
 
   const onSubmit = async (data) => {
-    console.log(data);
     dispatch(login(data))
       .unwrap()
       .then((res) => {
