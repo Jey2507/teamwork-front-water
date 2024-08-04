@@ -29,7 +29,7 @@ const LogOutModal = () => {
     <div className={css.modalContainer}>
       <button className={css.closeButton} onClick={() => dispatch(closeModal())}>
       <svg className="css.icon">
-       <use xlinkHref={sprite + "#icon-x"} />
+       <use xlinkHref={`${sprite}#icon-x`} />
      </svg>
       </button>
       <div className={css.coverText}>
