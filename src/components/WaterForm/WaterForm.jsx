@@ -1,6 +1,5 @@
 import css from "./WaterForm.module.css";
 import clsx from "clsx";
-import {useForm} from "react-hook-form";
 
 const WaterForm = ({operationType}) => {
   const FormHeader = (operationType) => {
@@ -18,20 +17,26 @@ const WaterForm = ({operationType}) => {
       {FormHeader(operationType)}
       <p className={css.AmountOfWater}>Amount of water</p>
       <div className={css.TapAddWaterWrapper}>
-        <button type="button">-</button>
-        <p>50ml</p>
-        <button type="button">+</button>
+        <button type="button" className={css.TapAddWater}>
+          -
+        </button>
+        <p className={css.TapAddWaterValue}>50ml</p>
+        <button type="button" className={css.TapAddWater}>
+          +
+        </button>
       </div>
 
-      <label>
+      <label className={css.RecordingTimeLabel}>
         Recording time:
-        <input type="time" />
+        <input type="text" className={css.RecordingTime} />
       </label>
-      <label>
+      <label className={css.WaterValueLabel}>
         Enter the value of the water used:
-        <input type="number" />
+        <input type="number" className={css.WaterValue} />
       </label>
-      <button type="submit">Save</button>
+      <button type="button" className={css.SaveBtn}>
+        Save
+      </button>
     </form>
   );
 };
