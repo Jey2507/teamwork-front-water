@@ -10,15 +10,7 @@
     align-items: center;
     z-index: 1000;
   }
-  
-  .modal {
-    position: relative;
-    background-color: white;
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0);
-  }
-  
+
   .closeButton {
     position: absolute;
     top: 10px;
@@ -32,3 +24,11 @@
     width: 24px;
     height: 24px;
   }
+
+  
+@media only screen and (min-width: 768px){
+  .icon {
+    width: 24px;
+    height: 24px;
+  }
+}
