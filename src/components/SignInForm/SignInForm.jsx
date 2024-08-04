@@ -6,6 +6,7 @@ import { useNavigate, Link } from "react-router-dom";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as Yup from "yup";
 import toast from "react-hot-toast";
+import Logo from "../Logo/Logo.jsx";
 
 import { login } from "../../redux/auth/operations.js";
 
@@ -53,7 +54,7 @@ const SignInForm = () => {
     <div className={css.signInContainer}>
       <div className={css.signInForm}>
         <div className={css.formSection}>
-          {/* <Logo /> тут буде лого */}
+          <Logo />
           <form className={css.form} onSubmit={handleSubmit(onSubmit)}>
             <h2 className={css.formTitle}>Sign In</h2>
             <div className={css.inputContainer}>
@@ -77,7 +78,8 @@ const SignInForm = () => {
                 />
                 <span
                   className={css.togglePassword}
-                  onClick={togglePasswordVisibility}>
+                  onClick={togglePasswordVisibility}
+                >
                   <svg className={css.icon}>
                     <use
                       href={`../../../assets/sprite.svg#${
@@ -94,7 +96,8 @@ const SignInForm = () => {
             <button
               disabled={!isDirty || !isValid}
               className={css.btnform}
-              type="submit">
+              type="submit"
+            >
               Sign In
             </button>
             <div className={css.spanSignIn}>
