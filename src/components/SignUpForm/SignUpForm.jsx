@@ -7,7 +7,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import * as Yup from "yup";
 import toast from "react-hot-toast";
 import Logo from "../Logo/Logo.jsx";
-
+import { icons as sprite } from "../../assets/index.js";
 import { register as registerUser } from "../../redux/auth/operations.js";
 
 const SignUpForm = () => {
@@ -79,18 +79,18 @@ const SignUpForm = () => {
                   placeholder="Enter your password"
                   {...register("password")}
                 />
-                <span
+                <svg
+                  width="20"
+                  height="20"
                   className={css.togglePassword}
                   onClick={togglePasswordVisibility}
                 >
-                  <svg className={css.icon}>
-                    <use
-                      href={`../../../assets/sprite.svg#${
-                        showPassword ? "icon-eye" : "icon-eye-off"
-                      }`}
-                    />
-                  </svg>
-                </span>
+                  <use
+                    xlinkHref={`${sprite}#${
+                      showPassword ? "icon-eye" : "icon-eye-off"
+                    }`}
+                  />
+                </svg>
               </div>
               {errors.password && (
                 <p className={css.errorText}>{errors.password.message}</p>
@@ -98,11 +98,25 @@ const SignUpForm = () => {
             </div>
             <div className={css.inputContainer}>
               <label className={css.formLabel}>Confirm Password</label>
-              <input
-                type={showPassword ? "text" : "password"}
-                placeholder="Confirm your password"
-                {...register("confirmPassword")}
-              />
+              <div className={css.inputWrapper}>
+                <input
+                  type={showPassword ? "text" : "password"}
+                  placeholder="Confirm your password"
+                  {...register("confirmPassword")}
+                />
+                <svg
+                  width="20"
+                  height="20"
+                  className={css.togglePassword}
+                  onClick={togglePasswordVisibility}
+                >
+                  <use
+                    xlinkHref={`${sprite}#${
+                      showPassword ? "icon-eye" : "icon-eye-off"
+                    }`}
+                  />
+                </svg>
+              </div>
               {errors.confirmPassword && (
                 <p className={css.errorText}>
                   {errors.confirmPassword.message}
@@ -124,9 +138,6 @@ const SignUpForm = () => {
             </div>
           </form>
         </div>
-        {/* <div className={css.imageSection}>
-          <AdvantagesSection /> тут буде секція
-        </div> */}
       </div>
     </div>
   );

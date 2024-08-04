@@ -13,11 +13,47 @@
 
 .signUpForm {
   display: flex;
+  flex-direction: column;
   background-color: var(--white);
   border-radius: 30px;
   overflow: hidden;
   width: 343px;
-  height: 780px;
+  min-height: 780px;
+  box-sizing: border-box;
+}
+
+.formSection {
+  flex: 1;
+  position: relative;
+  padding: 32px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  background-color: #f0eff4;
+}
+
+.logo {
+  position: absolute;
+  top: 16px;
+  left: 16px;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 132px 16px;
+  background-color: #f0eff4;
+  box-sizing: border-box;
+}
+
+.formTitle {
+  color: #323f47;
+  font-weight: 700;
+  font-size: 32px;
+  line-height: 1;
+  letter-spacing: -0.01em;
+  margin-bottom: 32px;
 }
 
 .inputContainer {
@@ -39,33 +75,6 @@
   cursor: pointer;
   fill: transparent;
   stroke: currentColor;
-}
-
-.formSection {
-  flex: 1;
-}
-
-.formSection,
-.form {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  padding: 132px 16px;
-  background-color: #f0eff4;
-}
-
-.formTitle {
-  color: #323f47;
-  font-weight: 700;
-  font-size: 32px;
-  line-height: 1;
-  letter-spacing: -0.01em;
-  margin-bottom: 32px;
-}
-
-.inputContainer {
-  margin-bottom: 16px;
-  position: relative;
 }
 
 .formLabel {
@@ -165,11 +174,13 @@
 .btnform:disabled:focus {
   transform: scale(1);
 }
+.errorText {
+  font-size: 12px;
+}
 
 @media (min-width: 768px) {
   .formSection {
     padding: 32px;
-    display: block;
   }
 
   .formTitle {
@@ -179,7 +190,6 @@
   .signUpForm {
     width: 704px;
     min-height: 960px;
-    background-color: var(--white);
   }
 
   .form {
@@ -194,19 +204,21 @@
     display: flex;
     justify-content: space-between;
     width: auto;
-    height: 736px;
+    min-height: 736px;
     background-color: var(--white);
     border-radius: 30px;
     overflow: hidden;
     gap: 32px;
   }
+
   .imageSection {
     display: block;
   }
+
   .formSection,
   .imageSection {
     width: 672px;
-    height: 736px;
+    min-height: 736px;
     border-radius: 30px;
   }
 
