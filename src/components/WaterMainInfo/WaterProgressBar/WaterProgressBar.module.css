@@ -1,0 +1,156 @@
+.waterProgressBarContainer {
+    background-color: #fff;
+    border-radius: 15px;
+    width: 198px;
+    height: 70px;
+    box-shadow: 0 4px 50px 0 rgba(0, 0, 0, 0.1);
+    position: absolute;
+    bottom: 120px;
+    left: 73px;
+}
+
+.progressBarInfo {
+    width: 174px;
+    height: 46px;
+    padding: 12px;
+}
+
+.data {
+    font-weight: 700;
+    line-height: 100%;
+    font-size: 14px;
+    color: #2f2f2f;
+    margin-bottom: 8px;
+}
+
+.progressBarContainer {
+    background-color: #f0eff4;
+    border-radius: 9px;
+    height: 6px;
+    width: 174px;
+    overflow: hidden;
+}
+
+.progressBar {
+    height: 6px;
+    background-color: #9be1a0;
+    border-radius: 9px;
+    width: 0;
+    transition: width 0.3s ease-in-out;
+}
+
+.progressEllipse {
+    position: absolute;
+    top: 52%;
+    transform: translateY(-50%);
+    width: 12px;
+    height: 12px;
+    background-color: #fff;
+    border: 1px solid #9be1a0;
+    border-radius: 50%;
+    transition: left 0.3s ease-in-out;
+}
+
+.progressPercentage {
+    display: flex;
+    justify-content: space-between;
+    width: 174px;
+    height: 10px;
+    margin-top: 8px;
+}
+
+.progressPercentage li {
+    font-size: 10px;
+    line-height: 100%;
+    color: rgba(47, 47, 47, 0.6);
+}
+
+.progressPercentage li:first-child {
+    margin-right: 66px;
+}
+
+.progressPercentage li:last-child {
+    margin-left: 49px;
+}
+
+.progressPercentageMove {
+    position: absolute;
+    margin-top: 9px;
+    font-weight: 400;
+    font-size: 8px;
+    line-height: 100%;
+    color: #9be1a0;
+}
+
+@media screen and (min-width: 768px) {
+    section {
+        min-width: 768px;
+        padding: 32px;
+    }
+
+    .waterProgressBarContainer {
+        width: 295px;
+        height: 106px;
+        bottom: 150px;
+        left: 204px;
+    }
+
+    .progressBarInfo {
+        padding: 20px;
+        width: 255px;
+        height: 66px;
+    }
+
+    .data {
+        font-size: 15px;
+        line-height: 149%;
+    }
+
+    .progressBarContainer {
+        width: 255px;
+    }
+
+    .progressEllipse {
+        top: 50%;
+    }
+
+    .progressPercentage {
+        width: 255px;
+        height: 23px;
+        margin-top: 4px;
+    }
+
+    .progressPercentage li {
+        font-size: 12px;
+        line-height: 187%;
+    }
+
+    .progressPercentage li:first-child {
+        margin-right: 99px;
+    }
+
+    .progressPercentage li:last-child {
+        margin-left: 85px;
+    }
+
+    .progressPercentageMove {
+        font-size: 10px;
+        line-height: 180%;
+        margin-top: 7px;
+    }
+}
+
+@media screen and (min-width: 1440px) {
+    section {
+        min-width: 1440px;
+    }
+
+    .waterProgressBarContainer {
+        bottom: 180px;
+        left: 188px;
+    }
+
+    .progressPercentageMove {
+        margin-top: 8px;
+    }
+}
