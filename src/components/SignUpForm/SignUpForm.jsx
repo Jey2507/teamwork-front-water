@@ -1,4 +1,4 @@
-import css from "../SignInForm/SignInForm.module.css";
+import css from "./SignUpForm.module.css";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { useForm } from "react-hook-form";
@@ -54,8 +54,8 @@ const SignUpForm = () => {
   };
 
   return (
-    <div className={css.signInContainer}>
-      <div className={css.signInForm}>
+    <div className={css.signUpContainer}>
+      <div className={css.signUpForm}>
         <div className={css.formSection}>
           <Logo />
           <form className={css.form} onSubmit={handleSubmit(onSubmit)}>
@@ -116,7 +116,7 @@ const SignUpForm = () => {
             >
               Sign Up
             </button>
-            <div className={css.spanSignIn}>
+            <div className={css.spanSignUp}>
               <p>Already have an account? </p>
               <Link className={css.link} to="/signin">
                 Sign In
