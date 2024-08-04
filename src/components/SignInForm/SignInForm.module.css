@@ -158,6 +158,7 @@
 .btnform:disabled {
   cursor: not-allowed;
   opacity: 0.5;
+  background-color: #ddd;
 }
 
 .btnform:disabled:hover,
