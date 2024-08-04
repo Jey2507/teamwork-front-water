@@ -9,16 +9,15 @@ import toast from 'react-hot-toast';
 const DeleteWaterModal = () => {
   const dispatch = useDispatch();
   const isModalOpen = useSelector((state) => state.modal.isModalOpen);
-  const entryId = useSelector((state) => state.modal.entryId); // Використовуйте entryId, якщо його зберігаєте в state.modal
+  const entryId = useSelector((state) => state.modal.entryId); 
 
   if (!isModalOpen) return null;
 
   const handleDelete = async () => {
     try {
-      await dispatch(deleteWaterEntry(entryId)); //  entryId для видалення конкретного запису
+      await dispatch(deleteWaterEntry(entryId)).unwrap();
       dispatch(closeModal());
       toast.success('Entry deleted successfully');
-      // Додати логіку для оновлення компонентів WaterProgressBar, WaterList та Calendar
     } catch (error) {
       toast.error('Failed to delete entry');
     }
@@ -28,9 +27,7 @@ const DeleteWaterModal = () => {
     <div className={css.modalContainer}>
       <button className={css.closeButton} onClick={() => dispatch(closeModal())}>
       <svg className={css.icon}>
-      <symbol id="icon-x" viewBox="0 0 32 32">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="3.429" d="M24 8 8 24M8 8l16 16"/>
-        </symbol>
+          <use xlinkHref="#icon-x" />
         </svg>
       </button>
       <div className={css.coverText}>

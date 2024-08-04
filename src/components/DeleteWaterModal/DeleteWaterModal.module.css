@@ -12,7 +12,6 @@
     box-shadow: 0 4px 50px 0 rgba(0, 0, 0, 0.1);
 }
 
-
 .closeButton {
     position: absolute;
     top: 10px;
@@ -32,12 +31,16 @@
     margin-bottom: 16px;
     line-height: 1.2;
     letter-spacing: -0.01em;
+    text-align: center; 
 }
 
 .text {
     font-size: 14px;
     line-height: 1.28;
     letter-spacing: -0.01em;
+    width: 296px;
+    margin: 0 auto; 
+    text-align: center; 
 }
 
 .buttonsCover {
@@ -104,6 +107,7 @@
         font-size: 18px;
         margin-bottom: 24px;
         line-height: 1.33;
+        width: 436px;
     }
 
     .buttonsCover {

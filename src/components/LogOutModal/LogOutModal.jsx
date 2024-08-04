@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import { logOut, clearStore } from '../../redux/auth/operations';
 import { closeModal } from '../../redux/ModalSlice';
 import toast from 'react-hot-toast';
+import sprite from '../../assets/sprite.svg'; 
 
 const LogOutModal = () => {
   const dispatch = useDispatch();
@@ -27,9 +28,9 @@ const LogOutModal = () => {
   return (
     <div className={css.modalContainer}>
       <button className={css.closeButton} onClick={() => dispatch(closeModal())}>
-        <svg className={css.icon}>
-          <use xlinkHref="#icon-log-out"></use>
-        </svg>
+      <svg className="css.icon">
+       <use xlinkHref={sprite + "#icon-x"} />
+     </svg>
       </button>
       <div className={css.coverText}>
         <h2 className={css.title}>Log Out</h2>

@@ -19,4 +19,8 @@ export const initialState = {
     loading: false,
     error: null,
 };
+/* 
+    waterProgress: 0,
+    calendarItems: [],
+ */
 
