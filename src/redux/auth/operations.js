@@ -1,5 +1,6 @@
 import axios from "axios";
 import { createAsyncThunk } from "@reduxjs/toolkit";
+import { clearStore } from './slice.js';
 
 const clearAuthHeader = () => {
     axios.defaults.headers.common.Authorization = '';
@@ -31,9 +32,14 @@ export const login = createAsyncThunk(
 
 export const logOut = createAsyncThunk('auth/logout', async (_, thunkAPI) => {
     try {
-        await axios.post('/users/logout');
-        clearAuthHeader();
+      await axios.post('/users/logout');
+      clearAuthHeader();
+      thunkAPI.dispatch(clearStore()); // Додаємо виклик clearStore після успішного виходу
     } catch (error) {
-        return thunkAPI.rejectWithValue(error.message);
+      return thunkAPI.rejectWithValue(error.message);
     }
-});
+  });
+  
+  export { clearStore };
+
+ 

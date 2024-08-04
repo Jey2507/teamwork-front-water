@@ -1,21 +1,24 @@
 import css from './LogOutModal.module.css';
-import useModalContext from '../useModalContext';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import { logOut } from '../../redux/auth/operations.js';
-import toast from 'react-hot-toast'; 
+import { logOut, clearStore } from '../../redux/auth/operations';
+import { closeModal } from '../../redux/ModalSlice';
+import toast from 'react-hot-toast';
 
 const LogOutModal = () => {
-  const { closeModal } = useModalContext();
   const dispatch = useDispatch();
-  const navigate = useNavigate(); 
+  const navigate = useNavigate();
+  const isModalOpen = useSelector((state) => state.modal.isModalOpen);
+
+  if (!isModalOpen) return null;
 
   const handleLogout = async () => {
     try {
       await dispatch(logOut());
-      closeModal();
+      dispatch(clearStore());
+      dispatch(closeModal());
       toast.success('Logged out successfully');
-      navigate('/'); // Redirect to HomePage
+      navigate('/');
     } catch (error) {
       toast.error('Failed to log out');
     }
@@ -23,10 +26,9 @@ const LogOutModal = () => {
 
   return (
     <div className={css.modalContainer}>
-      <button className={css.closeButton} onClick={closeModal}>
-        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <path d="M18 6L6 18" stroke="#2F2F2F" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-          <path d="M6 6L18 18" stroke="#2F2F2F" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+      <button className={css.closeButton} onClick={() => dispatch(closeModal())}>
+        <svg className={css.icon}>
+          <use xlinkHref="#icon-log-out"></use>
         </svg>
       </button>
       <div className={css.coverText}>
@@ -34,13 +36,10 @@ const LogOutModal = () => {
         <p className={css.text}>Do you really want to leave?</p>
       </div>
       <div className={css.buttonsCover}>
-        <button
-          className={css.logoutButton}
-          onClick={handleLogout}
-        >
+        <button className={css.logoutButton} onClick={handleLogout}>
           Log Out
         </button>
-        <button className={css.cancelButton} onClick={closeModal}>
+        <button className={css.cancelButton} onClick={() => dispatch(closeModal())}>
           Cancel
         </button>
       </div>
@@ -49,3 +48,5 @@ const LogOutModal = () => {
 };
 
 export default LogOutModal;
+
+

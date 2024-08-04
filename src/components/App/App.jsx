@@ -24,6 +24,7 @@ import { Route, Routes } from 'react-router-dom';
 import { lazy, Suspense } from 'react';
 import { ModalProvider } from '../ModalContext.jsx';
 
+
 const HomePage = lazy(() => import('../../pages/HomePage/HomePage.jsx'));
 const NotFoundPage = lazy(() => import('../../pages/NotFoundPage/NotFoundPage.jsx'));
 const TestPage = lazy(() => import('../../pages/TestPage/TestPage.jsx'));
