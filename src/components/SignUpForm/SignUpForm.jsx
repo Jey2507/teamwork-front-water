@@ -36,7 +36,12 @@ const SignUpForm = () => {
   });
 
   const onSubmit = async (data) => {
-    const { email, password } = data;
+    const { confirmPassword, ...submitData } = data;
+
+    const { email, password } = submitData;
+    console.log("submitData: ", submitData);
+
+    // Надсилаємо дані на сервер
     dispatch(registerUser({ email, password }))
       .unwrap()
       .then((res) => {
