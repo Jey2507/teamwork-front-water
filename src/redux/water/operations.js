@@ -1,5 +1,5 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import { addWaterReq } from "./services";
+import { addWaterReq, getWaterDayReq, getWaterMonthReq} from "./services";
 
 export const addWater = createAsyncThunk(
     'water/addWater',
@@ -12,3 +12,26 @@ export const addWater = createAsyncThunk(
         }
     }
 );
+export const getWaterDay = createAsyncThunk(
+    'water/getWaterDay',
+    async (day, thunkAPI) => {
+      try {
+        const response = await getWaterDayReq(day);
+        return response;
+      } catch (error) {
+        return thunkAPI.rejectWithValue(error.message);
+      }
+    }
+  );
+  export const getWaterMonth = createAsyncThunk(
+    'water/getWaterMonth',
+    async (date, thunkAPI) => {
+      try {
+        const response = await getWaterMonthReq(date);
+        return response.daysInMonth;
+      } catch (error) {
+        return thunkAPI.rejectWithValue(error.message);
+      }
+    }
+  );
+  
