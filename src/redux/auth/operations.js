@@ -27,9 +27,9 @@ export const login = createAsyncThunk(
   "auth/login",
   async (userInfo, thunkAPI) => {
     try {
-      const response = await axios.post("/users/login", userInfo);
-      setAuthHeader(response.data.token);
-      const profile = await axios.get("/users/profile");
+      const response = await axios.post("/auth/login", userInfo);
+      setAuthHeader(response.data.data.token);
+      const profile = await axios.get("/user");
 
       return { ...response.data, user: profile.data };
     } catch (error) {
@@ -40,7 +40,7 @@ export const login = createAsyncThunk(
 
 export const logout = createAsyncThunk("auth/logout", async (_, thunkAPI) => {
   try {
-    await axios.post("auth/logout");
+    await axios.post("/auth/logout");
     clearAuthHeader();
   } catch (error) {
     return thunkAPI.rejectWithValue(error.message);
@@ -48,12 +48,12 @@ export const logout = createAsyncThunk("auth/logout", async (_, thunkAPI) => {
 });
 
 export const refreshUser = createAsyncThunk(
-  "auth/refresh",
+  "auth/update",
   async (_, thunkAPI) => {
     const reduxState = thunkAPI.getState();
     setAuthHeader(reduxState.auth.token);
 
-    const response = await axios.get("/users/profile");
+    const response = await axios.get("/user/update");
     return response.data;
   },
   {
@@ -73,7 +73,7 @@ export const setupAxiosInterceptors = (store) => {
         originalRequest._retry = true;
         try {
           const { refreshToken } = store.getState().auth;
-          const { data } = await axios.post("/users/refresh-tokens", {
+          const { data } = await axios.post("/auth/refresh", {
             refreshToken,
           });
 
