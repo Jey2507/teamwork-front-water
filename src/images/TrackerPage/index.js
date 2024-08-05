@@ -1,0 +1,9 @@
+export { default as tp1xdt } from "./TrackingPx1desktop_result.png";
+export { default as tp2xdt } from "./TrackingPx2desktop_result.png";
+export { default as tp3xdt } from "./TrackingPx3desktop_result.png";
+export { default as tp1xtb } from "./TrackingPx1tablet_result.png";
+export { default as tp2xtb } from "./TrackingPx2tablet_result.png";
+export { default as tp3xtb } from "./TrackingPx3tablet_result.png";
+export { default as tp1xmb } from "./TrackingPx1mobile_result.png";
+export { default as tp2xmb } from "./TrackingPx2mobile_result.png";
+export { default as tp3xmb } from "./TrackingPx3mobile_result.png";
