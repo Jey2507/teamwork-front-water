@@ -2,7 +2,7 @@ import css from "../SharedLayout/SharedLayout.module.css"
 
 export default function SharedLayout({children}) {
     return  <div className={css.superMainBox}>
-            <div>{children}</div>
+            {children}
             <div className={css.mainBox}>
                 <div className={css.divHappy}>
                     <ul className={css.listHappy}>
