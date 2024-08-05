@@ -34,7 +34,7 @@ export const logOut = createAsyncThunk('auth/logout', async (_, thunkAPI) => {
     try {
       await axios.post('/users/logout');
       clearAuthHeader();
-      thunkAPI.dispatch(clearStore()); // Додаємо виклик clearStore після успішного виходу
+      thunkAPI.dispatch(clearStore()); 
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);
     }

@@ -43,9 +43,9 @@ const Modal = ({ children }) => {
     >
       <div className={css.modalContainer}>
         <button className={css.closeButton} onClick={handleClose}>
-          <svg className={css.icon}>
-            <use xlinkHref={`${sprite}#icon-x`} />
-          </svg>
+        <svg className="icon" viewBox="0 0 24 24">
+  <use xlinkHref={sprite + "#icon-x"} />
+</svg>
         </button>
         {children}
       </div>

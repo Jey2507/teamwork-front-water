@@ -1,6 +1,6 @@
 import css from './DeleteWaterModal.module.css';
 import { useDispatch, useSelector } from 'react-redux';
-import { deleteWaterEntry } from '../../redux/water/operations';
+import { deleteWater } from '../../redux/water/operations';
 import { closeModal } from '../../redux/ModalSlice';
 import toast from 'react-hot-toast';
 import Modal from '../Modal/Modal';
@@ -14,7 +14,7 @@ const DeleteWaterModal = () => {
   
     const handleDelete = async () => {
       try {
-        await dispatch(deleteWaterEntry(entryId)).unwrap();
+        await dispatch(deleteWater(entryId)).unwrap();
         dispatch(closeModal());
         toast.success('Entry deleted successfully');
       } catch (error) {
