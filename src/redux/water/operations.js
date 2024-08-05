@@ -1,5 +1,7 @@
+import axios from 'axios';
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import { addWaterReq } from "./services";
+
 
 export const addWater = createAsyncThunk(
     'water/addWater',
@@ -12,3 +14,17 @@ export const addWater = createAsyncThunk(
         }
     }
 );
+
+
+export const deleteWaterEntry = createAsyncThunk(
+    'water/deleteWaterEntry',
+    async (entryId, thunkAPI) => {
+      try {
+        await axios.delete(`/api/water/${entryId}`);
+        return entryId;
+      } catch (error) {
+        return thunkAPI.rejectWithValue(error.response.data);
+      }
+    }
+  );
+  
