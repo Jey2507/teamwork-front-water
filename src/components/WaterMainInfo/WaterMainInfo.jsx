@@ -1,7 +1,3 @@
-// import Logo from "../Logo/Logo";
-import WaterDailyNorma from './WaterDailyNorma/WaterDailyNorma.jsx';
-import WaterProgressBar from './WaterProgressBar/WaterProgressBar.jsx';
-import AddWaterButton from './AddWaterButton/AddWaterButton.jsx';
 import {
   tp1xdt,
   tp2xdt,
@@ -13,7 +9,9 @@ import {
   tp2xmb,
   tp3xmb,
 } from '../../images/TrackerPage/index.js';
-
+import AddWaterButton from '../AddWaterButton/AddWaterButton.jsx';
+import WaterDailyNorma from '../WaterDailyNorma/WaterDailyNorma.jsx';
+import WaterProgressBar from '../WaterProgressBar/WaterProgressBar.jsx';
 import css from './WaterMainInfo.module.css';
 
 export default function WaterMainInfo() {
