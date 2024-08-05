@@ -8,6 +8,7 @@ const TrackerPage = lazy(() => import('../../pages/TrackerPage/TrackerPage.jsx')
 const SignInPage = lazy(() => import('../../pages/SignInPage/SignInPage.jsx'));
 const SignUpPage = lazy(() => import('../../pages/SignUpPage/SignUpPage.jsx'));
 
+
 function App() {
   return (
     <Suspense>
