@@ -18,6 +18,13 @@
   overflow: hidden;
   width: 343px;
   height: 780px;
+  position: relative;
+}
+
+.logo {
+  position: absolute;
+  top: 24px;
+  left: 16px;
 }
 
 .inputContainer {
@@ -43,15 +50,12 @@
 
 .formSection {
   flex: 1;
-}
-
-.formSection,
-.form {
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  padding: 162px 16px;
+  padding: 24px 16px;
   background-color: #f0eff4;
+  position: relative;
+  gap: 172px;
 }
 
 .formTitle {
@@ -165,15 +169,26 @@
 .btnform:disabled:focus {
   transform: scale(1);
 }
+
 .errorText {
   height: 16px;
   font-size: 14px;
+}
+
+/* Додаємо новий клас для стилізації помилок */
+.inputError {
+  border-color: #ef5050 !important; /* Червоний бордер */
+  color: #ef5050 !important; /* Червоний текст */
 }
 
 @media (min-width: 768px) {
   .formSection {
     padding: 32px;
     display: block;
+  }
+
+  .formLabel {
+    font-size: 16px;
   }
 
   .formTitle {

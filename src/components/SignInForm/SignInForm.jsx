@@ -28,6 +28,8 @@ const SignInForm = () => {
     handleSubmit,
     reset,
     formState: { errors, isDirty, isValid },
+    setValue,
+    trigger,
   } = useForm({
     mode: "onChange",
     resolver: yupResolver(validationSchema),
@@ -50,11 +52,16 @@ const SignInForm = () => {
     setShowPassword(!showPassword);
   };
 
+  // Custom function to add error class if there is an error
+  const getInputClass = (fieldName) => {
+    return errors[fieldName] ? `${css.error}` : "";
+  };
+
   return (
     <div className={css.signInContainer}>
       <div className={css.signInForm}>
         <div className={css.formSection}>
-          <Logo />
+          <Logo className={css.logo} />
           <form className={css.form} onSubmit={handleSubmit(onSubmit)}>
             <h2 className={css.formTitle}>Sign In</h2>
             <div className={css.inputContainer}>
@@ -62,7 +69,9 @@ const SignInForm = () => {
               <input
                 type="email"
                 placeholder="Enter your email"
+                className={getInputClass("email")}
                 {...register("email")}
+                onChange={() => trigger("email")} // Validate on change
               />
               {errors.email && (
                 <p className={css.errorText}>{errors.email.message}</p>
@@ -74,7 +83,9 @@ const SignInForm = () => {
                 <input
                   type={showPassword ? "text" : "password"}
                   placeholder="Enter your password"
+                  className={getInputClass("password")}
                   {...register("password")}
+                  onChange={() => trigger("password")} // Validate on change
                 />
                 <svg
                   width="20"

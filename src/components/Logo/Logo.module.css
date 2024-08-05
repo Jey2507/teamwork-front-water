@@ -1,13 +1,13 @@
 .homePageLogo {
-  font-weight: 700;
+  color: rgb(50, 63, 71);
+  font-family: Poppins;
   font-size: 18px;
-  line-height: 111%;
-  letter-spacing: -0.01em;
+  font-weight: 700;
+  line-height: 20px;
+  letter-spacing: -1%;
+  /* text-align: center; */
   text-transform: uppercase;
-
-  color: #323f47;
   text-decoration: none;
-  height: 20px;
 
   @media (768px<=width) {
     font-size: 24px;
