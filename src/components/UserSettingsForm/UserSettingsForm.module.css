@@ -20,24 +20,25 @@ legend {
 .amountOfWaterText {
   margin-bottom: 5px;
 }
-.settingsModalTitle {
-  margin-bottom: 20px;
-}
+
 .uploadPhotoBtn {
   position: relative;
   display: inline-block;
   border: none;
   background-color: transparent;
   cursor: pointer;
-  padding: 0
+  padding: 0;
+  width: auto;
+
 }
 
-.settingsModalTitle {
-  color: rgb(50, 63, 71);
-  line-height: 24px;
-  font-size: 20px;
-  font-weight: 700;
+.btnIconContainer{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  column-gap: 8px;
 }
+
 
 .fileInput {
   position: absolute;
@@ -110,11 +111,6 @@ input[type="radio"] {
   border: 1px solid rgba(47, 47, 47, 0.4);
 }
 
-.settingsModal {
-  width: 343px;
-  height: auto;
-  background-color: transparent;
-}
 .genderLabel {
   display: inline-flex;
   gap: 10px;
@@ -170,7 +166,7 @@ input[type="radio"] {
 }
 
 .userAvatarContainer {
-  width: 133px;
+  width: auto;
   height: 103px;
   margin: 0 auto;
   display: flex;
@@ -207,10 +203,6 @@ input[type="radio"] {
 }
 
 @media screen and (min-width: 768px) {
-  .settingsModalTitle {
-    font-size: 28px;
-    line-height: 32px;
-  }
 
   .inputText,
   .formulaDescription,
@@ -237,9 +229,7 @@ input[type="radio"] {
     padding: 16px 50px 16px 50px;
   }
 
-  .settingsModal {
-    width: 648px;
-  }
+ 
   .normaWaterContainer {
     flex-direction: row;
     gap: 28px;
@@ -263,9 +253,7 @@ input[type="radio"] {
     grid-template-rows: repeat(3, auto);
     grid-auto-flow: column;
   }
-  .settingsModal {
-    width: 920px;
-  }
+
   .settingsForm > div:nth-child(4) {
     grid-row: 2;
   }
@@ -276,4 +264,10 @@ input[type="radio"] {
   border-radius: 15px;
 }
 
-
+.error {
+  color: rgb(239, 80, 80);
+}
+svg {
+  fill: transparent;
+  stroke: currentColor;
+}
