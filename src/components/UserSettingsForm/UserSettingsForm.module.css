@@ -50,7 +50,7 @@ legend {
   cursor: pointer;
 }
 
-input[type="radio"]::before {
+.genderInput::before {
   content: "";
   position: absolute;
   top: 50%;
@@ -63,7 +63,7 @@ input[type="radio"]::before {
   border: 1px solid rgb(155, 225, 160);
 }
 
-input[type="radio"]:checked::after {
+.genderInput:checked::after {
   content: "";
   position: absolute;
   top: 50%;

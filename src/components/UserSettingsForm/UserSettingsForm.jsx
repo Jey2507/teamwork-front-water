@@ -151,6 +151,7 @@ const UserSettingsForm = () => {
             <label className={`${css.genderLabel} ${css.inputText}`}>
               <input
                 type="radio"
+                className={css.genderInput}
                 value="woman"
                 name="gender"
                 {...register("gender")}
@@ -160,6 +161,7 @@ const UserSettingsForm = () => {
             <label className={`${css.genderLabel} ${css.inputText}`}>
               <input
                 type="radio"
+                className={css.genderInput}
                 value="man"
                 name="gender"
                 {...register("gender")}
