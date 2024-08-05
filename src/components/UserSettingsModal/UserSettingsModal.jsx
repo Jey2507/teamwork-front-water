@@ -1,13 +1,15 @@
-import React from 'react'
 import css from './UserSettingsModal.module.css'
 import UserSettingsForm from '../UserSettingsForm/UserSettingsForm'
+import Modal from '../Modal/Modal';
 
 function UserSettingsModal() {
     return (
-      <div className={css.settingsModal}>
-        <h2 className={css.settingsModalTitle}>Settings</h2>
-        <UserSettingsForm />
-      </div>
+      <Modal>
+        <div className={css.settingsModal}>
+          <h2 className={css.settingsModalTitle}>Settings</h2>
+          <UserSettingsForm />
+        </div>
+      </Modal>
     );
 }
 

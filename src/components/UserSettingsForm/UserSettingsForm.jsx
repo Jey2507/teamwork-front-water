@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import { useRef } from "react";
 import css from "./UserSettingsForm.module.css";
 import { useForm } from "react-hook-form";
 import { icons as sprite } from "../../assets/index.js";
