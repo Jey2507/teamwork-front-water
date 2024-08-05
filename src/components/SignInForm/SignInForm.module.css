@@ -67,11 +67,6 @@
   margin-bottom: 32px;
 }
 
-.inputContainer {
-  margin-bottom: 16px;
-  position: relative;
-}
-
 .formLabel {
   display: block;
   margin-bottom: 8px;
@@ -92,11 +87,26 @@
   color: var(--black);
   opacity: 60%;
   box-sizing: border-box;
+  transition: border-color 0.5s, color 0.5s;
 }
 
-.inputContainer input:focus {
-  border-color: var(--green-hover);
+.inputContainer input:focus,
+.inputContainer input:hover {
+  border-color: var(--green-hover) !important;
   outline: none;
+  color: var(--black) !important;
+}
+
+/* Стиль для помилок */
+.inputContainer input.error {
+  border-color: #ef5050;
+  color: #ef5050;
+}
+
+.inputContainer input.error:focus,
+.inputContainer input.error:hover {
+  border-color: var(--green-hover) !important;
+  color: var(--black) !important;
 }
 
 .inputContainer p {
@@ -149,11 +159,6 @@
   padding: 16px 0;
 }
 
-.form input:hover,
-.form input:focus {
-  border-color: var(--green-hover);
-}
-
 .btnform:hover,
 .btnform:active {
   background-color: #87d28d;
@@ -173,12 +178,6 @@
 .errorText {
   height: 16px;
   font-size: 14px;
-}
-
-/* Додаємо новий клас для стилізації помилок */
-.inputError {
-  border-color: #ef5050 !important; /* Червоний бордер */
-  color: #ef5050 !important; /* Червоний текст */
 }
 
 @media (min-width: 768px) {

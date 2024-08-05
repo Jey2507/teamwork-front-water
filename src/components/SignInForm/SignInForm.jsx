@@ -28,10 +28,9 @@ const SignInForm = () => {
     handleSubmit,
     reset,
     formState: { errors, isDirty, isValid },
-    setValue,
     trigger,
   } = useForm({
-    mode: "onChange",
+    mode: "onBlur",
     resolver: yupResolver(validationSchema),
   });
 
@@ -52,9 +51,8 @@ const SignInForm = () => {
     setShowPassword(!showPassword);
   };
 
-  // Custom function to add error class if there is an error
   const getInputClass = (fieldName) => {
-    return errors[fieldName] ? `${css.error}` : "";
+    return errors[fieldName] ? css.error : "";
   };
 
   return (
@@ -71,7 +69,7 @@ const SignInForm = () => {
                 placeholder="Enter your email"
                 className={getInputClass("email")}
                 {...register("email")}
-                onChange={() => trigger("email")} // Validate on change
+                onBlur={() => trigger("email")}
               />
               {errors.email && (
                 <p className={css.errorText}>{errors.email.message}</p>
@@ -85,7 +83,7 @@ const SignInForm = () => {
                   placeholder="Enter your password"
                   className={getInputClass("password")}
                   {...register("password")}
-                  onChange={() => trigger("password")} // Validate on change
+                  onBlur={() => trigger("password")}
                 />
                 <svg
                   width="20"
