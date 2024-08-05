@@ -9,10 +9,12 @@ import toast from "react-hot-toast";
 import Logo from "../Logo/Logo.jsx";
 import { icons as sprite } from "../../assets/index.js";
 import { register as registerUser } from "../../redux/auth/operations.js";
+import AdvantagesSection from "../AdvantagesSection/AdvantagesSection.jsx";
 
 const SignUpForm = () => {
   const dispatch = useDispatch();
   const [showPassword, setShowPassword] = useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const navigate = useNavigate();
 
   const validationSchema = Yup.object().shape({
@@ -37,11 +39,8 @@ const SignUpForm = () => {
 
   const onSubmit = async (data) => {
     const { confirmPassword, ...submitData } = data;
-
     const { email, password } = submitData;
-    console.log("submitData: ", submitData);
 
-    // Надсилаємо дані на сервер
     dispatch(registerUser({ email, password }))
       .unwrap()
       .then((res) => {
@@ -56,6 +55,10 @@ const SignUpForm = () => {
 
   const togglePasswordVisibility = () => {
     setShowPassword(!showPassword);
+  };
+
+  const toggleConfirmPasswordVisibility = () => {
+    setShowConfirmPassword(!showConfirmPassword);
   };
 
   return (
@@ -105,7 +108,7 @@ const SignUpForm = () => {
               <label className={css.formLabel}>Confirm Password</label>
               <div className={css.inputWrapper}>
                 <input
-                  type={showPassword ? "text" : "password"}
+                  type={showConfirmPassword ? "text" : "password"}
                   placeholder="Confirm your password"
                   {...register("confirmPassword")}
                 />
@@ -113,11 +116,11 @@ const SignUpForm = () => {
                   width="20"
                   height="20"
                   className={css.togglePassword}
-                  onClick={togglePasswordVisibility}
+                  onClick={toggleConfirmPasswordVisibility}
                 >
                   <use
                     xlinkHref={`${sprite}#${
-                      showPassword ? "icon-eye" : "icon-eye-off"
+                      showConfirmPassword ? "icon-eye" : "icon-eye-off"
                     }`}
                   />
                 </svg>
@@ -142,6 +145,9 @@ const SignUpForm = () => {
               </Link>
             </div>
           </form>
+        </div>
+        <div className={css.imageSection}>
+          <AdvantagesSection />
         </div>
       </div>
     </div>

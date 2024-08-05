@@ -1,10 +1,7 @@
-import SharedLayout from "../../components/SharedLayout/SharedLayout.jsx";
 import SignUpForm from "../../components/SignUpForm/SignUpForm.jsx";
 
 const SignUpPage = () => {
-  return <SharedLayout>
-          <SignUpForm />
-        </SharedLayout>
+  return <SignUpForm />;
 };
 
 export default SignUpPage;
