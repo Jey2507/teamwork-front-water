@@ -1,3 +1,7 @@
+import SharedLayout from "../../components/SharedLayout/SharedLayout.jsx";
+
 export default function HomePage() {
-  return <div>HomePage</div>;
+  return <SharedLayout>
+    <div>HomePage</div>
+    </SharedLayout>
 }
