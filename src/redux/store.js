@@ -8,10 +8,14 @@ import {
     REGISTER,
 } from "redux-persist";
 import { waterReducer } from "./water/slice";
+import modalReducer from "./ModalSlice.js";
+import { authReducer } from "./auth/slice";
 
 export const store = configureStore({
     reducer: {
         water: waterReducer,
+        modal: modalReducer,
+        auth: authReducer,
     },
     middleware: (getDefaultMiddleware) =>
         getDefaultMiddleware({
