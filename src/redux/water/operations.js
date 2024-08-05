@@ -46,5 +46,19 @@ export const deleteWaterEntry = createAsyncThunk(
     } catch (error) {
       return thunkAPI.rejectWithValue(error.response.data);
     }
-  }
+ }
 );
+
+  export const getTodaySumamryWater = createAsyncThunk(
+    'water/getTodaySummaryWater',
+    async (_, thunkAPI) => {
+      try {
+        const response = await getTodaySumamryWaterReq('/water/today');
+        const res = (response.data.todaySumamryWater / 1000).toFixed(1);
+        return res;
+      } catch (error) {
+        return thunkAPI.rejectWithValue(error.message);
+      }
+    }
+  );
+
