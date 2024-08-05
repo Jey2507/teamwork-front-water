@@ -14,6 +14,10 @@ p {
   margin: 0;
 }
 
+h2 {
+  margin: 0;
+}
+
 ul {
   list-style: none;
 }
@@ -27,5 +31,6 @@ body {
     padding: 32px;
   }  
 }
+
 
 /* І ніякий лишній СSS тут не пишіть!  */
