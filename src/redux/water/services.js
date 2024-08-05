@@ -4,3 +4,14 @@ export const addWaterReq = async (arg) => {
     const { data } = await axios.post('/water', arg);
     return data;
 }
+export const getWaterDayReq = async (date) => {
+    const { data } = await axios.get(`/water/daily/${date}`);
+    return data;
+  };
+
+  export const getWaterMonthReq = async (date) => {
+    const { data } = await axios.get(`/water/monthly/${date.year}/${date.month}`);
+    return data;
+  };
+  
+  

@@ -1,0 +1,108 @@
+.container {
+    background-color: var(--main-white);
+    position: absolute;
+    left: 50%;
+    transform: translate(-50%);
+    top: 253px;
+    border-radius: 15px;
+    padding: 12px;
+    
+}
+.text {
+    margin: 0;
+    font-size: 14px;
+    line-height: 1;
+    margin-bottom: 8px;
+    font-weight: bold;
+    color: var(--main);
+}
+
+.backBar {
+    position: relative;
+    background-color: var(--background);
+    width: 174px;
+    height: 6px;
+    border-radius: 9px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 8px;
+}
+.frontBar {
+    position: absolute;
+    height: 100%;
+    width: 20px;
+    border-radius: 9px;
+    background-color: var(--accent);
+}
+
+.frontBar::after {
+    content: '';
+    position: absolute;
+    top:50%;
+    left: 90%;
+    display: block;
+    width: 12px;
+    height: 12px;
+    background-color: #fff;
+    border-radius: 50%;
+    border: solid var(--accent) 1px;
+    transform: translateY(-50%);
+}
+
+.percentage {
+    list-style: none;
+    display: flex;
+    padding: 0;
+    margin-top: 0;
+    margin-bottom: 0;
+    justify-content: space-between;
+  
+   
+}
+
+li {
+color: var(--main-text);
+opacity: 60%;
+font-size: 10px;
+line-height: 1;
+}
+
+.greenPercent {
+    font-size: 8px;
+    color: var(--accent);
+    line-height: 1;
+}
+
+.isInvisible {
+    opacity: 0;
+    width: 2px;
+}
+
+@media screen and (min-width: 768px) {
+ 
+    .container {
+        padding: 20px;
+        top: 322px;
+    }
+    .backBar {
+    width: 255px;
+    height: 8px;
+           }
+
+           .text {
+            font-size: 15px;
+            line-height: 1.5;
+            margin-bottom: 6px;
+           }
+
+           li {
+            font-size: 12px;
+            line-height: 1.87;
+           }
+}
+
+@media screen and (min-width: 1440px) {
+    .container {
+            top: 450px;
+        }
+}
