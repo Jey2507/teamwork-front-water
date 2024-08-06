@@ -13,40 +13,26 @@
 
 .signUpForm {
   display: flex;
-  flex-direction: column;
+  justify-content: space-between;
   background-color: var(--white);
   border-radius: 30px;
   overflow: hidden;
   width: 343px;
-  min-height: 780px;
-  box-sizing: border-box;
+  height: 780px;
+  position: relative;
 }
 
 .formSection {
   flex: 1;
+  display: flex;
+  flex-direction: column;
+  padding: 24px 16px;
+  background-color: #f0eff4;
   position: relative;
-  padding: 32px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  background-color: #f0eff4;
+  gap: 24px;
 }
 
-.logo {
-  position: absolute;
-  top: 16px;
-  left: 16px;
-}
-
-.form {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  padding: 132px 16px;
-  background-color: #f0eff4;
-  box-sizing: border-box;
-}
-
+/* Заголовок форми */
 .formTitle {
   color: #323f47;
   font-weight: 700;
@@ -54,6 +40,16 @@
   line-height: 1;
   letter-spacing: -0.01em;
   margin-bottom: 32px;
+}
+
+.formLabel {
+  display: block;
+  margin-bottom: 8px;
+  font-size: 14px;
+  line-height: 1.29;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  color: var(--black);
 }
 
 .inputContainer {
@@ -77,16 +73,6 @@
   stroke: currentColor;
 }
 
-.formLabel {
-  display: block;
-  margin-bottom: 8px;
-  font-size: 14px;
-  line-height: 1.29;
-  font-weight: 700;
-  letter-spacing: -0.01em;
-  color: var(--black);
-}
-
 .inputContainer input {
   width: 100%;
   padding: 16px 0 16px 16px;
@@ -97,24 +83,30 @@
   color: var(--black);
   opacity: 60%;
   box-sizing: border-box;
+  transition: border-color 0.5s, color 0.5s;
 }
 
-.inputContainer input:focus {
-  border-color: var(--green-hover);
+.inputContainer input:focus,
+.inputContainer input:hover {
+  border-color: var(--green-hover) !important;
   outline: none;
+  color: var(--black) !important;
+}
+
+.inputContainer input.error {
+  border-color: #ef5050;
+  color: #ef5050;
+}
+
+.inputContainer input.error:focus,
+.inputContainer input.error:hover {
+  border-color: var(--green-hover) !important;
+  color: var(--black) !important;
 }
 
 .inputContainer p {
   color: #ef5050;
   margin: 5px 0 0;
-}
-
-.spanSignUp p {
-  color: #2f2f2f80;
-  opacity: 50%;
-  text-decoration: none;
-  font-weight: 700;
-  font-size: 14px;
 }
 
 .spanSignUp {
@@ -131,6 +123,14 @@
   letter-spacing: -0.01em;
 }
 
+.spanSignUp p {
+  color: #2f2f2f80;
+  opacity: 50%;
+  text-decoration: none;
+  font-weight: 700;
+  font-size: 14px;
+}
+
 .link {
   height: 18px;
   color: #2f2f2f;
@@ -139,7 +139,7 @@
 .btnform {
   width: 100%;
   height: 50px;
-  padding: 10px;
+  padding: 16px 0;
   font-family: Poppins;
   background-color: #9be1a0;
   border: none;
@@ -151,12 +151,7 @@
   cursor: pointer;
   margin-top: 32px;
   letter-spacing: -0.01em;
-  padding: 16px 0;
-}
-
-.form input:hover,
-.form input:focus {
-  border-color: var(--green-hover);
+  transition: background-color 0.3s, transform 0.2s;
 }
 
 .btnform:hover,
@@ -167,15 +162,17 @@
 .btnform:disabled {
   cursor: not-allowed;
   opacity: 0.5;
-  background-color: #aeaaaa;
+  background-color: #ddd;
 }
 
 .btnform:disabled:hover,
 .btnform:disabled:focus {
   transform: scale(1);
 }
+
 .errorText {
-  font-size: 12px;
+  margin-top: 5px;
+  font-size: 14px;
 }
 
 @media (min-width: 768px) {
@@ -189,7 +186,7 @@
 
   .signUpForm {
     width: 704px;
-    min-height: 960px;
+    height: 960px;
   }
 
   .form {
@@ -204,7 +201,7 @@
     display: flex;
     justify-content: space-between;
     width: auto;
-    min-height: 736px;
+    height: 736px;
     background-color: var(--white);
     border-radius: 30px;
     overflow: hidden;
@@ -218,7 +215,7 @@
   .formSection,
   .imageSection {
     width: 672px;
-    min-height: 736px;
+    height: 736px;
     border-radius: 30px;
   }
 
