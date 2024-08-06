@@ -16,8 +16,8 @@ export const register = createAsyncThunk(
   async (newUser, thunkAPI) => {
     try {
       const response = await axios.post("/auth/register", newUser);
-      setAuthHeader(response.data.token);
-      return response.data;
+      setAuthHeader(response.data.data.token);
+      return response.data.data;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);
     }
@@ -29,37 +29,19 @@ export const login = createAsyncThunk(
   async (userInfo, thunkAPI) => {
     try {
       const res = await axios.post("/auth/login", userInfo);
-      setAuthHeader(res.data.token);
-      toast.success(res.data.message);
+      setAuthHeader(res.data.data.token);
+      console.log('This is res', res);
+
+      toast.success(res.data.data.message);
 
       const profile = await axios.get('/user');
-      return { ...res.data, user: profile.data };
+      return { ...res.data.data, user: profile.data };
     } catch (error) {
       toast.error(error.response.data.message);
       return thunkAPI.rejectWithValue(error.message);
     }
   }
 );
-
-// export const logIn = createAsyncThunk(
-//   'auth/login',
-//   async (credentials, thunkAPI) => {
-//       try {
-//           const res = await axios.post('/users/signin', credentials);
-//           setAuthHeader(res.data.token);
-//           toast.success(res.data.message);
-
-//           const profileRes = await axios.get('/users/profile');
-
-//           return { ...res.data, user: profileRes.data };
-//       } catch (error) {
-//           toast.error(error.response.data.message);
-//           return thunkAPI.rejectWithValue(error.message);
-//       }
-//   }
-// );
-
-
 
 
 export const logout = createAsyncThunk("auth/logout", async (_, thunkAPI) => {
@@ -101,9 +83,9 @@ export const setupAxiosInterceptors = (store) => {
           const { refreshToken } = store.getState().auth;
           const { data } = await axios.post("auth/refresh", { refreshToken });
 
-          setAuthHeader(data.token);
-          store.dispatch(setToken({ token: data.token, refreshToken: data.refreshToken }));
-          originalRequest.headers.Authorization = `Bearer ${data.token}`;
+          setAuthHeader(data.accessToken);
+          store.dispatch(setToken({ token: data.accessToken, refreshToken: data.refreshToken }));
+          originalRequest.headers.Authorization = `Bearer ${data.accessToken}`;
           return axios(originalRequest);
         } catch (err) {
           return Promise.reject(err);
