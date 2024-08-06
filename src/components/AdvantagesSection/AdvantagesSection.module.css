@@ -209,7 +209,7 @@
   .mainBox {
     width: 672px;
     height: 736px;
-    background-image: url('../../assets/images/drink-water-laptop.png');
+    background-image: url("../../assets/images/drink-water-laptop.png");
     padding: 64px 32px;
     display: flex;
     flex-direction: row;

@@ -1,4 +1,4 @@
-import css from "./SignUpForm.module.css";
+import styles from "./SignUpForm.module.css"; // оновлено імпорт
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { useForm } from "react-hook-form";
@@ -13,6 +13,7 @@ import { register as registerUser } from "../../redux/auth/operations.js";
 const SignUpForm = () => {
   const dispatch = useDispatch();
   const [showPassword, setShowPassword] = useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const navigate = useNavigate();
 
   const validationSchema = Yup.object().shape({
@@ -37,11 +38,8 @@ const SignUpForm = () => {
 
   const onSubmit = async (data) => {
     const { confirmPassword, ...submitData } = data;
-
     const { email, password } = submitData;
-    console.log("submitData: ", submitData);
 
-    // Надсилаємо дані на сервер
     dispatch(registerUser({ email, password }))
       .unwrap()
       .then((res) => {
@@ -58,36 +56,46 @@ const SignUpForm = () => {
     setShowPassword(!showPassword);
   };
 
+  const toggleConfirmPasswordVisibility = () => {
+    setShowConfirmPassword(!showConfirmPassword);
+  };
+
   return (
-    <div className={css.signUpContainer}>
-      <div className={css.signUpForm}>
-        <div className={css.formSection}>
+    <div className={styles.signUpContainer}>
+      <div className={styles.signUpWrapper}>
+        <div className={styles.formSection}>
           <Logo />
-          <form className={css.form} onSubmit={handleSubmit(onSubmit)}>
-            <h2 className={css.formTitle}>Sign Up</h2>
-            <div className={css.inputContainer}>
-              <label className={css.formLabel}>Email</label>
+          <form className={styles.form} onSubmit={handleSubmit(onSubmit)}>
+            <h2 className={styles.formTitle}>Sign Up</h2>
+            <div className={styles.inputGroup}>
+              <label className={styles.inputLabel}>Email</label>
               <input
                 type="email"
                 placeholder="Enter your email"
                 {...register("email")}
+                className={`${styles.input} ${
+                  errors.email ? styles.errorInput : ""
+                }`}
               />
               {errors.email && (
-                <p className={css.errorText}>{errors.email.message}</p>
+                <p className={styles.errorText}>{errors.email.message}</p>
               )}
             </div>
-            <div className={css.inputContainer}>
-              <label className={css.formLabel}>Password</label>
-              <div className={css.inputWrapper}>
+            <div className={styles.inputGroup}>
+              <label className={styles.inputLabel}>Password</label>
+              <div className={styles.inputWrapper}>
                 <input
                   type={showPassword ? "text" : "password"}
                   placeholder="Enter your password"
                   {...register("password")}
+                  className={`${styles.input} ${
+                    errors.password ? styles.errorInput : ""
+                  }`}
                 />
                 <svg
                   width="20"
                   height="20"
-                  className={css.togglePassword}
+                  className={styles.togglePassword}
                   onClick={togglePasswordVisibility}
                 >
                   <use
@@ -98,46 +106,49 @@ const SignUpForm = () => {
                 </svg>
               </div>
               {errors.password && (
-                <p className={css.errorText}>{errors.password.message}</p>
+                <p className={styles.errorText}>{errors.password.message}</p>
               )}
             </div>
-            <div className={css.inputContainer}>
-              <label className={css.formLabel}>Confirm Password</label>
-              <div className={css.inputWrapper}>
+            <div className={styles.inputGroup}>
+              <label className={styles.inputLabel}>Confirm Password</label>
+              <div className={styles.inputWrapper}>
                 <input
-                  type={showPassword ? "text" : "password"}
+                  type={showConfirmPassword ? "text" : "password"}
                   placeholder="Confirm your password"
                   {...register("confirmPassword")}
+                  className={`${styles.input} ${
+                    errors.confirmPassword ? styles.errorInput : ""
+                  }`}
                 />
                 <svg
                   width="20"
                   height="20"
-                  className={css.togglePassword}
-                  onClick={togglePasswordVisibility}
+                  className={styles.togglePassword}
+                  onClick={toggleConfirmPasswordVisibility}
                 >
                   <use
                     xlinkHref={`${sprite}#${
-                      showPassword ? "icon-eye" : "icon-eye-off"
+                      showConfirmPassword ? "icon-eye" : "icon-eye-off"
                     }`}
                   />
                 </svg>
               </div>
               {errors.confirmPassword && (
-                <p className={css.errorText}>
+                <p className={styles.errorText}>
                   {errors.confirmPassword.message}
                 </p>
               )}
             </div>
             <button
               disabled={!isDirty || !isValid}
-              className={css.btnform}
+              className={styles.submitButton}
               type="submit"
             >
               Sign Up
             </button>
-            <div className={css.spanSignUp}>
+            <div className={styles.signInPrompt}>
               <p>Already have an account? </p>
-              <Link className={css.link} to="/signin">
+              <Link className={styles.signInLink} to="/signin">
                 Sign In
               </Link>
             </div>

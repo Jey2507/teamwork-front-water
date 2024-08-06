@@ -8,18 +8,32 @@
     
 }
 
-img {
+.trackerImage {
     display: block;
     margin-left: auto;
     margin-right: auto;
    
 }
-
-        .logo {
-            
+ .trackerLogo {
+            display: inline-block;
             position: absolute;
             top: 24px;
             left: 16px;
+           
+        }
+
+        .btn {
+    position: absolute;
+    top: 337px;
+    left: 187px;
+    display: block;
+    font-size: 14px;
+    line-height: 1.29;
+    padding: 14px 20px;
+    font-weight: 700;
+    border-radius: 30px;
+ 
+    cursor: pointer;
         }
 
 @media screen and (min-width: 375px) {
@@ -27,7 +41,7 @@ img {
 width: 343px;
 height: 415px;
     }
-    img {
+  .trackerImage {
 width: 262px;
 
     }
@@ -45,15 +59,22 @@ left: 16px;
         height: 578px;
         padding-top: 69px;
     }
-    img {
+        .trackerImage {
         width: 374px;
       
         
     }
-    .logo {
+    .trackerLogo {
 top: 32px;
     left: 32px;
     }
+
+                .btn {
+                    top: 454px;
+                    left: 494px;
+                    /* font-style: 16px;
+                    line-height: 1.5; */
+                }
        
 }
 
@@ -65,7 +86,7 @@ top: 32px;
         padding-top: 92;
         
     }
-    img {
+        .trackerImage {
         width: 472px;
         
        

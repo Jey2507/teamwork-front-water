@@ -8,6 +8,7 @@ import css from '../UserPanel/UserPanel.module.css';
 export default function UserPanel({ username, avatar }) {
   const [isPopoverOpen, setIsPopoverOpen] = useState(false);
   const userInfo = useSelector(selectUser);
+  console.log(userInfo)
   const userBarRef = useRef(null);
   const popoverRef = useRef(null);
 
