@@ -19,17 +19,24 @@
     text-align: left;
 }
 
-.icon {
-    margin-right: 8px;
+.settingIcon {
+    fill: #323f47;
 }
 
-.closeButton {
-    display: flex;
-    align-items: center;
-    background: none;
-    border: none;
-    cursor: pointer;
-    width: 100%;
-    text-align: left;
-    padding: 10px 0;
+.logoutIcon {
+    fill: rgba(50, 63, 71, 0.4);
+}
+
+.settingsText {
+    font-weight: 700;
+    font-size: 15px;
+    line-height: 1.49;
+    color: #323f47;
+}
+
+.logoutText {
+    font-weight: 700;
+    font-size: 15px;
+    line-height: 1.49;
+    color: rgba(50, 63, 71, 0.4);
 }
