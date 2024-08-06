@@ -1,5 +1,7 @@
 import { configureStore } from "@reduxjs/toolkit";
 import {
+    persistReducer,
+    persistStore,
     FLUSH,
     REHYDRATE,
     PAUSE,
@@ -7,15 +9,36 @@ import {
     PURGE,
     REGISTER,
 } from "redux-persist";
-import { waterReducer } from "./water/slice";
 import modalReducer from "./ModalSlice.js";
-import { authReducer } from "./auth/slice";
+import { authReducer } from "./auth/slice.js";
+import { waterReducer } from "./water/slice.js";
+import { setupAxiosInterceptors } from "./auth/operations.js";
+import storage from "redux-persist/lib/storage";
+
+const authConfig = {
+    key: 'auth',
+    storage,
+    whitelist: ['token', 'refreshToken', 'isLoggedIn'],
+}
+const waterConfig = {
+    key: 'water',
+    storage,
+    whitelist: [
+        'selectedDate',
+        'selectedDateData',
+        'selectedMonth',
+        'monthData',
+        'toggleInfo'
+    ],
+}
+const persistorAuthReducer = persistReducer(authConfig, authReducer);
+const persistorWaterReducer = persistReducer(waterConfig, waterReducer);
 
 export const store = configureStore({
     reducer: {
-        water: waterReducer,
+        water: persistorWaterReducer,
+        auth: persistorAuthReducer,
         modal: modalReducer,
-        auth: authReducer,
     },
     middleware: (getDefaultMiddleware) =>
         getDefaultMiddleware({
@@ -24,3 +47,5 @@ export const store = configureStore({
             },
         }),
 });
+setupAxiosInterceptors(store);
+export const persistor = persistStore(store);

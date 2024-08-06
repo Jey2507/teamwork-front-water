@@ -1,0 +1,42 @@
+.wrapper {
+  padding: 18px 30px 18px 30px;
+  gap: 10px;
+  border-radius: 30px;
+  opacity: 0px;
+  max-height: 66px;
+  max-width: 178px;
+}
+.add_water_btn {
+  size: inherit;
+  background: none;
+  border: none;
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 24px;
+  letter-spacing: -0.01em;
+  text-align: center;
+  height: 30px;
+  white-space: nowrap;
+}
+.circle_btn {
+  display: inline-block;
+  width: 30px;
+  height: 30px;
+  gap: 0px;
+  border-radius: 100px;
+  opacity: 0px;
+  margin-right: 10px;
+}
+.icon {
+  width: 15px;
+  height: 15px;
+  transform: rotate(45deg);
+  border-radius: 50px;
+  padding-top: 6px;
+  padding-left: 6px;
+  box-sizing: unset;
+}
+
+.add_water_btn:hover {
+  cursor: pointer;
+}

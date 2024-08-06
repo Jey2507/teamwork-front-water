@@ -1,25 +1,33 @@
-import css from "../SignInForm/SignInForm.module.css";
-import { useState } from "react";
-import { useDispatch } from "react-redux";
-import { useForm } from "react-hook-form";
-import { useNavigate, Link } from "react-router-dom";
-import { yupResolver } from "@hookform/resolvers/yup";
-import * as Yup from "yup";
-import toast from "react-hot-toast";
-import Logo from "../Logo/Logo.jsx";
-import { icons as sprite } from "../../assets/index.js";
-import { login } from "../../redux/auth/operations.js";
+import css from '../SignInForm/SignInForm.module.css';
+import { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { useForm } from 'react-hook-form';
+import { useNavigate, Link } from 'react-router-dom';
+import { yupResolver } from '@hookform/resolvers/yup';
+import * as Yup from 'yup';
+import toast from 'react-hot-toast';
+import Logo from '../Logo/Logo.jsx';
+import { icons as sprite } from '../../assets/index.js';
+import { login, refreshUser } from '../../redux/auth/operations.js';
+import { selectIsLoggegIn } from '../../redux/auth/selectors.js';
 
 const SignInForm = () => {
   const dispatch = useDispatch();
   const [showPassword, setShowPassword] = useState(false);
   const navigate = useNavigate();
+  const isLoggedIn = useSelector(selectIsLoggegIn);
+
+  useEffect(() => {
+    if (isLoggedIn) {
+      dispatch(refreshUser());
+    }
+  }, [isLoggedIn, dispatch]);
 
   const validationSchema = Yup.object().shape({
-    email: Yup.string().email("Email is invalid").required("Email is required"),
+    email: Yup.string().email('Email is invalid').required('Email is required'),
     password: Yup.string()
-      .min(6, "Password must be at least 6 characters")
-      .required("Password is required"),
+      .min(6, 'Password must be at least 6 characters')
+      .required('Password is required'),
   });
 
   const {
@@ -28,20 +36,20 @@ const SignInForm = () => {
     reset,
     formState: { errors, isDirty, isValid },
   } = useForm({
-    mode: "onChange",
+    mode: 'onChange',
     resolver: yupResolver(validationSchema),
   });
 
-  const onSubmit = async (data) => {
+  const onSubmit = async data => {
     dispatch(login(data))
       .unwrap()
-      .then((res) => {
+      .then(res => {
         toast.success(res.message);
         reset();
-        navigate("/tracker");
+        navigate('/tracker');
       })
-      .catch((err) => {
-        toast.error("Login failed");
+      .catch(err => {
+        toast.error('Login failed');
       });
   };
 
@@ -58,22 +66,16 @@ const SignInForm = () => {
             <h2 className={css.formTitle}>Sign In</h2>
             <div className={css.inputContainer}>
               <label className={css.formLabel}>Email</label>
-              <input
-                type="email"
-                placeholder="Enter your email"
-                {...register("email")}
-              />
-              {errors.email && (
-                <p className={css.errorText}>{errors.email.message}</p>
-              )}
+              <input type="email" placeholder="Enter your email" {...register('email')} />
+              {errors.email && <p className={css.errorText}>{errors.email.message}</p>}
             </div>
             <div className={css.inputContainer}>
               <label className={css.formLabel}>Password</label>
               <div className={css.inputWrapper}>
                 <input
-                  type={showPassword ? "text" : "password"}
+                  type={showPassword ? 'text' : 'password'}
                   placeholder="Enter your password"
-                  {...register("password")}
+                  {...register('password')}
                 />
                 <svg
                   width="20"
@@ -81,22 +83,12 @@ const SignInForm = () => {
                   className={css.togglePassword}
                   onClick={togglePasswordVisibility}
                 >
-                  <use
-                    xlinkHref={`${sprite}#${
-                      showPassword ? "icon-eye" : "icon-eye-off"
-                    }`}
-                  />
+                  <use xlinkHref={`${sprite}#${showPassword ? 'icon-eye' : 'icon-eye-off'}`} />
                 </svg>
               </div>
-              {errors.password && (
-                <p className={css.errorText}>{errors.password.message}</p>
-              )}
+              {errors.password && <p className={css.errorText}>{errors.password.message}</p>}
             </div>
-            <button
-              disabled={!isDirty || !isValid}
-              className={css.btnform}
-              type="submit"
-            >
+            <button disabled={!isDirty || !isValid} className={css.btnform} type="submit">
               Sign In
             </button>
             <div className={css.spanSignIn}>
@@ -107,9 +99,6 @@ const SignInForm = () => {
             </div>
           </form>
         </div>
-        {/* <div className={css.imageSection}>
-          <AdvantagesSection /> тут буде секція
-        </div> */}
       </div>
     </div>
   );
