@@ -21,13 +21,13 @@ export default function UserBarPopover({ onClose }) {
   return (
     <div className={css.userBarPopover} ref={popoverRef}>
       <button className={css.popoverButton} onClick={() => setShowSettingsModal(true)}>
-        <svg>
-          <use href={`${sprite}#icon-setting`} />
+        <svg width="16" height="16">
+          <use href={`${sprite}#icon-settings`} />
         </svg>
         Settings
       </button>
       <button className={css.popoverButton} onClick={() => setShowLogOutModal(true)}>
-        <svg>
+        <svg width="16" height="16">
           <use href={`${sprite}#icon-log-out`} />
         </svg>
         Log out
