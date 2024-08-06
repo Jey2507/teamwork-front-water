@@ -35,7 +35,6 @@ export default function UserPanel({ username, avatar }) {
   //   return fullName.split(' ')[0]
   // };
 
-  console.log(userInfo);
 
   return (
     <div className={css.userPanel}>
