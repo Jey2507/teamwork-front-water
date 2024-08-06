@@ -5,7 +5,6 @@ import { closeModal } from '../../redux/ModalSlice';
 import toast from 'react-hot-toast';
 import Modal from '../Modal/Modal';
 import { logout } from '../../redux/auth/operations.js';
-import { clearStore } from '../../redux/auth/slice.js';
 
 const LogOutModal = () => {
   const dispatch = useDispatch();
@@ -17,7 +16,6 @@ const LogOutModal = () => {
   const handleLogout = async () => {
     try {
       await dispatch(logout()).unwrap();
-      dispatch(clearStore());
       dispatch(closeModal());
       toast.success('Logged out successfully');
       navigate('/');
