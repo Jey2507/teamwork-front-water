@@ -43,7 +43,7 @@ export const logout = createAsyncThunk("auth/logout", async (_, thunkAPI) => {
   try {
     await axios.post("/auth/logout");
     clearAuthHeader();
-    thunkAPI.dispatch(clearStore()); // Додаємо виклик clearStore після успішного виходу
+    thunkAPI.dispatch(clearStore());
   } catch (error) {
     return thunkAPI.rejectWithValue(error.message);
   }
@@ -53,17 +53,19 @@ export const refreshUser = createAsyncThunk(
   "auth/update",
   async (_, thunkAPI) => {
     const reduxState = thunkAPI.getState();
-    setAuthHeader(reduxState.auth.token);
-
-    const response = await axios.get("/user/update");
-    return response.data;
+    const persistedToken = reduxState.auth.token;
+    if (persistedToken === null) {
+      return thunkAPI.rejectWithValue('Unable to fetch user');
+    }
+    try {
+      setAuthHeader(persistedToken);
+      const res = await axios.get('/users/update');
+      return res.data;
+    }
+    catch (error) {
+      return thunkAPI.rejectWithValue(error.message);
+    }
   },
-  {
-    condition(_, thunkAPI) {
-      const reduxState = thunkAPI.getState();
-      return reduxState.auth.token !== null;
-    },
-  }
 );
 
 export const setupAxiosInterceptors = (store) => {

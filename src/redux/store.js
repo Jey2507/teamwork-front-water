@@ -31,8 +31,8 @@ const waterConfig = {
         'toggleInfo'
     ],
 }
-const persistorAuthReducer = persistReducer(authConfig, authReducer)
-const persistorWaterReducer = persistReducer(waterConfig, waterReducer)
+const persistorAuthReducer = persistReducer(authConfig, authReducer);
+const persistorWaterReducer = persistReducer(waterConfig, waterReducer);
 
 export const store = configureStore({
     reducer: {
@@ -47,6 +47,5 @@ export const store = configureStore({
             },
         }),
 });
-
 setupAxiosInterceptors(store);
 export const persistor = persistStore(store);

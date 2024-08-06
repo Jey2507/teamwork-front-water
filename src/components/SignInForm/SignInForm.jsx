@@ -1,6 +1,6 @@
 import css from '../SignInForm/SignInForm.module.css';
-import { useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { useForm } from 'react-hook-form';
 import { useNavigate, Link } from 'react-router-dom';
 import { yupResolver } from '@hookform/resolvers/yup';
@@ -8,12 +8,20 @@ import * as Yup from 'yup';
 import toast from 'react-hot-toast';
 import Logo from '../Logo/Logo.jsx';
 import { icons as sprite } from '../../assets/index.js';
-import { login } from '../../redux/auth/operations.js';
+import { login, refreshUser } from '../../redux/auth/operations.js';
+import { selectIsLoggegIn } from '../../redux/auth/selectors.js';
 
 const SignInForm = () => {
   const dispatch = useDispatch();
   const [showPassword, setShowPassword] = useState(false);
   const navigate = useNavigate();
+  const isLoggedIn = useSelector(selectIsLoggegIn);
+
+  useEffect(() => {
+    if (isLoggedIn) {
+      dispatch(refreshUser());
+    }
+  }, [isLoggedIn, dispatch]);
 
   const validationSchema = Yup.object().shape({
     email: Yup.string().email('Email is invalid').required('Email is required'),
