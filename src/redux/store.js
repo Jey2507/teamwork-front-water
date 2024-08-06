@@ -38,6 +38,7 @@ export const store = configureStore({
     reducer: {
         water: persistorWaterReducer,
         auth: persistorAuthReducer,
+        modal: modalReducer,
     },
     middleware: (getDefaultMiddleware) =>
         getDefaultMiddleware({
