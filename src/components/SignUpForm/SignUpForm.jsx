@@ -1,4 +1,4 @@
-import css from "./SignUpForm.module.css";
+import styles from "./SignUpForm.module.css"; // оновлено імпорт
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { useForm } from "react-hook-form";
@@ -62,35 +62,41 @@ const SignUpForm = () => {
   };
 
   return (
-    <div className={css.signUpContainer}>
-      <div className={css.signUpForm}>
-        <div className={css.formSection}>
+    <div className={styles.signUpContainer}>
+      <div className={styles.signUpWrapper}>
+        <div className={styles.formSection}>
           <Logo />
-          <form className={css.form} onSubmit={handleSubmit(onSubmit)}>
-            <h2 className={css.formTitle}>Sign Up</h2>
-            <div className={css.inputContainer}>
-              <label className={css.formLabel}>Email</label>
+          <form className={styles.form} onSubmit={handleSubmit(onSubmit)}>
+            <h2 className={styles.formTitle}>Sign Up</h2>
+            <div className={styles.inputGroup}>
+              <label className={styles.inputLabel}>Email</label>
               <input
                 type="email"
                 placeholder="Enter your email"
                 {...register("email")}
+                className={`${styles.input} ${
+                  errors.email ? styles.errorInput : ""
+                }`}
               />
               {errors.email && (
-                <p className={css.errorText}>{errors.email.message}</p>
+                <p className={styles.errorText}>{errors.email.message}</p>
               )}
             </div>
-            <div className={css.inputContainer}>
-              <label className={css.formLabel}>Password</label>
-              <div className={css.inputWrapper}>
+            <div className={styles.inputGroup}>
+              <label className={styles.inputLabel}>Password</label>
+              <div className={styles.inputWrapper}>
                 <input
                   type={showPassword ? "text" : "password"}
                   placeholder="Enter your password"
                   {...register("password")}
+                  className={`${styles.input} ${
+                    errors.password ? styles.errorInput : ""
+                  }`}
                 />
                 <svg
                   width="20"
                   height="20"
-                  className={css.togglePassword}
+                  className={styles.togglePassword}
                   onClick={togglePasswordVisibility}
                 >
                   <use
@@ -101,21 +107,24 @@ const SignUpForm = () => {
                 </svg>
               </div>
               {errors.password && (
-                <p className={css.errorText}>{errors.password.message}</p>
+                <p className={styles.errorText}>{errors.password.message}</p>
               )}
             </div>
-            <div className={css.inputContainer}>
-              <label className={css.formLabel}>Confirm Password</label>
-              <div className={css.inputWrapper}>
+            <div className={styles.inputGroup}>
+              <label className={styles.inputLabel}>Confirm Password</label>
+              <div className={styles.inputWrapper}>
                 <input
                   type={showConfirmPassword ? "text" : "password"}
                   placeholder="Confirm your password"
                   {...register("confirmPassword")}
+                  className={`${styles.input} ${
+                    errors.confirmPassword ? styles.errorInput : ""
+                  }`}
                 />
                 <svg
                   width="20"
                   height="20"
-                  className={css.togglePassword}
+                  className={styles.togglePassword}
                   onClick={toggleConfirmPasswordVisibility}
                 >
                   <use
@@ -126,27 +135,27 @@ const SignUpForm = () => {
                 </svg>
               </div>
               {errors.confirmPassword && (
-                <p className={css.errorText}>
+                <p className={styles.errorText}>
                   {errors.confirmPassword.message}
                 </p>
               )}
             </div>
             <button
               disabled={!isDirty || !isValid}
-              className={css.btnform}
+              className={styles.submitButton}
               type="submit"
             >
               Sign Up
             </button>
-            <div className={css.spanSignUp}>
+            <div className={styles.signInPrompt}>
               <p>Already have an account? </p>
-              <Link className={css.link} to="/signin">
+              <Link className={styles.signInLink} to="/signin">
                 Sign In
               </Link>
             </div>
           </form>
         </div>
-        <div className={css.imageSection}>
+        <div className={styles.imageSection}>
           <AdvantagesSection />
         </div>
       </div>
