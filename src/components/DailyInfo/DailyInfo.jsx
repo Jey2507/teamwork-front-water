@@ -16,7 +16,7 @@ export default function DailyInfo() {
           colorText={'var(--main)'}
           colorIcon={'var(--main)'}
         />
-        <WaterList waters={waters} />
+        <WaterList />
       </div>
     </>
   );

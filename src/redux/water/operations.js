@@ -19,6 +19,7 @@ export const getWaterDay = createAsyncThunk(
   async (day, thunkAPI) => {
     try {
       const response = await getWaterDayReq(day);
+      console.log(response)
       return response;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);
