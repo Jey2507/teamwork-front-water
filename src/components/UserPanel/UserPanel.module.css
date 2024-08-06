@@ -6,6 +6,19 @@
     /* Позиціонування відносно UserPanel */
 }
 
+.hello {
+    font-family: "Gilroy", sans-serif;
+    font-weight: 400;
+    font-size: 32px;
+    line-height: 1;
+    letter-spacing: -0.01em;
+    color: var(--main);
+}
+
+.span {
+    font-weight: 700;
+}
+
 .userBarContainer {
     position: relative;
     /* Позиціонування UserBarPopover відносно UserBar */
@@ -20,4 +33,20 @@
     /* Вирівнювання по лівому краю `UserBar` */
     margin-top: 8px;
     /* Відступ для розділення від `UserBar` */
+}
+
+@media screen and (min-width: 768px) {
+    .hello {
+        font-family: "Gilroy", sans-serif;
+        font-weight: 400;
+        font-size: 36px;
+        line-height: 1.06;
+        letter-spacing: -0.01em;
+        color: var(--main);
+    }
+    
+}
+
+@media screen and (min-width: 1440px) {
+
 }

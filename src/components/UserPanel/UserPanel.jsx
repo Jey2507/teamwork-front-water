@@ -33,7 +33,7 @@ export default function UserPanel({ username, avatar }) {
 
   return (
     <div className={css.userPanel}>
-      <h2 className={css.hello}>Hello, {userInfo?.name}!</h2>
+      <h2 className={css.hello}>Hello, <span className={css.span}>{userInfo.name}</span> !</h2>
       <div className={css.userBarContainer} ref={userBarRef}>
         <UserBar
           username={userInfo?.name}
