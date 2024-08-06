@@ -4,13 +4,15 @@
   line-height: 111%;
   letter-spacing: -0.01em;
   text-transform: uppercase;
+  text-align: center;
 
-  color: #323f47;
+  color: var(--main);
   text-decoration: none;
-  height: 20px;
+}
 
-  @media (768px<=width) {
+@media screen and (min-width:768px) {
+  .homePageLogo {
     font-size: 24px;
-    line-height: 100%;
+    line-height: 1;
   }
 }
