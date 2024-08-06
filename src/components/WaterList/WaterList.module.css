@@ -1,0 +1,37 @@
+.water_list {
+  display: flex;
+  gap: 16px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  text-align: center;
+  overflow-x: scroll;
+  padding-bottom: 24px;
+  overflow: auto;
+  padding-top: 24px;
+}
+.water_item {
+  flex-basis: 48%;
+  flex-shrink: 0;
+  max-width: 149px;
+}
+.water_list::-webkit-scrollbar {
+  height: 8px;
+  width: 20px;
+}
+
+.water_list::-webkit-scrollbar-track {
+  background-color: var(--main-white);
+}
+
+.water_list::-webkit-scrollbar-thumb {
+  background: var(--main);
+  border-radius: 25px;
+}
+@media screen and (min-width: 375px) {
+  .water_item {
+    flex-basis: 32%;
+    flex-shrink: 0;
+    max-width: 192px;
+  }
+}
