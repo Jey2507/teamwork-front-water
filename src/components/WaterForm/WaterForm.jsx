@@ -34,12 +34,12 @@ const WaterForm = ({
 
   const validationSchema = Yup.object().shape({
     recordingTime: Yup.string()
-      .required(t("recordTimeRequired"))
-      .matches(/^([0-1]?[0-9]|2[0-3]):[0-5][0-9]$/, t("invalidTimeFormat")),
+      .required("Recording time is required")
+      .matches(/^([0-1]?[0-9]|2[0-3]):[0-5][0-9]$/, "Invalid time format"),
     waterValue: Yup.number()
-      .required(t("waterValueRequired"))
-      .min(50, t("waterValueGreater"))
-      .max(5000, t("waterValueLess")),
+      .required("Water value is required")
+      .min(50, "Water value must be greater than 50 ml")
+      .max(5000, "Water value must be less than 5000 ml"),
   });
 
   const {
@@ -105,11 +105,11 @@ const WaterForm = ({
   const FormHeader = (operationType) => {
     switch (operationType) {
       case "add":
-        return <p className={css.FormHeader}>{t("chooseValue")}</p>;
+        return <p className={css.FormHeader}>Choose the value</p>;
       case "edit":
-        return <p className={css.FormHeader}>{t("correctData")}</p>;
+        return <p className={css.FormHeader}>Correct the entered data</p>;
       default:
-        return <p className={css.FormHeader}>{t("addWater")}</p>;
+        return <p className={css.FormHeader}>Add Water</p>;
     }
   };
 
@@ -124,7 +124,7 @@ const WaterForm = ({
   return (
     <form className={css.WaterForm} onSubmit={handleSubmit(onSubmit)}>
       {FormHeader(operationType)}
-      <p className={css.AmountOfWater}>{t("waterAmount")}</p>
+      <p className={css.AmountOfWater}>Amount of water:</p>
       <div className={css.TapAddWaterWrapper}>
         <button
           type="button"
@@ -135,9 +135,7 @@ const WaterForm = ({
             <use xlinkHref={svgSprite + "#icon-remove"}></use>
           </svg>
         </button>
-        <p className={css.TapAddWaterValue}>
-          {waterAmount} {t("ml")}
-        </p>
+        <p className={css.TapAddWaterValue}>{waterAmount} ml</p>
         <button
           type="button"
           className={css.TapAddWater}
@@ -150,7 +148,7 @@ const WaterForm = ({
       </div>
 
       <label className={css.RecordingTimeLabel}>
-        {t("recordTime")}
+        Recording time
         <Controller
           name="recordingTime"
           control={control}
@@ -174,7 +172,7 @@ const WaterForm = ({
         )}
       </label>
       <label className={css.WaterValueLabel}>
-        {t("enterWaterValue")}
+        Enter the value of the water used:
         <Controller
           name="waterValue"
           control={control}
@@ -192,7 +190,9 @@ const WaterForm = ({
           <p className={css.Error}>{errors.waterValue.message}</p>
         )}
       </label>
-      <button type="submit" className={css.SaveBtn}></button>
+      <button type="submit" className={css.SaveBtn}>
+        Save
+      </button>
     </form>
   );
 };

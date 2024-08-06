@@ -18,11 +18,11 @@ const WaterModal = ({
   const modalHeader = (operationType) => {
     switch (operationType) {
       case "add":
-        return t("addWaterTitle");
+        return "Add Water";
       case "edit":
-        return t("editWaterAmount");
+        return "Edit Water Amount";
       default:
-        return t("addWaterTitle");
+        return "Add Water";
     }
   };
 
@@ -35,6 +35,8 @@ const WaterModal = ({
         return curentTimestamp;
       case "edit":
         return recordTimestamp;
+      default:
+        return curentTimestamp;
     }
   };
 
@@ -73,7 +75,7 @@ const WaterModal = ({
       <button
         type="button"
         onClick={handleClose}
-        aria-label={t("closeWaterModal")}
+        aria-label="Close Water Modal"
         className={css.WaterModalCloseBtn}>
         <svg>
           <use xlinkHref={svgSprite + "#icon-clear"}></use>
