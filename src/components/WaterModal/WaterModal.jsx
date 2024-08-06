@@ -1,7 +1,6 @@
 import css from "./WaterModal.module.css";
-import clsx from "clsx";
-
 import WaterForm from "../WaterForm/WaterForm";
+import {useModal} from "../../hooks/useModal";
 
 const WaterModal = ({operationType}) => {
   const modalHeader = (operationType) => {
