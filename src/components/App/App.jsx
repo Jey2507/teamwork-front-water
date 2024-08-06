@@ -1,5 +1,6 @@
 import {Route, Routes} from "react-router-dom";
 import {lazy} from "react";
+import WaterModal from "../WaterModal/WaterModal.jsx";
 
 const HomePage = lazy(() => import("../../pages/HomePage/HomePage.jsx"));
 const NotFoundPage = lazy(() =>
