@@ -1,7 +1,14 @@
+.superMainBox {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+}
+
 .mainBox {
   width: 343px;
   height: 353px;
-  background-image: url("../../assets/images/drink-water-mobile.png");
+  background-image: url('../../assets/images/drink-water-mobile.png');
   background-repeat: no-repeat;
   background-size: 100%;
   padding: 32px 16px;
@@ -133,7 +140,7 @@
   .mainBox {
     width: 704px;
     height: 446px;
-    background-image: url("../../assets/images/drink-water-tablet.png");
+    background-image: url('../../assets/images/drink-water-tablet.png');
     padding: 32px;
     display: flex;
     flex-direction: row;
