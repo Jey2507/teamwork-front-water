@@ -1,0 +1,22 @@
+[
+  {
+    "id": "1e0700a2-5183-4291-85cc-2065a036a683",
+    "volume": "250 ml",
+    "time": "07:00"
+  },
+  {
+    "id": "a30f821b-4d25-4ff0-abdd-e340b3f0dd2b",
+    "volume": "150 ml",
+    "time": "11:00"
+  },
+  {
+    "id": "44dca67a-8e5a-4798-bf8e-b15efd4e1abd",
+    "volume": "350 ml",
+    "time": "13:00"
+  },
+  {
+    "id": "ea8ed3dc-2b68-4a53-905a-53ecb0adef33",
+    "volume": "250 ml",
+    "time": "16:00"
+  }
+]

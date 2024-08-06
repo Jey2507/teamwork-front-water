@@ -1,5 +1,5 @@
 export const initialState = {
-     selectedDate: new Date().toISOString().split('T')[0],
+    selectedDate: new Date().toISOString().split('T')[0],
     selectedDateData: [],
     errorDay: null,
     isLoadingDay: false,
