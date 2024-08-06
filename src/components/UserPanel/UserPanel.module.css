@@ -1,0 +1,22 @@
+.userPanel {
+    display: flex;
+    align-items: center;
+    position: relative;
+    /* Позиціонування відносно UserPanel */
+}
+
+.userBarContainer {
+    position: relative;
+    /* Позиціонування UserBarPopover відносно UserBar */
+    margin-left: auto;
+}
+
+.popoverWrapper {
+    position: absolute;
+    top: 100%;
+    /* Під `UserBar` */
+    left: 0;
+    /* Вирівнювання по лівому краю `UserBar` */
+    margin-top: 8px;
+    /* Відступ для розділення від `UserBar` */
+}
