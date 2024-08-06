@@ -29,7 +29,7 @@
   padding: 24px 16px;
   background-color: #f0eff4;
   position: relative;
-  gap: 24px;
+  gap: 126px;
 }
 
 /* Заголовок форми */
@@ -178,6 +178,10 @@
 @media (min-width: 768px) {
   .formSection {
     padding: 32px;
+    gap: 171px;
+  }
+  .formLabel {
+    font-size: 16px;
   }
 
   .formTitle {
@@ -192,7 +196,7 @@
   .form {
     min-width: 436px;
     height: auto;
-    padding: 227px 102px;
+    padding: 0 102px;
   }
 }
 
@@ -212,14 +216,13 @@
     display: block;
   }
 
+  .formSection {
+    gap: 74px;
+  }
   .formSection,
   .imageSection {
     width: 672px;
     height: 736px;
     border-radius: 30px;
-  }
-
-  .form {
-    padding: 130px 118px;
   }
 }
