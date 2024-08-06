@@ -1,0 +1,20 @@
+.homePageLogo {
+  color: rgb(50, 63, 71);
+  font-family: Poppins;
+  font-size: 18px;
+  font-weight: 700;
+  line-height: 20px;
+  letter-spacing: -1%;
+  /* text-align: center; */
+  text-transform: uppercase;
+  text-align: center;
+  color: var(--main);
+  text-decoration: none;
+}
+
+@media screen and (min-width:768px) {
+  .homePageLogo {
+    font-size: 24px;
+    line-height: 1;
+  }
+}

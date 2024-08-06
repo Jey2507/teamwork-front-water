@@ -1,0 +1,228 @@
+.signInContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  margin: 16px;
+  background-color: var(--white);
+}
+
+.signInForm {
+  display: flex;
+  background-color: var(--white);
+  border-radius: 30px;
+  overflow: hidden;
+  width: 343px;
+  height: 780px;
+  position: relative;
+}
+
+.logo {
+  position: absolute;
+  top: 24px;
+  left: 16px;
+}
+
+.inputContainer {
+  position: relative;
+  margin-bottom: 16px;
+  display: flex;
+  flex-direction: column;
+}
+
+.inputWrapper {
+  display: flex;
+  align-items: center;
+  position: relative;
+}
+
+.inputWrapper svg {
+  position: absolute;
+  right: 18px;
+  cursor: pointer;
+  fill: transparent;
+  stroke: currentColor;
+}
+
+.formSection {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  padding: 24px 16px;
+  background-color: #f0eff4;
+  position: relative;
+  gap: 172px;
+}
+
+.formTitle {
+  color: #323f47;
+  font-weight: 700;
+  font-size: 32px;
+  line-height: 1;
+  letter-spacing: -0.01em;
+  margin-bottom: 32px;
+}
+
+.formLabel {
+  display: block;
+  margin-bottom: 8px;
+  font-size: 14px;
+  line-height: 1.29;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  color: var(--black);
+}
+
+.inputContainer input {
+  width: 100%;
+  padding: 16px 0 16px 16px;
+  border: 1px solid #ddd;
+  border-radius: 15px;
+  font-size: 14px;
+  font-weight: 400;
+  color: var(--black);
+  opacity: 60%;
+  box-sizing: border-box;
+  transition: border-color 0.5s, color 0.5s;
+}
+
+.inputContainer input:focus,
+.inputContainer input:hover {
+  border-color: var(--green-hover) !important;
+  outline: none;
+  color: var(--black) !important;
+}
+
+.inputContainer input.error {
+  border-color: #ef5050;
+  color: #ef5050;
+}
+
+.inputContainer input.error:focus,
+.inputContainer input.error:hover {
+  border-color: var(--green-hover) !important;
+  color: var(--black) !important;
+}
+
+.inputContainer p {
+  color: #ef5050;
+  /* margin: 5px 0 0; */
+}
+
+.spanSignIn p {
+  color: #2f2f2f80;
+  opacity: 50%;
+  text-decoration: none;
+  font-weight: 700;
+  font-size: 14px;
+}
+
+.spanSignIn {
+  margin-top: 16px;
+  display: flex;
+  gap: 5px;
+  text-align: center;
+  justify-content: center;
+  color: #000;
+  font-size: 14px;
+  font-weight: 700;
+  line-height: 18px;
+  cursor: pointer;
+  letter-spacing: -0.01em;
+}
+
+.link {
+  height: 18px;
+  color: #2f2f2f;
+}
+
+.btnform {
+  width: 100%;
+  height: 50px;
+  padding: 10px;
+  font-family: Poppins;
+  background-color: #9be1a0;
+  border: none;
+  border-radius: 30px;
+  color: rgb(65, 71, 50);
+  font-size: 14px;
+  font-weight: 700;
+  line-height: 1.29;
+  cursor: pointer;
+  margin-top: 32px;
+  letter-spacing: -0.01em;
+  padding: 16px 0;
+}
+
+.btnform:hover,
+.btnform:active {
+  background-color: #87d28d;
+}
+
+.btnform:disabled {
+  cursor: not-allowed;
+  opacity: 0.5;
+  background-color: #ddd;
+}
+
+.btnform:disabled:hover,
+.btnform:disabled:focus {
+  transform: scale(1);
+}
+
+.errorText {
+  margin-top: 5px;
+  height: 18px;
+  font-size: 14px;
+}
+
+@media (min-width: 768px) {
+  .formSection {
+    padding: 32px;
+    display: block;
+  }
+
+  .formLabel {
+    font-size: 16px;
+  }
+
+  .formTitle {
+    font-size: 36px;
+  }
+
+  .signInForm {
+    width: 704px;
+    height: 960px;
+    background-color: var(--white);
+  }
+
+  .form {
+    min-width: 436px;
+    height: auto;
+    padding: 227px 102px;
+  }
+}
+
+@media (min-width: 1440px) {
+  .signInForm {
+    display: flex;
+    justify-content: space-between;
+    width: auto;
+    height: 736px;
+    background-color: var(--white);
+    border-radius: 30px;
+    overflow: hidden;
+    gap: 32px;
+  }
+  
+  .formSection,
+  .imageSection {
+    width: 672px;
+    height: 736px;
+    border-radius: 30px;
+  }
+
+  .form {
+    padding: 130px 118px;
+  }
+}

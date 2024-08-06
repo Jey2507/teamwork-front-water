@@ -7,6 +7,9 @@ export const initialState = {
         year: new Date().getFullYear(),
         month: new Date().getMonth() + 1,
     },
+    date: null,
+    totalDayWater: 0,
+    items: [],
     monthData: [],
     errorMonth: null,
     isLoadingMonth: false,
@@ -19,4 +22,8 @@ export const initialState = {
     loading: false,
     error: null,
 };
+/* 
+    waterProgress: 0,
+    calendarItems: [],
+ */
 
