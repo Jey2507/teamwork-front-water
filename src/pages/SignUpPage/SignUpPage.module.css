@@ -1,0 +1,19 @@
+.wrapperStyle {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 5px;
+}
+
+.wrapperHome {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+@media screen and (min-width: 1440px) {
+  .wrapperHome {
+    flex-direction: row;
+    gap: 32px;
+  }
+}

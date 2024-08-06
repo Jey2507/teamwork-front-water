@@ -1,7 +1,9 @@
-import SharedLayout from "../../components/SharedLayout/SharedLayout.jsx";
+import AdvantagesSection from '../../components/AdvantagesSection/AdvantagesSection.jsx';
 
 export default function HomePage() {
-  return <SharedLayout>
-    <div>HomePage</div>
-    </SharedLayout>
+  return (
+    <>
+      <AdvantagesSection />
+    </>
+  );
 }
