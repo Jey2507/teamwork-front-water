@@ -8,6 +8,7 @@
   max-width: 192px;
   background-color: var(--main-white);
   gap: 10px;
+  justify-items: center;
 }
 .glass_water_icon {
   width: 38px;

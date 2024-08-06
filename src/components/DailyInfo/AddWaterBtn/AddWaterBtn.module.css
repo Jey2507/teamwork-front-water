@@ -1,10 +1,16 @@
 .wrapper {
-  padding: 18px 30px 18px 30px;
+  position: absolute;
+  padding: 15px 30px 15px 18px;
   gap: 10px;
   border-radius: 30px;
   opacity: 0px;
   max-height: 66px;
   max-width: 178px;
+  top: 612px;
+  left: 462px;
+}
+.nowraper {
+  gap: 10px;
 }
 .add_water_btn {
   size: inherit;

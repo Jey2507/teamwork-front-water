@@ -6,6 +6,7 @@ import { getWaterDay } from '../../redux/water/operations';
 import { selectDate, selectWaterDay } from '../../redux/water/selectors';
 
 export default function WaterList({ waters }) {
+  const value = Object.keys(waters).length;
   const currentDay = useSelector(selectDate);
   const waterAmount = useSelector(selectWaterDay);
 
@@ -20,11 +21,15 @@ export default function WaterList({ waters }) {
 
   return (
     <ul className={css.water_list}>
-      {waters.map(water => (
-        <li key={water.id} className={css.water_item}>
-          <WaterItem water={water} />
-        </li>
-      ))}
+      {value > 0 ? (
+        waters.map(water => (
+          <li key={water.id} className={css.water_item}>
+            <WaterItem water={water} />
+          </li>
+        ))
+      ) : (
+        <p>No data for the selected date</p>
+      )}
     </ul>
   );
 }
