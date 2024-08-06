@@ -21,10 +21,12 @@
 
 .settingIcon {
     fill: transparent;
+    stroke: currentColor;
 }
 
 .logoutIcon {
     fill: rgba(50, 63, 71, 0.4);
+    stroke: rgba(50, 63, 71, 0.4);
 }
 
 .settingsText {

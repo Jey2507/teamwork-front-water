@@ -8,6 +8,7 @@ import css from '../UserPanel/UserPanel.module.css';
 export default function UserPanel({ username, avatar }) {
   const [isPopoverOpen, setIsPopoverOpen] = useState(false);
   const userInfo = useSelector(selectUser);
+  console.log(userInfo)
   const userBarRef = useRef(null);
   const popoverRef = useRef(null);
 
@@ -33,7 +34,7 @@ export default function UserPanel({ username, avatar }) {
 
   return (
     <div className={css.userPanel}>
-      <h2 className={css.hello}>Hello, {userInfo?.name}!</h2>
+      <h2 className={css.hello}>Hello,<span className={css.userHelloName}>{userInfo?.name}{ 'User'}!</span></h2>
       <div className={css.userBarContainer} ref={userBarRef}>
         <UserBar
           username={userInfo?.name}
