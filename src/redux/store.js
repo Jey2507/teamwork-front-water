@@ -18,7 +18,7 @@ import storage from "redux-persist/lib/storage";
 const authConfig = {
     key: 'auth',
     storage,
-    whitelist: ['token', 'refreshToken', 'isLoggedIn'],
+    whitelist: ['token', 'refreshToken'],
 }
 const waterConfig = {
     key: 'water',
