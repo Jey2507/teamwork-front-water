@@ -18,7 +18,7 @@ import storage from "redux-persist/lib/storage";
 const authConfig = {
     key: 'auth',
     storage,
-    whitelist: ['token', 'refreshToken'],
+    whitelist: ['token', 'refreshToken', 'isLoggedIn'],
 }
 const waterConfig = {
     key: 'water',
@@ -37,7 +37,6 @@ const persistorWaterReducer = persistReducer(waterConfig, waterReducer);
 export const store = configureStore({
     reducer: {
         water: persistorWaterReducer,
-        modal: modalReducer,
         auth: persistorAuthReducer,
     },
     middleware: (getDefaultMiddleware) =>
