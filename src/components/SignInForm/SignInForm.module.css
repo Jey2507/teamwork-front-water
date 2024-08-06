@@ -97,7 +97,6 @@
   color: var(--black) !important;
 }
 
-/* Стиль для помилок */
 .inputContainer input.error {
   border-color: #ef5050;
   color: #ef5050;
@@ -111,7 +110,7 @@
 
 .inputContainer p {
   color: #ef5050;
-  margin: 5px 0 0;
+  /* margin: 5px 0 0; */
 }
 
 .spanSignIn p {
@@ -176,7 +175,7 @@
 }
 
 .errorText {
-  height: 16px;
+  height: 18px;
   font-size: 14px;
 }
 
