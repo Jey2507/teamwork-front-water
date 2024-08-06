@@ -6,7 +6,7 @@ const UserBar = forwardRef(({ username, avatar, onClick, isPopoverOpen }, ref) =
   return (
     <div className={css.userBarContainer} ref={ref}>
       <button className={css.userBar} onClick={onClick}>
-        <span>{username}</span>
+        <span className={css.nameBar}>{username}{'user'}</span>
         <img src={avatar} alt={`${username}'s avatar`} className={css.avatar} />
         <svg className={css.dropdownIcon} width="16" height="16" fill="none">
           <use href={`${sprite}#icon-${isPopoverOpen ? 'arrow-up' : 'arrow-down'}`} />

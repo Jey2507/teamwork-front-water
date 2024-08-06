@@ -1,5 +1,5 @@
 import { useEffect, useState, useRef } from 'react';
-import {useSelector} from 'react-redux';
+import { useSelector } from 'react-redux';
 import UserBar from '../UserBar/UserBar';
 import UserBarPopover from '../UserBarPopover/UserBarPopover';
 import { selectUser } from '../../redux/auth/selectors';
@@ -11,7 +11,7 @@ export default function UserPanel({ username, avatar }) {
   const userBarRef = useRef(null);
   const popoverRef = useRef(null);
 
-  const togglePopover = () => {
+  const togglePopover = (event) => {
     setIsPopoverOpen(prev => !prev);
   };
 
@@ -30,11 +30,6 @@ export default function UserPanel({ username, avatar }) {
     document.addEventListener('mousedown', handleClickOutside);
     return () => document.removeEventListener('mousedown', handleClickOutside);
   }, []);
-
-  // const getFirstName = (fullName) => {
-  //   return fullName.split(' ')[0]
-  // };
-
 
   return (
     <div className={css.userPanel}>
