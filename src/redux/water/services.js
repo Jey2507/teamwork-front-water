@@ -5,7 +5,7 @@ export const addWaterReq = async (arg) => {
     return data;
 }
 export const getWaterDayReq = async (date) => {
-    const { data } = await axios.post(`/water/daily-water`, {params: { date }});
+    const { data } = await axios.get(`/water/daily-water?date=${date}`);
     console.log(data)
     return data;
   };
