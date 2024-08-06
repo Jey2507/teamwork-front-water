@@ -175,6 +175,7 @@
 }
 
 .errorText {
+  margin-top: 5px;
   height: 18px;
   font-size: 14px;
 }
