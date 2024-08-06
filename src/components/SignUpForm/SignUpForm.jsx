@@ -9,7 +9,6 @@ import toast from "react-hot-toast";
 import Logo from "../Logo/Logo.jsx";
 import { icons as sprite } from "../../assets/index.js";
 import { register as registerUser } from "../../redux/auth/operations.js";
-import AdvantagesSection from "../AdvantagesSection/AdvantagesSection.jsx";
 
 const SignUpForm = () => {
   const dispatch = useDispatch();
@@ -154,9 +153,6 @@ const SignUpForm = () => {
               </Link>
             </div>
           </form>
-        </div>
-        <div className={styles.imageSection}>
-          <AdvantagesSection />
         </div>
       </div>
     </div>
