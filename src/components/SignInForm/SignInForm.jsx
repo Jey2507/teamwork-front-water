@@ -26,8 +26,8 @@ const SignInForm = () => {
   const validationSchema = Yup.object().shape({
     email: Yup.string().email('Email is invalid').required('Email is required'),
     password: Yup.string()
-      .min(6, 'Password must be at least 6 characters')
-      .required('Password is required'),
+      .required("Password is required")
+      .min(6, "Password must be at least 6 characters"),
   });
 
   const {
@@ -35,8 +35,9 @@ const SignInForm = () => {
     handleSubmit,
     reset,
     formState: { errors, isDirty, isValid },
+    trigger,
   } = useForm({
-    mode: 'onChange',
+    mode: "onBlur",
     resolver: yupResolver(validationSchema),
   });
 
@@ -57,17 +58,29 @@ const SignInForm = () => {
     setShowPassword(!showPassword);
   };
 
+  const getInputClass = (fieldName) => {
+    return errors[fieldName] ? css.error : "";
+  };
+
   return (
     <div className={css.signInContainer}>
       <div className={css.signInForm}>
         <div className={css.formSection}>
-          <Logo />
+          <Logo className={css.logo} />
           <form className={css.form} onSubmit={handleSubmit(onSubmit)}>
             <h2 className={css.formTitle}>Sign In</h2>
             <div className={css.inputContainer}>
               <label className={css.formLabel}>Email</label>
-              <input type="email" placeholder="Enter your email" {...register('email')} />
-              {errors.email && <p className={css.errorText}>{errors.email.message}</p>}
+              <input
+                type="email"
+                placeholder="Enter your email"
+                className={getInputClass("email")}
+                {...register("email")}
+                onBlur={() => trigger("email")}
+              />
+              {errors.email && (
+                <p className={css.errorText}>{errors.email.message}</p>
+              )}
             </div>
             <div className={css.inputContainer}>
               <label className={css.formLabel}>Password</label>
@@ -75,7 +88,9 @@ const SignInForm = () => {
                 <input
                   type={showPassword ? 'text' : 'password'}
                   placeholder="Enter your password"
-                  {...register('password')}
+                  className={getInputClass("password")}
+                  {...register("password")}
+                  onBlur={() => trigger("password")}
                 />
                 <svg
                   width="20"
