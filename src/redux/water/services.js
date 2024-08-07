@@ -5,13 +5,13 @@ export const addWaterReq = async (arg) => {
   return data;
 }
 export const getWaterDayReq = async (date) => {
-  const { data } = await axios.get(`/water/daily-water?date=${date}`);
+  const { data } = await axios.get(`/water/daily-water`, date);
   console.log(data)
   return data;
 };
 
 export const getWaterMonthReq = async (date) => {
-  const { data } = await axios.get(`/water/monthly-water/${date.year}/${date.month}`);
+  const { data } = await axios.get(`/water/monthly-water`, date);
   return data;
 };
 
