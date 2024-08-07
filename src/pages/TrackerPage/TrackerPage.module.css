@@ -5,7 +5,13 @@
 }
 @media screen and (min-width: 768px) {
   .wrapper {
-    flex-direction: row;
     gap: 32px;
+  }
+}
+
+@media screen and (min-width: 1440px) {
+  .wrapper {
+    display: flex;
+    flex-direction: row;
   }
 }

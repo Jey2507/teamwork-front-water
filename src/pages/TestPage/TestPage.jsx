@@ -6,7 +6,7 @@ import UserSettingsModal from '../../components/UserSettingsModal/UserSettingsMo
 
 const TestPage = () => {
   const dispatch = useDispatch();
-  const { isModalOpen, modalType, modalData } = useSelector((state) => state.modal);
+  const { isModalOpen, modalType, } = useSelector((state) => state.modal);
 
   const renderModal = () => {
     switch (modalType) {
@@ -23,15 +23,8 @@ const TestPage = () => {
 
   return (
     <div>
-      <h1>Test Page</h1>
-      <button onClick={() => dispatch(openModal({ type: 'LOGOUT' }))}>
-        Open LogOut Modal
-      </button>
       <button onClick={() => dispatch(openModal({ type: 'DELETE_WATER', data: { entryId: 1 } }))}>
         Open Delete Water Modal
-      </button>
-      <button onClick={() => dispatch(openModal({ type: 'SETTING' }))}>
-        Open Setting Modal
       </button>
       {isModalOpen && renderModal()}
     </div>
