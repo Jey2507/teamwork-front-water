@@ -27,10 +27,13 @@ const authSlice = createSlice({
       })
 
       .addCase(login.fulfilled, (state, action) => {
+        const cookies = new Cookies();
         state.user = action.payload.user
         state.token = action.payload.token;
-        // state.refreshToken = action.payload.refreshToken;
+        // state.refreshToken = action.payload.user.refreshToken;
         state.isLoggedIn = true;
+
+        state.refreshToken = cookies.get('refreshToken');
       })
       .addCase(login.rejected, (state, action) => {
         state.error = action.payload;
