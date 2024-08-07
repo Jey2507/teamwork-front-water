@@ -5,6 +5,7 @@ import css from '../UserPanel/UserPanel.module.css';
 
 export default function UserPanel() {
   const userInfo = useSelector(selectUser);
+  console.log(userInfo)
   const userName = userInfo.name;
 
   const getFirstName = fullName => {
