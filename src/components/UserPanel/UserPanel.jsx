@@ -20,7 +20,7 @@ export default function UserPanel() {
   return (
     <div className={css.userBarWrapper}>
       <h2 className={css.hello}>
-        Hello, <span className={css.span}>{getFirstName(userInfo.name)}</span>!
+        Hello, <span className={css.span}>{getFirstName(33)}</span>!
       </h2>
         <UserBar />
     </div>
