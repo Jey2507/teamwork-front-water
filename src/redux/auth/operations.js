@@ -72,7 +72,7 @@ export const refreshUser = createAsyncThunk(
   },
 );
 
-export const setupAxiosInterceptors = (store) => {
+/* export const setupAxiosInterceptors = (store) => {
   axios.interceptors.response.use(
     (response) => response,
     async (error) => {
@@ -91,6 +91,44 @@ export const setupAxiosInterceptors = (store) => {
           return Promise.reject(err);
         }
       }
+      return Promise.reject(error);
+    }
+  );
+}; */
+
+export const setupAxiosInterceptors = (store) => {
+  axios.interceptors.response.use(
+    (response) => response,
+    async (error) => {
+      const originalRequest = error.config;
+
+      // Check if the error is a 401 and we have not retried this request yet
+      if (error.response.status === 401 && !originalRequest._retry) {
+        originalRequest._retry = true;
+        try {
+          const { refreshToken } = store.getState().auth;
+
+          // If there is no refresh token, reject the request
+          if (!refreshToken) {
+            clearAuthHeader();
+            return Promise.reject(error);
+          }
+
+          const { data } = await axios.post("/auth/refresh", { refreshToken });
+
+          setAuthHeader(data.accessToken);
+          store.dispatch(setToken({ token: data.accessToken, refreshToken: data.refreshToken }));
+
+          originalRequest.headers.Authorization = `Bearer ${data.accessToken}`;
+          return axios(originalRequest);
+        } catch (err) {
+          // If the refresh request fails, clear the auth header and reject the request
+          clearAuthHeader();
+          return Promise.reject(err);
+        }
+      }
+
+      // If the request was already retried or another error occurred, reject the request
       return Promise.reject(error);
     }
   );

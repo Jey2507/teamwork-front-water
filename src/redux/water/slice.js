@@ -1,6 +1,14 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { initialState } from "./constants";
 import { addWater, getWaterDay, getWaterMonth, deleteWater } from "./operations";
+
+const initialState = {
+  date: null,
+  totalDayWater: 0,
+  items: [],
+  monthItems: [],
+  loading: false,
+  error: false,
+};
 
 const handlePending = (state) => {
   state.loading = true;
@@ -15,16 +23,14 @@ const handleRejected = (state, action) => {
 const waterSlice = createSlice({
   name: 'water',
   initialState: initialState,
-  reducers: {
-
-  },
+  reducers: {},
   extraReducers: (builder) =>
     builder
       .addCase(addWater.pending, handlePending)
       .addCase(addWater.fulfilled, (state, action) => {
         state.loading = false;
         state.error = null;
-        state.waterDay = [...state.waterDay, action.payload];
+        state.items = [...state.items, action.payload];
       })
       .addCase(addWater.rejected, handleRejected)
       .addCase(getWaterDay.pending, (state) => {
@@ -38,17 +44,8 @@ const waterSlice = createSlice({
       .addCase(getWaterDay.rejected, (state) => {
         state.error = true;
       })
-      // .addCase(getTodaySumamryWater.pending, (state) => {
-      //   state.error = false;
-      // })
-      // .addCase(getTodaySumamryWater.fulfilled, (state, action) => {
-      //   state.todaySumamryWater = action.payload; // Оновлення поля todaySumamryWater
-      // })
-      // .addCase(getTodaySumamryWater.rejected, (state) => {
-      //   state.error = true;
-      // })
-      .addCase(getWaterMonth.fulfilled, (state, action) => {
-        state.monthData = action.payload;
+     .addCase(getWaterMonth.fulfilled, (state, action) => {
+        state.monthItems = action.payload;
       })
       .addCase(getWaterMonth.rejected, (state) => {
         state.error = true;
@@ -57,7 +54,7 @@ const waterSlice = createSlice({
       .addCase(deleteWater.fulfilled, (state, action) => {
         state.loading = false;
         state.error = null;
-        state.waterDay = state.waterDay.filter(item => item.id !== action.payload);
+        state.items = state.items.filter(item => item.id !== action.payload);
         // Update water progress and calendar items when get them ready
       })
       .addCase(deleteWater.rejected, handleRejected)

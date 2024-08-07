@@ -14,9 +14,3 @@ export const getWaterMonthReq = async (date) => {
   const { data } = await axios.get(`/water/monthly-water`, date);
   return data;
 };
-
-// export const getTodaySumamryWaterReq = async (date) => {
-//   const { data } = await axios.get(`/water/today/${date}`);
-//   return data;
-
-// };
