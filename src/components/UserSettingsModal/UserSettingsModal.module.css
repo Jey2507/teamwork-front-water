@@ -1,0 +1,30 @@
+.settingsModalTitle {
+  margin-bottom: 20px;
+  color: rgb(50, 63, 71);
+  line-height: 24px;
+  font-size: 20px;
+  font-weight: 700;
+}
+
+.settingsModal {
+  width: 343px;
+  height: auto;
+  background-color: white;
+  padding: 40px;
+}
+
+@media screen and (min-width: 768px) {
+  .settingsModalTitle {
+    font-size: 28px;
+    line-height: 32px;
+  }
+  .settingsModal {
+    width: 648px;
+  }
+}
+
+@media screen and (min-width: 1440px) {
+  .settingsModal {
+    width: 920px;
+  }
+}

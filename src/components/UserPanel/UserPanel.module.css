@@ -1,0 +1,60 @@
+.userBarWrapper {
+    background-color: var(--background);
+    display: flex;
+    align-self: flex-start;
+    gap: 20px;
+    flex-direction: column;
+    color: var(--main-white);
+  }
+
+.hello {
+    font-family: "Gilroy", sans-serif;
+    font-weight: 400;
+    font-size: 32px;
+    line-height: 1;
+    letter-spacing: -0.01em;
+    color: var(--main);
+}
+
+.span {
+    font-weight: 700;
+}
+
+.userBarContainer {
+    position: relative;
+    /* Позиціонування UserBarPopover відносно UserBar */
+    margin-left: auto;
+}
+
+.popoverWrapper {
+    position: absolute;
+    top: 100%;
+    /* Під `UserBar` */
+    left: 0;
+    /* Вирівнювання по лівому краю `UserBar` */
+    margin-top: 8px;
+    /* Відступ для розділення від `UserBar` */
+}
+
+@media screen and (min-width: 768px) {
+    .hello {
+        font-family: "Gilroy", sans-serif;
+        font-weight: 400;
+        font-size: 36px;
+        line-height: 1.06;
+        letter-spacing: -0.01em;
+        color: var(--main);
+    }
+
+    .userBarWrapper {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+      }
+    
+}
+
+@media screen and (min-width: 1440px) {
+
+}

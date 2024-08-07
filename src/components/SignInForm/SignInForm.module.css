@@ -1,7 +1,3 @@
-.imageSection {
-  display: none;
-}
-
 .signInContainer {
   display: flex;
   justify-content: center;
@@ -18,6 +14,13 @@
   overflow: hidden;
   width: 343px;
   height: 780px;
+  position: relative;
+}
+
+.logo {
+  position: absolute;
+  top: 24px;
+  left: 16px;
 }
 
 .inputContainer {
@@ -43,15 +46,12 @@
 
 .formSection {
   flex: 1;
-}
-
-.formSection,
-.form {
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  padding: 162px 16px;
+  padding: 24px 16px;
   background-color: #f0eff4;
+  position: relative;
+  gap: 172px;
 }
 
 .formTitle {
@@ -61,11 +61,6 @@
   line-height: 1;
   letter-spacing: -0.01em;
   margin-bottom: 32px;
-}
-
-.inputContainer {
-  margin-bottom: 16px;
-  position: relative;
 }
 
 .formLabel {
@@ -88,16 +83,30 @@
   color: var(--black);
   opacity: 60%;
   box-sizing: border-box;
+  transition: border-color 0.5s, color 0.5s;
 }
 
-.inputContainer input:focus {
-  border-color: var(--green-hover);
+.inputContainer input:focus,
+.inputContainer input:hover {
+  border-color: var(--green-hover) !important;
   outline: none;
+  color: var(--black) !important;
+}
+
+.inputContainer input.error {
+  border-color: #ef5050;
+  color: #ef5050;
+}
+
+.inputContainer input.error:focus,
+.inputContainer input.error:hover {
+  border-color: var(--green-hover) !important;
+  color: var(--black) !important;
 }
 
 .inputContainer p {
   color: #ef5050;
-  margin: 5px 0 0;
+  /* margin: 5px 0 0; */
 }
 
 .spanSignIn p {
@@ -145,11 +154,6 @@
   padding: 16px 0;
 }
 
-.form input:hover,
-.form input:focus {
-  border-color: var(--green-hover);
-}
-
 .btnform:hover,
 .btnform:active {
   background-color: #87d28d;
@@ -165,8 +169,10 @@
 .btnform:disabled:focus {
   transform: scale(1);
 }
+
 .errorText {
-  height: 16px;
+  margin-top: 5px;
+  height: 18px;
   font-size: 14px;
 }
 
@@ -174,6 +180,10 @@
   .formSection {
     padding: 32px;
     display: block;
+  }
+
+  .formLabel {
+    font-size: 16px;
   }
 
   .formTitle {
@@ -204,9 +214,7 @@
     overflow: hidden;
     gap: 32px;
   }
-  .imageSection {
-    display: block;
-  }
+  
   .formSection,
   .imageSection {
     width: 672px;

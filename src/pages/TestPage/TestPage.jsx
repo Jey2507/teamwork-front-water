@@ -2,6 +2,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { openModal } from '../../redux/ModalSlice';
 import LogOutModal from '../../components/LogOutModal/LogOutModal';
 import DeleteWaterModal from '../../components/DeleteWaterModal/DeleteWaterModal';
+import UserSettingsModal from '../../components/UserSettingsModal/UserSettingsModal';
 
 const TestPage = () => {
   const dispatch = useDispatch();
@@ -13,6 +14,8 @@ const TestPage = () => {
         return <LogOutModal />;
       case 'DELETE_WATER':
         return <DeleteWaterModal />;
+      case 'SETTING':
+        return <UserSettingsModal />
       default:
         return null;
     }
@@ -26,6 +29,9 @@ const TestPage = () => {
       </button>
       <button onClick={() => dispatch(openModal({ type: 'DELETE_WATER', data: { entryId: 1 } }))}>
         Open Delete Water Modal
+      </button>
+      <button onClick={() => dispatch(openModal({ type: 'SETTING' }))}>
+        Open Setting Modal
       </button>
       {isModalOpen && renderModal()}
     </div>

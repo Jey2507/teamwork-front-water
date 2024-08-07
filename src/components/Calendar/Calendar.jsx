@@ -1,4 +1,4 @@
-import { CalendarItem } from '../CalendarItem/CalendarItem.jsx';
+// import { CalendarItem } from '../CalendarItem/CalendarItem.jsx';
 import { startOfMonth, endOfMonth, eachDayOfInterval, isSameDay } from 'date-fns';
 import css from './Calendar.module.css';
 import { useDispatch, useSelector } from 'react-redux';
@@ -29,7 +29,7 @@ export const Calendar = ({ currentMonth }) => {
         {days.map(day => {
           return (
             <li className={css.itemCalendar} key={day}>
-              <CalendarItem day={day} getDayData={getDayData} />
+              {/* <CalendarItem day={day} getDayData={getDayData} /> */}
             </li>
           );
         })}

@@ -1,7 +1,11 @@
-import SharedLayout from "../../components/SharedLayout/SharedLayout.jsx";
+import AdvantagesSection from "../../components/AdvantagesSection/AdvantagesSection.jsx";
+import Container from "../../components/Container/Container.jsx";
+import WelcomeSection from "../../components/WelcomeSection/WelcomeSection.jsx";
 
 export default function HomePage() {
-  return <SharedLayout>
-    <div>HomePage</div>
-    </SharedLayout>
+  return <Container>
+            <AdvantagesSection>
+                <WelcomeSection />
+            </AdvantagesSection>  
+          </Container>
 }
