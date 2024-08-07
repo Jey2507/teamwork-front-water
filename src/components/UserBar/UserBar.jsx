@@ -51,22 +51,18 @@ const Userbar = () => {
   };
 
   return (
-      <div className={css.userBarMenu} data-tour="step-7">
-        <button className={css.userBarBtn} onClick={toggleMenu}>
-          {getFirstName(userInfo?.data.name)}
-          {userInfo?.data.avatar ? (
-            <img
-              src={userInfo.avatar}
-              alt="User Avatar"
-              className={css.avatar}
-            />
-          ) : (
-            <span className={css.avatarPlaceholder}>.</span>
-          )}
-          <svg className={`${css.chevron} ${menuOpen ? css.open : ''}`}>
-            <use xlinkHref={`${sprite}#icon-arrow-down`} />
-          </svg>
-        </button>
+    <div className={css.userBarMenu} data-tour="step-7">
+      <button className={css.userBarBtn} onClick={toggleMenu}>
+        {getFirstName(userInfo?.name)}
+        {userInfo?.avatar ? (
+          <img src={userInfo.avatar} alt="User Avatar" className={css.avatar} />
+        ) : (
+          <span className={css.avatarPlaceholder}>.</span>
+        )}
+        <svg className={`${css.chevron} ${menuOpen ? css.open : ''}`}>
+          <use xlinkHref={`${sprite}#icon-arrow-down`} />
+        </svg>
+      </button>
       {menuOpen && (
         <div className={css.userBarOpenMenu}>
           <ul className={css.wrapperLink}>
