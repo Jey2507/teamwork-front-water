@@ -1,43 +1,45 @@
 .backdrop {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.3); 
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    z-index: 1000;
-  }
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.3);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
 
-  .closeButton {
-    position: absolute;
-    top: 20px;
-    right: 16px;
-    background: none;
-    border: none;
-    cursor: pointer;
-  }
-  
-  .icon {
-    width: 24px;
-    height: 24px;
-  }
-
-  
-@media only screen and (min-width: 768px){
-  .icon {
-    width: 24px;
-    height: 24px;
-  }
+.modalContainer {
+  position: relative; 
+  padding: 40px 14px;
+  border-radius: 15px;
+  text-align: center;
+  max-width: 344px;
+  min-width: 267px;
+  background: var(--white);
+  box-shadow: 0 4px 50px 0 rgba(0, 0, 0, 0.1);
 }
 
 .closeButton {
   position: absolute;
   top: 20px;
-  right: 20px;
+  right: 16px;
   background: none;
   border: none;
   cursor: pointer;
+}
+
+.icon {
+  width: 24px;
+  height: 24px;
+
+}
+
+@media only screen and (min-width: 768px) {
+  .icon {
+    width: 24px;
+    height: 24px;
+  }
 }

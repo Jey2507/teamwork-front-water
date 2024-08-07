@@ -37,8 +37,8 @@ export const getWaterMonth = createAsyncThunk(
     }
   }
 );
-export const deleteWaterEntry = createAsyncThunk(
-  'water/deleteWaterEntry',
+export const deleteWater = createAsyncThunk(
+  'water/deleteWater',
   async (entryId, thunkAPI) => {
     try {
       await axios.delete(`/api/water/${entryId}`);
