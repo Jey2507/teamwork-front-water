@@ -56,7 +56,7 @@ const Userbar = () => {
           {getFirstName(userInfo?.data.name)}
           {userInfo?.data.avatar ? (
             <img
-              src={userInfo.data.avatar}
+              src={userInfo.avatar}
               alt="User Avatar"
               className={css.avatar}
             />
