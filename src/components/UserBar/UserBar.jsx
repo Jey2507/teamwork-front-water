@@ -55,10 +55,10 @@ const Userbar = () => {
   return (
       <div className={css.userBarMenu} data-tour="step-7">
         <button className={css.userBarBtn} onClick={toggleMenu}>
-          {getFirstName(userInfo?.name)}
-          {userInfo?.avatar ? (
+          {getFirstName(userInfo?.data.name)}
+          {userInfo?.avatar.data ? (
             <img
-              src={userInfo.avatar}
+              src={userInfo.data.avatar}
               alt="User Avatar"
               className={css.avatar}
             />
