@@ -4,13 +4,11 @@ import { useSelector } from 'react-redux';
 
 export default function WaterDailyNorma() {
   let waterDailyNorma = 1.5;
-  if (useSelector(selectDailyNorma) !== null) {
-    waterDailyNorma = useSelector(selectDailyNorma);
-     
-  }
+  // if (useSelector(selectDailyNorma) !== null) {
+  //   waterDailyNorma = useSelector(selectDailyNorma);
 
+  // }
 
-   
   return (
     <div className={css.container}>
       <p className={css.norma}>{waterDailyNorma}L</p>

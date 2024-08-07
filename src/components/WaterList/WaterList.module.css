@@ -1,6 +1,6 @@
 .water_list {
   display: flex;
-  gap: 16px;
+  gap: 8px;
   margin: 0;
   padding: 0;
   list-style: none;
@@ -29,6 +29,9 @@
   border-radius: 25px;
 }
 @media screen and (min-width: 375px) {
+  .water_list {
+    gap: 16px;
+  }
   .water_item {
     flex-basis: 32%;
     flex-shrink: 0;

@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import css from '../UserBar/UserBar.module.css';
-import { icons as sprite } from "../../assets/index.js";
+import { icons as sprite } from '../../assets/index.js';
 import { useAuth } from '../../hooks/useAut';
 import LogOutModal from '../LogOutModal/LogOutModal';
 import UserSettingsModal from '../UserSettingsModal/UserSettingsModal';
@@ -8,24 +8,22 @@ import { useDispatch, useSelector } from 'react-redux';
 import { refreshUser } from '../../redux/auth/operations.js';
 import { selectUser } from '../../redux/auth/selectors.js';
 import { openModal } from '../../redux/ModalSlice.js';
-// import { useModalContext } from '../../context/ModalContext';
 
 const Userbar = () => {
-  // const { openModal } = useModalContext();
   const [menuOpen, setMenuOpen] = useState(false);
   const { user } = useAuth();
   const dispatch = useDispatch();
   const userInfo = useSelector(selectUser);
   const [isUserUpdated, setIsUserUpdated] = useState(false);
 
-  const { isModalOpen, modalType } = useSelector((state) => state.modal);
+  const { isModalOpen, modalType } = useSelector(state => state.modal);
 
   const renderModal = () => {
     switch (modalType) {
       case 'LOGOUT':
         return <LogOutModal />;
       case 'SETTING':
-        return <UserSettingsModal />
+        return <UserSettingsModal />;
       default:
         return null;
     }
@@ -48,7 +46,7 @@ const Userbar = () => {
     setMenuOpen(!menuOpen);
   };
 
-  const getFirstName = (fullName) => {
+  const getFirstName = fullName => {
     return fullName ? fullName.split(' ')[0] : 'User';
   };
 
@@ -69,37 +67,36 @@ const Userbar = () => {
             <use xlinkHref={`${sprite}#icon-arrow-down`} />
           </svg>
         </button>
-        {menuOpen && (
-          <div className={css.userBarOpenMenu}>
-            <ul className={css.wrapperLink}>
-              <li>
-                <a
-                 onClick={() => dispatch(openModal({ type: 'SETTING' }))}
-                  className={css.userBarLink}
-
-                >
-                  <svg width="16" height="16">
-                    <use xlinkHref={`${sprite}#icon-settings`} />
-                  </svg>
-                  Settings
-                </a>
-              </li>
-              <li>
-                <a
-                  className={css.userBarLink}
-                  onClick={() => dispatch(openModal({ type: 'LOGOUT' }))}
-                >
-                  <svg width="16" height="16">
-                    <use xlinkHref={`${sprite}#icon-log-out`} />
-                  </svg>
-                  Log Out
-                </a>
-              </li>
-            </ul>
-          </div>
-        )}
-        {isModalOpen && renderModal()}
-      </div>
+      {menuOpen && (
+        <div className={css.userBarOpenMenu}>
+          <ul className={css.wrapperLink}>
+            <li>
+              <a
+                onClick={() => dispatch(openModal({ type: 'SETTING' }))}
+                className={css.userBarLink}
+              >
+                <svg width="16" height="16">
+                  <use xlinkHref={`${sprite}#icon-settings`} />
+                </svg>
+                Settings
+              </a>
+            </li>
+            <li>
+              <a
+                className={css.userBarLink}
+                onClick={() => dispatch(openModal({ type: 'LOGOUT' }))}
+              >
+                <svg width="16" height="16">
+                  <use xlinkHref={`${sprite}#icon-log-out`} />
+                </svg>
+                Log Out
+              </a>
+            </li>
+          </ul>
+        </div>
+      )}
+      {isModalOpen && renderModal()}
+    </div>
   );
 };
 
