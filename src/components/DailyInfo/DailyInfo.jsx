@@ -9,14 +9,19 @@ export default function DailyInfo() {
   return (
     <>
       <div className={css.wraper}>
-        <ChooseDate />
-        <AddWaterBtn
-          mainColor={'none'}
-          backgroundColorIcon={'var(--accent)'}
-          colorText={'var(--main)'}
-          colorIcon={'var(--main)'}
-        />
-        <WaterList />
+        <div className={css.section}>
+          <ChooseDate />
+          <AddWaterBtn
+            smallBtn={true}
+            mainColor={'none'}
+            backgroundColorIcon={'var(--accent)'}
+            colorText={'var(--main)'}
+            hoverBackgroundColorIcon={'var(--main)'}
+            colorIcon={'var(--main)'}
+            hoverColorIcon={'var(--main-white)'}
+          />
+        </div>
+        <WaterList waters={waters} />
       </div>
     </>
   );

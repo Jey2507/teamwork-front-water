@@ -1,3 +1,4 @@
+import { Helmet } from 'react-helmet-async';
 import AdvantagesSection from '../../components/AdvantagesSection/AdvantagesSection.jsx';
 import Container from '../../components/Container/Container.jsx';
 import SignUpForm from '../../components/SignUpForm/SignUpForm.jsx';
@@ -8,6 +9,9 @@ const SignUpPage = () => {
   const { isDesktop } = useMedia();
   return (
     <div>
+      <Helmet>
+        <title>Sign Up - AquaTrack</title>
+      </Helmet>
       <Container>
         <div className={css.wrapperHome}>
           <SignUpForm />
