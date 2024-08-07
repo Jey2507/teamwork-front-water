@@ -1,12 +1,12 @@
-import {useState} from "react";
-import {useForm, Controller} from "react-hook-form";
-import {yupResolver} from "@hookform/resolvers/yup";
-import * as Yup from "yup";
-import css from "./WaterForm.module.css";
-import clsx from "clsx";
-import svgSprite from "../../assets/sprite.svg";
-import {useDispatch} from "react-redux";
-import {addWater, updateWaterIntakeRecord} from "../../redux/water/operations";
+import { useState } from 'react';
+import { useForm, Controller } from 'react-hook-form';
+import { yupResolver } from '@hookform/resolvers/yup';
+import * as Yup from 'yup';
+import css from './WaterForm.module.css';
+import clsx from 'clsx';
+import svgSprite from '../../assets/sprite.svg';
+import { useDispatch } from 'react-redux';
+import { addWater, updateWaterIntakeRecord } from '../../redux/water/operations';
 
 const WaterForm = ({
   operationType = "add",
@@ -46,7 +46,7 @@ const WaterForm = ({
     control,
     handleSubmit,
     setValue,
-    formState: {errors},
+    formState: { errors },
   } = useForm({
     resolver: yupResolver(validationSchema),
     defaultValues: {
@@ -75,7 +75,7 @@ const WaterForm = ({
 
     switch (operationType) {
       case "add":
-        dispatch(addWater(addWaterValue)).then(({error}) => {
+        dispatch(addWater(addWaterValue)).then(({ error }) => {
           if (!error) {
             setIsLoading(false);
             handleClose();
@@ -86,8 +86,8 @@ const WaterForm = ({
         break;
       case "edit":
         dispatch(
-          updateWaterIntakeRecord({id: waterID, formData: editWaterValue})
-        ).then(({error}) => {
+          updateWaterIntakeRecord({ id: waterID, formData: editWaterValue })
+        ).then(({ error }) => {
           if (!error) {
             setIsLoading(false);
             handleClose();
@@ -130,9 +130,10 @@ const WaterForm = ({
           type="button"
           className={css.TapAddWater}
           onClick={() => handleWaterAmountChange(Math.max(waterAmount - 50, 0))}
-          disabled={isMinusButtonDisabled}>
+          disabled={isMinusButtonDisabled}
+        >
           <svg>
-            <use xlinkHref={svgSprite + "#icon-remove"}></use>
+            <use xlinkHref={svgSprite + '#icon-remove'}></use>
           </svg>
         </button>
         <p className={css.TapAddWaterValue}>{waterAmount} ml</p>
@@ -140,9 +141,10 @@ const WaterForm = ({
           type="button"
           className={css.TapAddWater}
           onClick={() => handleWaterAmountChange(waterAmount + 50)}
-          disabled={isPlusButtonDisabled}>
+          disabled={isPlusButtonDisabled}
+        >
           <svg>
-            <use xlinkHref={svgSprite + "#icon-add"}></use>
+            <use xlinkHref={svgSprite + '#icon-add'}></use>
           </svg>
         </button>
       </div>
@@ -152,14 +154,14 @@ const WaterForm = ({
         <Controller
           name="recordingTime"
           control={control}
-          render={({field}) => (
+          render={({ field }) => (
             <input
               {...field}
               type="text"
               className={clsx(css.RecordingTime)}
               placeholder="HH:MM"
               onChange={(e) => {
-                const [newHours, newMinutes] = e.target.value.split(":");
+                const [newHours, newMinutes] = e.target.value.split(':');
                 setFormHours(newHours);
                 setFormMinutes(newMinutes);
                 field.onChange(e);
@@ -176,11 +178,11 @@ const WaterForm = ({
         <Controller
           name="waterValue"
           control={control}
-          render={({field}) => (
+          render={({ field }) => (
             <input
               {...field}
               type="number"
-              value={waterAmount || ""}
+              value={waterAmount || ''}
               onChange={(e) => handleWaterAmountChange(Number(e.target.value))}
               className={css.WaterValue}
             />
