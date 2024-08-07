@@ -16,9 +16,9 @@ export const addWater = createAsyncThunk(
 
 export const getWaterDay = createAsyncThunk(
   'water/daily-water',
-  async (day, thunkAPI) => {
+  async (date, thunkAPI) => {
     try {
-      const response = await getWaterDayReq(day);
+      const response = await getWaterDayReq(date);
       console.log(response)
       return response;
     } catch (error) {
