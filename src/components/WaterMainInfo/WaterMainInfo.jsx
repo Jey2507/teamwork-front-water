@@ -10,8 +10,8 @@ import {
   tp3xmb,
 } from '../../images/TrackerPage/index.js';
 import AddWaterButton from '../AddWaterButton/AddWaterButton.jsx';
-import WaterDailyNorma from '../WaterDailyNorma/WaterDailyNorma.jsx';
-import WaterProgressBar from '../WaterProgressBar/WaterProgressBar.jsx';
+// import WaterDailyNorma from '../WaterDailyNorma/WaterDailyNorma.jsx';
+// import WaterProgressBar from '../WaterProgressBar/WaterProgressBar.jsx';
 import css from './WaterMainInfo.module.css';
 import Logo from "../Logo/Logo.jsx"
 
@@ -28,8 +28,8 @@ export default function WaterMainInfo() {
         src={tp1xmb}
         alt=""
       />
-      <WaterDailyNorma />
-      <WaterProgressBar />
+      {/* <WaterDailyNorma /> */}
+      {/* <WaterProgressBar /> */}
       <div className={css.btn}>
          <AddWaterButton 
       mainColor={'var(--main'} backgroundColorIcon={'none'} colorText={'var(--main-white'} colorIcon={'var(--main-white)'} />

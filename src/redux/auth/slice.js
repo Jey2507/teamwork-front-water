@@ -1,6 +1,8 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { initialStateConstant } from "./constants";
 import { login, logout, refreshUser, register } from "./operations";
+import Cookies from "universal-cookie";
+
 
 const authSlice = createSlice({
   name: 'auth',
@@ -25,9 +27,11 @@ const authSlice = createSlice({
       })
 
       .addCase(login.fulfilled, (state, action) => {
-        state.user = action.payload.user;
+        const cookies = new Cookies();
+        state.user = action.payload.data
         state.token = action.payload.token;
-        state.refreshToken = action.payload.refreshToken;
+        // state.refreshToken = action.payload.refreshToken;
+        state.refreshToken = cookies.get('refreshToken');
         state.isLoggedIn = true;
       })
       .addCase(login.rejected, (state, action) => {
@@ -37,6 +41,7 @@ const authSlice = createSlice({
       .addCase(logout.fulfilled, (state) => {
         state.user = { name: null, email: null };
         state.token = null;
+        state.refreshToken = null;
         state.isLoggedIn = false;
       })
 
