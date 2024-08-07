@@ -33,6 +33,7 @@ const authSlice = createSlice({
         // state.refreshToken = action.payload.refreshToken;
         state.refreshToken = cookies.get('refreshToken');
         state.isLoggedIn = true;
+
       })
       .addCase(login.rejected, (state, action) => {
         state.error = action.payload;

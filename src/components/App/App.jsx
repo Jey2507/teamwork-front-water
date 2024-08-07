@@ -5,7 +5,7 @@ import RestrictedRoute from '../../pages/RestrictedRoute.jsx';
 import PrivateRoute from '../../pages/PrivateRoute.jsx';
 import { useDispatch, useSelector } from 'react-redux';
 import { refreshUser } from '../../redux/auth/operations.js';
-import { selectIsRefreshing } from '../../redux/auth/selectors.js';
+import { selectIsRefreshing, selectRefreshToken } from '../../redux/auth/selectors.js';
 import Loader from '../Loader/Loader.jsx';
 
 const TestPage = lazy(() => import('../../pages/TestPage/TestPage.jsx'));
