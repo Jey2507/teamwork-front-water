@@ -1,17 +1,17 @@
-import {useState} from "react";
-import {useForm, Controller} from "react-hook-form";
-import {yupResolver} from "@hookform/resolvers/yup";
-import * as Yup from "yup";
-import css from "./WaterForm.module.css";
-import clsx from "clsx";
-import svgSprite from "../../assets/sprite.svg";
-import {useDispatch} from "react-redux";
-import {addWater, updateWaterIntakeRecord} from "../../redux/water/operations";
+import { useState } from 'react';
+import { useForm, Controller } from 'react-hook-form';
+import { yupResolver } from '@hookform/resolvers/yup';
+import * as Yup from 'yup';
+import css from './WaterForm.module.css';
+import clsx from 'clsx';
+import svgSprite from '../../assets/sprite.svg';
+import { useDispatch } from 'react-redux';
+import { addWater, updateWaterIntakeRecord } from '../../redux/water/operations';
 
 const WaterForm = ({
   operationType = "add",
   editTime,
-  waterPortion,
+  waterPortion = 50,  // Значение по умолчанию, если waterPortion не передан
   waterID,
   handleClose,
 }) => {
@@ -19,7 +19,7 @@ const WaterForm = ({
   const dispatch = useDispatch();
   const [isLoading, setIsLoading] = useState(false);
 
-  const dateFromUrl = new Date(editTime);
+  const dateFromUrl = editTime ? new Date(editTime) : new Date();
 
   const year = dateFromUrl.getFullYear();
   const month = String(dateFromUrl.getMonth() + 1).padStart(2, "0");
@@ -46,12 +46,12 @@ const WaterForm = ({
     control,
     handleSubmit,
     setValue,
-    formState: {errors},
+    formState: { errors },
   } = useForm({
     resolver: yupResolver(validationSchema),
     defaultValues: {
       recordingTime: `${formHours}:${formMinutes}`,
-      waterValue: waterAmount.toString(),
+      waterValue: waterAmount.toString(),  // Убедитесь, что waterAmount определен
     },
   });
 
@@ -61,48 +61,37 @@ const WaterForm = ({
     );
     const timeToSend = combinedDateTime.getTime().toString();
 
-    const addWaterValue = {
-      amount: data.waterValue,
-      date: timeToSend,
-    };
-
-    const editWaterValue = {
+    const waterValue = {
       amount: data.waterValue,
       date: timeToSend,
     };
 
     setIsLoading(true);
 
-    switch (operationType) {
-      case "add":
-        dispatch(addWater(addWaterValue)).then(({error}) => {
-          if (!error) {
-            setIsLoading(false);
-            handleClose();
-          } else {
-            setIsLoading(false);
-          }
-        });
-        break;
-      case "edit":
-        dispatch(
-          updateWaterIntakeRecord({id: waterID, formData: editWaterValue})
-        ).then(({error}) => {
-          if (!error) {
-            setIsLoading(false);
-            handleClose();
-          } else {
-            setIsLoading(false);
-          }
-        });
-        break;
-      default:
-        setIsLoading(false);
-        break;
+    if (operationType === "add") {
+      dispatch(addWater(waterValue)).then(({ error }) => {
+        if (!error) {
+          setIsLoading(false);
+          handleClose();
+        } else {
+          setIsLoading(false);
+        }
+      });
+    } else if (operationType === "edit") {
+      dispatch(updateWaterIntakeRecord({ id: waterID, formData: waterValue })).then(({ error }) => {
+        if (!error) {
+          setIsLoading(false);
+          handleClose();
+        } else {
+          setIsLoading(false);
+        }
+      });
+    } else {
+      setIsLoading(false);
     }
   };
 
-  const FormHeader = (operationType) => {
+  const FormHeader = () => {
     switch (operationType) {
       case "add":
         return <p className={css.FormHeader}>Choose the value</p>;
@@ -115,34 +104,36 @@ const WaterForm = ({
 
   const handleWaterAmountChange = (amount) => {
     setWaterAmount(amount);
-    setValue("waterValue", amount.toString());
+    setValue("waterValue", amount.toString());  // Убедитесь, что amount определен
   };
 
-  const isMinusButtonDisabled = waterAmount === 50;
-  const isPlusButtonDisabled = waterAmount === 5000;
+  const isMinusButtonDisabled = waterAmount <= 50;
+  const isPlusButtonDisabled = waterAmount >= 5000;
 
   return (
     <form className={css.WaterForm} onSubmit={handleSubmit(onSubmit)}>
-      {FormHeader(operationType)}
+      {FormHeader()}
       <p className={css.AmountOfWater}>Amount of water:</p>
       <div className={css.TapAddWaterWrapper}>
         <button
           type="button"
           className={css.TapAddWater}
           onClick={() => handleWaterAmountChange(Math.max(waterAmount - 50, 0))}
-          disabled={isMinusButtonDisabled}>
+          disabled={isMinusButtonDisabled}
+        >
           <svg>
-            <use xlinkHref={svgSprite + "#icon-remove"}></use>
+            <use xlinkHref={svgSprite + '#icon-remove'}></use>
           </svg>
         </button>
         <p className={css.TapAddWaterValue}>{waterAmount} ml</p>
         <button
           type="button"
           className={css.TapAddWater}
-          onClick={() => handleWaterAmountChange(waterAmount + 50)}
-          disabled={isPlusButtonDisabled}>
+          onClick={() => handleWaterAmountChange(Math.min(waterAmount + 50, 5000))}
+          disabled={isPlusButtonDisabled}
+        >
           <svg>
-            <use xlinkHref={svgSprite + "#icon-add"}></use>
+            <use xlinkHref={svgSprite + '#icon-add'}></use>
           </svg>
         </button>
       </div>
@@ -152,16 +143,16 @@ const WaterForm = ({
         <Controller
           name="recordingTime"
           control={control}
-          render={({field}) => (
+          render={({ field }) => (
             <input
               {...field}
               type="text"
               className={clsx(css.RecordingTime)}
               placeholder="HH:MM"
               onChange={(e) => {
-                const [newHours, newMinutes] = e.target.value.split(":");
-                setFormHours(newHours);
-                setFormMinutes(newMinutes);
+                const [newHours, newMinutes] = e.target.value.split(':');
+                setFormHours(newHours || hours); // Убедитесь, что newHours определен
+                setFormMinutes(newMinutes || minutes); // Убедитесь, что newMinutes определен
                 field.onChange(e);
               }}
             />
@@ -176,11 +167,11 @@ const WaterForm = ({
         <Controller
           name="waterValue"
           control={control}
-          render={({field}) => (
+          render={({ field }) => (
             <input
               {...field}
               type="number"
-              value={waterAmount || ""}
+              value={waterAmount || ''}
               onChange={(e) => handleWaterAmountChange(Number(e.target.value))}
               className={css.WaterValue}
             />

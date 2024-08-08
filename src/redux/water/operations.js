@@ -49,6 +49,19 @@ export const deleteWaterEntry = createAsyncThunk(
   }
 );
 
+export const updateWaterIntakeRecord = createAsyncThunk(
+  'water/updateWaterIntakeRecord',
+  async (recordData, thunkAPI) => {
+    try {
+      const response = await axios.put(`/api/water/${recordData.id}`, recordData);
+      return response.data;
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error.response.data);
+    }
+  }
+);
+
+
 // export const getTodaySumamryWater = createAsyncThunk(
 //   'water/getTodaySummaryWater',
 //   async (_, thunkAPI) => {
