@@ -1,6 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { initialState } from "./constants";
-import { addWater, getWaterDay, getWaterMonth, deleteWaterEntry } from "./operations";
+import { addWater, getWaterDay, getWaterMonth } from "./operations";
 
 const handlePending = (state) => {
   state.loading = true;
@@ -53,14 +53,14 @@ const waterSlice = createSlice({
       .addCase(getWaterMonth.rejected, (state) => {
         state.error = true;
       })
-      .addCase(deleteWaterEntry.pending, handlePending)
-      .addCase(deleteWaterEntry.fulfilled, (state, action) => {
-        state.loading = false;
-        state.error = null;
-        state.waterDay = state.waterDay.filter(item => item.id !== action.payload);
-        // Update water progress and calendar items when get them ready
-      })
-      .addCase(deleteWaterEntry.rejected, handleRejected)
+  // .addCase(deleteWaterEntry.pending, handlePending)
+  // .addCase(deleteWaterEntry.fulfilled, (state, action) => {
+  //   state.loading = false;
+  //   state.error = null;
+  //   state.waterDay = state.waterDay.filter(item => item.id !== action.payload);
+  //   // Update water progress and calendar items when get them ready
+  // })
+  // .addCase(deleteWaterEntry.rejected, handleRejected)
 });
 
 export const waterReducer = waterSlice.reducer;
