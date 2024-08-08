@@ -8,7 +8,7 @@ import { selectDate, selectWaterDate} from '../../redux/water/selectors';
 export default function WaterList() {
   
   const currentDay = useSelector(selectDate);
-  const waterAmount = useSelector(selectWaterDate);
+  const waterAmount = useSelector(selectWaterDate) || [];
 
   const dispatch = useDispatch();
 
@@ -20,7 +20,7 @@ export default function WaterList() {
 
   return (
     <ul className={css.water_list}>
-      {waterAmount ? (
+      {waterAmount.length ? (
         waterAmount.map(water => (
           <li key={water._id} className={css.water_item}>
             <WaterItem amount={water.amount} date={water.date} />
