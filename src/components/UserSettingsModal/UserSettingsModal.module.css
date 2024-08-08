@@ -11,6 +11,8 @@
   height: auto;
   background-color: white;
   padding: 40px;
+  border-radius: 15px;
+  box-shadow: 0px 4px 50px 0px rgba(0, 0, 0, 0.1);
 }
 
 @media screen and (min-width: 768px) {
@@ -27,4 +29,24 @@
   .settingsModal {
     width: 920px;
   }
+}
+.settingsModal {
+  max-height: 90vh;
+  overflow-y: auto;
+  max-height: 90vh;
+  scrollbar-width: 8px;
+  scrollbar-color: rgb(240, 239, 244) inherit;
+}
+
+.settingsModal::-webkit-scrollbar {
+  width: 8px;
+}
+
+.settingsModal::-webkit-scrollbar-track {
+  background-color: inherit;
+}
+
+.settingsModal::-webkit-scrollbar-thumb {
+  background-color: rgb(240, 239, 244);
+  border-radius: 30px;
 }

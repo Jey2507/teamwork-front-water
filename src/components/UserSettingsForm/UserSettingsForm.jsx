@@ -6,26 +6,28 @@ import { useDispatch, useSelector } from "react-redux";
 import { selectUser } from "../../redux/auth/selectors.js";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
-// import toast from "react-hot-toast";
-import axios from "axios";
+import toast from "react-hot-toast";
+import { closeModal } from "../../redux/ModalSlice.js";
+import { updateUser } from "../../redux/auth/operations.js";
 
 const schema = yup.object().shape({
   name: yup.string().required("Name is required!"),
   email: yup.string().email("Email is invalid").required("Email is required!"),
-  gender: yup.string().oneOf(["man", "woman"]).required(),
+  gender: yup.string().oneOf(["male", "female"]).required(),
   weight: yup
-    .number()
-    .positive("Weight must be positive!")
+    .number("Please, enter a number")
+    .typeError("Please, enter a number")
+    .min(0, "Weight greater or equal to 0 kg!")
     .max(300, "Weight must be less than 300 kg!"),
   dailyTimeActivity: yup
-    .number()
-    .positive("Daily time activity must be positive!")
-    .min(0)
+    .number("Please, enter a number")
+    .typeError("Please, enter a number")
+    .min(0, "Daily time activity greater or equal to 0 hours!")
     .max(8, "Daily time activity must be less than 8 hours!"),
   dailyNorma: yup
-    .number()
-    .positive("Daily norma must be positive!")
-    .min(0)
+    .number("Please, enter a number")
+    .typeError("Please, enter a number")
+    .min(0, "Daily norma greater or equal to 0 liters!")
     .max(10, "Daily norma must be less than 10 liters!"),
 });
 
@@ -44,11 +46,11 @@ const UserSettingsForm = () => {
       dailyNorma: dailyNorma,
     },
     resolver: yupResolver(schema),
-    mode: "onChange",
+    mode: "onSubmit",
   });
 
   const userAvatarRef = useRef(null);
-  // const dispatch = useDispatch();
+  const dispatch = useDispatch();
 
   let userGender = watch("gender");
   let userWeight = watch("weight");
@@ -76,23 +78,22 @@ const UserSettingsForm = () => {
 
   const onSubmit = async (data) => {
     const formData = new FormData();
-    formData.append("name", data.name);
-    formData.append("email", data.email);
-    formData.append("gender", data.gender);
-    formData.append("weight", Number(data.weight));
-    formData.append("dailyTimeActivity", Number(data.dailyTimeActivity));
-    formData.append("dailyNorma", Number(data.dailyNorma));
+    const keys = Object.keys(data);
+    for (const key of keys) {
+      formData.append(key, data[key]);
+    }
+
     formData.append("userAvatar", userAvatarRef.current.src);
+    try {
+      await dispatch(updateUser(formData)).unwrap();
+      dispatch(closeModal());
+      toast.success("The changes were successfully applied!");
+    } catch (error) {
+      toast.error("Failed to apply changes!");
+    }
 
-    await axios.patch('/user/update',data);
-    //   .then(() => {
-    //     toast.success("The changes were successfully applied!");
-    //   })
-    //   .catch(() => {
-    //     toast.error("Failed to apply changes!");
-    //   });
+    dispatch(closeModal());
 
-    // console.log(Object.fromEntries(formData.entries()));
   };
 
   const handleFileSelect = (event) => {
@@ -106,11 +107,6 @@ const UserSettingsForm = () => {
   function roundUpToTwoDecimalPlaces(num) {
     return Math.ceil(num * 100) / 100;
   }
-
-  const handleInputChange = (evt, setValue, fieldName) => {
-    const { value } = evt.target;
-    setValue(fieldName, value === "" || isNaN(value) ? 0 : Number(value));
-  };
 
   const calculateNormaWater = (userGender, userWeight, userSportTime) => {
     let normaWater = 0;
@@ -134,7 +130,7 @@ const UserSettingsForm = () => {
   let normaWater = calculateNormaWater(userGender, userWeight, userSportTime);
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)}>
+    <form onSubmit={handleSubmit(onSubmit)} className={css.userSettingsForm}>
       <div className={css.userAvatarContainer}>
         <img
           src=""
@@ -187,15 +183,15 @@ const UserSettingsForm = () => {
           </fieldset>
         </div>
         <div className={css.userInfoContainer}>
-          <label
-            className={`${css.userInfoLabel} ${css.inputTitle} ${css.inputText}`}
-          >
+          <label className={`${css.userInfoLabel} ${css.inputTitle}`}>
             Your name
             <input
               type="text"
               name="name"
               {...register("name")}
-              className={`${css.userInfoField} ${errors.name && css.error}`}
+              className={`${css.userInfoField} ${css.inputText} ${
+                errors.name && css.error
+              }`}
             />
             {errors.name && (
               <p className={`${css.inputText} ${css.error}`}>
@@ -258,7 +254,6 @@ const UserSettingsForm = () => {
               type="number"
               step="any"
               name="weight"
-              onInput={(evt) => handleInputChange(evt, setValue, "weight")}
               {...register("weight")}
               className={`${css.userInfoField} ${css.inputText}  ${
                 errors.weight && css.error
@@ -276,9 +271,6 @@ const UserSettingsForm = () => {
               type="number"
               step="any"
               name="dailyTimeActivity"
-              onInput={(evt) =>
-                handleInputChange(evt, setValue, "dailyTimeActivity")
-              }
               {...register("dailyTimeActivity")}
               className={`${css.userInfoField} ${css.inputText}  ${
                 errors.dailyTimeActivity && css.error
@@ -304,7 +296,6 @@ const UserSettingsForm = () => {
               type="number"
               step="any"
               name="dailyNorma"
-              onInput={(evt) => handleInputChange(evt, setValue, "dailyNorma")}
               {...register("dailyNorma")}
               className={`${css.userInfoField} ${css.inputText}  ${
                 errors.dailyNorma && css.error

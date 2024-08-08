@@ -71,6 +71,24 @@ export const refreshUser = createAsyncThunk(
   },
 );
 
+export const updateUser = createAsyncThunk(
+  "auth/update",
+  async (data, thunkAPI) => {
+    const state = thunkAPI.getState();
+    const persistedToken = state.auth.token;
+    if (persistedToken === null) {
+      return thunkAPI.rejectWithValue("Unable to fetch user");
+    }
+    try {
+      setAuthHeader(persistedToken);
+      const res = await axios.patch("/user/update", data);
+      return res.data;
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error.message);
+    }
+  }
+);
+
 
 export const setupAxiosInterceptors = (store) => {
   axios.interceptors.response.use(
