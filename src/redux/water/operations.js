@@ -38,7 +38,7 @@ export const getWaterMonth = createAsyncThunk(
   }
 );
 
-export const deleteWaterEntry = createAsyncThunk(
+export const deleteWater = createAsyncThunk(
   'water/delete-water',
   async (entryId, thunkAPI) => {
     try {
