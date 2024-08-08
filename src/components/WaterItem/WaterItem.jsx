@@ -3,20 +3,42 @@ import css from './WaterItem.module.css';
 import Icons from '../../assets/sprite.svg';
 import { openModal } from '../../redux/ModalSlice';
 import DeleteWaterModal from '../DeleteWaterModal/DeleteWaterModal';
+import WaterModal from '../WaterModal/WaterModal';
 
 export default function WaterItem({ water }) {
   const dispatch = useDispatch();
-  const { isModalOpen, modalType } = useSelector(state => state.modal);
+  const { isModalOpen, modalType, modalData } = useSelector(state => state.modal);
+
   const renderModal = () => {
     switch (modalType) {
       case 'DELETE_WATER':
         return <DeleteWaterModal />;
+      case 'EDIT_WATER':
+        return (
+          <WaterModal
+            operationType="edit"
+            onClose={() => dispatch(closeModal())}
+            water={modalData}
+            timestampFromUrl={water.timestamp}
+          />
+        );
       default:
         return null;
     }
   };
+
+  const handleEdit = () => {
+    dispatch(openModal({
+      type: 'EDIT_WATER',
+      data: water
+    }));
+  };
+
   const handleDelete = () => {
-    dispatch(openModal({ type: 'DELETE_WATER', data: { entryId: 1 } }));
+    dispatch(openModal({
+      type: 'DELETE_WATER',
+      data: { entryId: water.id }
+    }));
   };
 
   return (
@@ -29,7 +51,7 @@ export default function WaterItem({ water }) {
         <p className={css.water_time}>{water.time}</p>
       </div>
       <div className={css.btn_group}>
-        <button className={css.button}>
+        <button className={css.button} onClick={handleEdit}>
           <svg className={css.icon}>
             <use href={Icons + '#icon-edit'}></use>
           </svg>
