@@ -30,18 +30,17 @@ export const login = createAsyncThunk(
     try {
       const res = await axios.post("/auth/login", userInfo);
       setAuthHeader(res.data.data.token);
-      console.log('This is res', res);
-
       toast.success(res.data.data.message);
 
       const profile = await axios.get('/user');
-      return { user: profile.data.data };
+      return {...res.data.data, user: profile.data.data };
     } catch (error) {
       toast.error(error.response.data.message);
       return thunkAPI.rejectWithValue(error.message);
     }
   }
 );
+
 
 
 export const logout = createAsyncThunk("auth/logout", async (_, thunkAPI) => {
@@ -55,7 +54,7 @@ export const logout = createAsyncThunk("auth/logout", async (_, thunkAPI) => {
 
 export const refreshUser = createAsyncThunk(
   "auth/refresh",
-  async (data, thunkAPI) => {
+  async (_, thunkAPI) => {
     const state = thunkAPI.getState();
     const persistedToken = state.auth.token;
     if (persistedToken === null) {
@@ -63,14 +62,15 @@ export const refreshUser = createAsyncThunk(
     }
     try {
       setAuthHeader(persistedToken);
-      const res = await axios.patch('/user/update',{data});
-      return res.data;
+      const res = await axios.get('/user');
+      return res.data.data;
     }
     catch (error) {
       return thunkAPI.rejectWithValue(error.message);
     }
   },
 );
+
 
 export const setupAxiosInterceptors = (store) => {
   axios.interceptors.response.use(

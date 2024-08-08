@@ -5,9 +5,9 @@ import { openModal } from '../../redux/ModalSlice';
 import DeleteWaterModal from '../DeleteWaterModal/DeleteWaterModal';
 import WaterModal from '../WaterModal/WaterModal';
 
-export default function WaterItem({ water }) {
+export default function WaterItem({ amount, date }) {
   const dispatch = useDispatch();
-  const { isModalOpen, modalType, modalData } = useSelector(state => state.modal);
+  const { isModalOpen, modalType } = useSelector(state => state.modal);
 
   const renderModal = () => {
     switch (modalType) {
@@ -41,14 +41,21 @@ export default function WaterItem({ water }) {
     }));
   };
 
+  const formatTime = (dateString) => {
+    const dateObj = new Date(dateString);
+    const hours = dateObj.getHours().toString().padStart(2, '0');
+    const minutes = dateObj.getMinutes().toString().padStart(2, '0');
+    return `${hours}:${minutes}`;
+  };
+
   return (
     <div className={css.wrapper}>
       <svg className={css.glass_water_icon}>
         <use href={Icons + '#glass-water'}></use>
       </svg>
       <div>
-        <p className={css.water_volume}>{water.volume}</p>
-        <p className={css.water_time}>{water.time}</p>
+        <p className={css.water_volume}>{amount} ml</p>
+        <p className={css.water_time}>{formatTime(date)}</p>
       </div>
       <div className={css.btn_group}>
         <button className={css.button} onClick={handleEdit}>
