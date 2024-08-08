@@ -1,14 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { addWater, getWaterDay, getWaterMonth, deleteWater } from "./operations";
-
-const initialState = {
-  date: null,
-  totalDayWater: 0,
-  items: [],
-  monthItems: [],
-  loading: false,
-  error: false,
-};
+import { addWater, getWaterDay, getWaterMonth, deleteWaterEntry } from "./operations";
 
 const handlePending = (state) => {
   state.loading = true;
@@ -22,7 +13,15 @@ const handleRejected = (state, action) => {
 
 const waterSlice = createSlice({
   name: 'water',
-  initialState: initialState,
+  initialState: {
+    date: null,
+    totalDayWater: 0,
+    items: [], // Array of water entries for the day
+    monthData: [], // Data for the month
+    loading: false,
+    error: null,
+    waterDay: [], // List of water entries
+  },
   reducers: {},
   extraReducers: (builder) =>
     builder
@@ -30,34 +29,32 @@ const waterSlice = createSlice({
       .addCase(addWater.fulfilled, (state, action) => {
         state.loading = false;
         state.error = null;
-        state.items = [...state.items, action.payload];
+        state.waterDay = [...state.waterDay, action.payload];
       })
       .addCase(addWater.rejected, handleRejected)
       .addCase(getWaterDay.pending, (state) => {
-        state.error = false;
+        state.loading = true;
+        state.error = null;
       })
       .addCase(getWaterDay.fulfilled, (state, action) => {
-        state.date = action.payload.date;
-        state.totalDayWater = action.payload.totalDayWater;
-        state.items = action.payload.consumedWaterData;
+        state.loading = false;
+        state.date = action.payload.date; // Response should contain date
+        state.totalDayWater = action.payload.totalDayWater; // Response should contain totalDayWater
+        state.items = action.payload.entries; // Ensure response has entries
       })
-      .addCase(getWaterDay.rejected, (state) => {
-        state.error = true;
+      .addCase(getWaterDay.rejected, handleRejected)
+      .addCase(getWaterMonth.fulfilled, (state, action) => {
+        state.loading = false;
+        state.monthData = action.payload; // Ensure response has month data
       })
-     .addCase(getWaterMonth.fulfilled, (state, action) => {
-        state.monthItems = action.payload;
-      })
-      .addCase(getWaterMonth.rejected, (state) => {
-        state.error = true;
-      })
-      .addCase(deleteWater.pending, handlePending)
-      .addCase(deleteWater.fulfilled, (state, action) => {
+      .addCase(getWaterMonth.rejected, handleRejected)
+      .addCase(deleteWaterEntry.pending, handlePending)
+      .addCase(deleteWaterEntry.fulfilled, (state, action) => {
         state.loading = false;
         state.error = null;
-        state.items = state.items.filter(item => item.id !== action.payload);
-        // Update water progress and calendar items when get them ready
+        state.waterDay = state.waterDay.filter(item => item.id !== action.payload.id); // Match response structure
       })
-      .addCase(deleteWater.rejected, handleRejected)
+      .addCase(deleteWaterEntry.rejected, handleRejected)
 });
 
 export const waterReducer = waterSlice.reducer;
