@@ -1,10 +1,68 @@
-.calendar {
-    background-color: #f0eff4;
-    padding: 46px 0;
-    max-height: 431px;
+.wrapper {
+  width: 100%;
+  max-width: 304px;
+  margin: 0 auto;
+  background-color: #f0eff4;
+  color: var(--dark-blue);
+}
+.mainInfo {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: baseline;
+  margin-bottom: 24px;
+}
+.pagination {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+}
+.title {
+  margin: 0;
+  font-size: 20px;
+  font-weight: 700;
+  line-height: 24px;
+}
+.iconBtn {
+  display: grid;
+  place-items: center;
+  transition: all 0.3s;
+  background-color: transparent;
+  border: none;
+  padding: 0;
+}
+.iconBtn.active {
+  opacity: 0.6;
+}
+
+.errorMessage {
+  width: 100%;
+  padding: 100px auto;
+  display: grid;
+  place-items: center;
+  height: 300px;
+}
+
+@media (min-width: 768px) {
+  .wrapper {
+    max-width: 640px;
   }
-  @media (--tablet-bp) {
-    .calendar {
-      padding-bottom: 35px;
-    }
+  .mainInfo {
+    margin-bottom: 24px;
   }
+  .pagination {
+    gap: 20px;
+  }
+  .title {
+    font-size: 28px;
+    line-height: 32px;
+  }
+}
+@media (min-width: 1440px) {
+  .wrapper {
+    max-width: 608px;
+  }
+}
