@@ -4,10 +4,10 @@ import { useForm } from "react-hook-form";
 import { icons as sprite } from "../../assets/index.js";
 import { useDispatch, useSelector } from "react-redux";
 import { selectUser } from "../../redux/auth/selectors.js";
-import { refreshUser } from "../../redux/auth/operations.js";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
-import toast from "react-hot-toast";
+// import toast from "react-hot-toast";
+import axios from "axios";
 
 const schema = yup.object().shape({
   name: yup.string().required("Name is required!"),
@@ -48,7 +48,7 @@ const UserSettingsForm = () => {
   });
 
   const userAvatarRef = useRef(null);
-  const dispatch = useDispatch();
+  // const dispatch = useDispatch();
 
   let userGender = watch("gender");
   let userWeight = watch("weight");
@@ -84,16 +84,15 @@ const UserSettingsForm = () => {
     formData.append("dailyNorma", Number(data.dailyNorma));
     formData.append("userAvatar", userAvatarRef.current.src);
 
-    dispatch(refreshUser(formData))
-      .unwrap()
-      .then(() => {
-        toast.success("The changes were successfully applied!");
-      })
-      .catch(() => {
-        toast.error("Failed to apply changes!");
-      });
+    await axios.patch('/user/update',data);
+    //   .then(() => {
+    //     toast.success("The changes were successfully applied!");
+    //   })
+    //   .catch(() => {
+    //     toast.error("Failed to apply changes!");
+    //   });
 
-    console.log(Object.fromEntries(formData.entries()));
+    // console.log(Object.fromEntries(formData.entries()));
   };
 
   const handleFileSelect = (event) => {

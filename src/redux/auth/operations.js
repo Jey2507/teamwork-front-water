@@ -30,8 +30,6 @@ export const login = createAsyncThunk(
     try {
       const res = await axios.post("/auth/login", userInfo);
       setAuthHeader(res.data.data.token);
-      console.log('This is res', res);
-
       toast.success(res.data.data.message);
 
       const profile = await axios.get('/user');
@@ -72,6 +70,7 @@ export const refreshUser = createAsyncThunk(
     }
   },
 );
+
 
 export const setupAxiosInterceptors = (store) => {
   axios.interceptors.response.use(

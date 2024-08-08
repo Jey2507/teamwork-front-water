@@ -4,9 +4,10 @@ import Icons from '../../assets/sprite.svg';
 import { openModal } from '../../redux/ModalSlice';
 import DeleteWaterModal from '../DeleteWaterModal/DeleteWaterModal';
 
-export default function WaterItem({ water }) {
+export default function WaterItem({ amount, date }) {
   const dispatch = useDispatch();
   const { isModalOpen, modalType } = useSelector(state => state.modal);
+
   const renderModal = () => {
     switch (modalType) {
       case 'DELETE_WATER':
@@ -15,8 +16,16 @@ export default function WaterItem({ water }) {
         return null;
     }
   };
+
   const handleDelete = () => {
     dispatch(openModal({ type: 'DELETE_WATER', data: { entryId: 1 } }));
+  };
+
+  const formatTime = (dateString) => {
+    const dateObj = new Date(dateString);
+    const hours = dateObj.getHours().toString().padStart(2, '0');
+    const minutes = dateObj.getMinutes().toString().padStart(2, '0');
+    return `${hours}:${minutes}`;
   };
 
   return (
@@ -25,8 +34,8 @@ export default function WaterItem({ water }) {
         <use href={Icons + '#glass-water'}></use>
       </svg>
       <div>
-        <p className={css.water_volume}>{water.volume}</p>
-        <p className={css.water_time}>{water.time}</p>
+        <p className={css.water_volume}>{amount} ml</p>
+        <p className={css.water_time}>{formatTime(date)}</p>
       </div>
       <div className={css.btn_group}>
         <button className={css.button}>

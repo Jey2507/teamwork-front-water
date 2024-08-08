@@ -1,6 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { initialStateConstant } from "./constants";
-import { login, logout, refreshUser, register } from "./operations";
+import { login, logout, refreshUser, register} from "./operations";
 import Cookies from "universal-cookie";
 
 

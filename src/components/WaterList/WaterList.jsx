@@ -3,15 +3,12 @@ import WaterItem from '../WaterItem/WaterItem';
 import css from './WaterList.module.css';
 import { useDispatch, useSelector } from 'react-redux';
 import { getWaterDay } from '../../redux/water/operations';
-import { selectDate, selectWaterDay } from '../../redux/water/selectors';
+import { selectDate, selectWaterDate} from '../../redux/water/selectors';
 
-export default function WaterList({ waters }) {
-  const value = Object.keys(waters).length;
+export default function WaterList() {
+  
   const currentDay = useSelector(selectDate);
-  const waterAmount = useSelector(selectWaterDay);
-
-  console.log('water', waterAmount);
-  console.log('currentDay', currentDay);
+  const waterAmount = useSelector(selectWaterDate);
 
   const dispatch = useDispatch();
 
@@ -19,12 +16,14 @@ export default function WaterList({ waters }) {
     dispatch(getWaterDay(currentDay));
   }, [currentDay, dispatch]);
 
+  // const value = Object.keys(waterAmount).length;
+
   return (
     <ul className={css.water_list}>
-      {value > 0 ? (
-        waters.map(water => (
-          <li key={water.id} className={css.water_item}>
-            <WaterItem water={water} />
+      {waterAmount ? (
+        waterAmount.map(water => (
+          <li key={water._id} className={css.water_item}>
+            <WaterItem amount={water.amount} date={water.date} />
           </li>
         ))
       ) : (

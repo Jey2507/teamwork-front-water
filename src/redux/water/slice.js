@@ -31,7 +31,7 @@ const waterSlice = createSlice({
         state.error = false;
       })
       .addCase(getWaterDay.fulfilled, (state, action) => {
-        state.date = action.payload.date;
+        state.date = action.payload.data;
         state.totalDayWater = action.payload.totalDayWater;
         state.items = action.payload.consumedWaterData;
       })

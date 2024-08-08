@@ -21,7 +21,7 @@ export default function DailyInfo() {
             hoverColorIcon={'var(--main-white)'}
           />
         </div>
-        <WaterList waters={waters} />
+        <WaterList />
       </div>
     </>
   );
