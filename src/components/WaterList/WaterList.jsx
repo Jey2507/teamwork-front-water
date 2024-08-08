@@ -3,10 +3,9 @@ import WaterItem from '../WaterItem/WaterItem';
 import css from './WaterList.module.css';
 import { useDispatch, useSelector } from 'react-redux';
 import { getWaterDay } from '../../redux/water/operations';
-import { selectDate, selectWaterDate} from '../../redux/water/selectors';
+import { selectDate, selectWaterDate } from '../../redux/water/selectors';
 
 export default function WaterList() {
-  
   const currentDay = useSelector(selectDate);
   const waterAmount = useSelector(selectWaterDate) || [];
 

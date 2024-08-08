@@ -1,13 +1,13 @@
-import { selectDailyNorma } from '../../redux/auth/selectors';
-import css from './WaterDailyNorma.module.css';
 import { useSelector } from 'react-redux';
+import css from './WaterDailyNorma.module.css';
+import { selectUser } from '../../redux/auth/selectors';
 
 export default function WaterDailyNorma() {
-  let waterDailyNorma = 1.5;
-  // if (useSelector(selectDailyNorma) !== null) {
-  //   waterDailyNorma = useSelector(selectDailyNorma);
-
-  // }
+  let waterDailyNormaBar = useSelector(selectUser);
+  let waterDailyNorma;
+  waterDailyNormaBar !== null
+    ? (waterDailyNorma = waterDailyNormaBar.dailyNorma)
+    : (waterDailyNorma = 1.5);
 
   return (
     <div className={css.container}>
