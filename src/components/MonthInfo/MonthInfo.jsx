@@ -5,7 +5,7 @@ import clsx from 'clsx';
 
 import Calendar from '../Calendar/Calendar.jsx';
 import CalendarPagination from '../CalendarPagination/CalendarPagination.jsx';
-import Loader from '../Loader/Loader';
+import Loader from '../Loader/Loader.jsx';
 import Chart from '../Chart/Chart';
 import { icons as sprite } from '../../assets/index.js';
 import { getWaterMonth } from '../../redux/water/operations';
