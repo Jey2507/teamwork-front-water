@@ -3,6 +3,8 @@ import { initialStateConstant } from "./constants";
 import { login, logout, refreshUser, register, updateUser } from "./operations";
 import Cookies from "universal-cookie";
 
+const cookies = new Cookies();
+
 const authSlice = createSlice({
   name: "auth",
   initialState: initialStateConstant,
@@ -26,13 +28,14 @@ const authSlice = createSlice({
       })
 
       .addCase(login.fulfilled, (state, action) => {
-        const cookies = new Cookies();
+        
         state.user = action.payload.user;
         state.token = action.payload.token;
-        // state.refreshToken = action.payload.user.refreshToken;
+        // console.log(action.payload, "action.payload")
+        // state.refreshToken = action.payload.refreshToken;
         state.isLoggedIn = true;
-
         state.refreshToken = cookies.get("refreshToken");
+        console.log(cookies.get("refreshToken"), "refreshToken")
       })
       .addCase(login.rejected, (state, action) => {
         state.error = action.payload;
@@ -52,6 +55,7 @@ const authSlice = createSlice({
         state.user = action.payload;
         state.isLoggedIn = true;
         state.isRefreshing = false;
+        console.log(cookies.get("refreshToken"), "refreshToken")
       })
       .addCase(refreshUser.rejected, (state) => {
         state.isRefreshing = false;
