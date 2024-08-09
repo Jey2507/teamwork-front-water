@@ -52,7 +52,7 @@ const UserSettingsForm = () => {
   });
 
   const userAvatarRef = useRef(null);
-  const dispatch = useDispatch(); 
+  const dispatch = useDispatch();
 
   let userGender = watch("gender");
   let userWeight = watch("weight");
@@ -88,7 +88,7 @@ const UserSettingsForm = () => {
     if (selectedAvatarFile) {
       formData.append("avatar", selectedAvatarFile);
     }
-    
+
     try {
       await dispatch(updateUser(formData)).unwrap();
       dispatch(closeModal());
@@ -98,7 +98,6 @@ const UserSettingsForm = () => {
     }
 
     dispatch(closeModal());
-
   };
 
   const handleFileSelect = (event) => {
@@ -106,7 +105,7 @@ const UserSettingsForm = () => {
     if (file) {
       const avatarURL = URL.createObjectURL(file);
       userAvatarRef.current.src = avatarURL;
-      setSelectedAvatarFile(file); 
+      setSelectedAvatarFile(file);
     }
   };
 
