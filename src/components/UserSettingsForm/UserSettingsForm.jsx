@@ -1,4 +1,4 @@
-import { useRef, useEffect } from "react";
+import { useRef, useEffect, useState } from "react";
 import css from "./UserSettingsForm.module.css";
 import { useForm } from "react-hook-form";
 import { icons as sprite } from "../../assets/index.js";
@@ -32,6 +32,8 @@ const schema = yup.object().shape({
 });
 
 const UserSettingsForm = () => {
+  const [selectedAvatarFile, setSelectedAvatarFile] = useState(null);
+
   const { name, gender, avatar, weight, email, dailyTimeActivity, dailyNorma } =
     useSelector(selectUser);
   const {
@@ -50,7 +52,7 @@ const UserSettingsForm = () => {
   });
 
   const userAvatarRef = useRef(null);
-  const dispatch = useDispatch();
+  const dispatch = useDispatch(); 
 
   let userGender = watch("gender");
   let userWeight = watch("weight");
@@ -83,7 +85,10 @@ const UserSettingsForm = () => {
       formData.append(key, data[key]);
     }
 
-    formData.append("userAvatar", userAvatarRef.current.src);
+    if (selectedAvatarFile) {
+      formData.append("avatar", selectedAvatarFile);
+    }
+    
     try {
       await dispatch(updateUser(formData)).unwrap();
       dispatch(closeModal());
@@ -101,6 +106,7 @@ const UserSettingsForm = () => {
     if (file) {
       const avatarURL = URL.createObjectURL(file);
       userAvatarRef.current.src = avatarURL;
+      setSelectedAvatarFile(file); 
     }
   };
 

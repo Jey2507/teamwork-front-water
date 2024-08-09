@@ -1,14 +1,9 @@
-*,
-*::before,
-*::after {
-  box-sizing: border-box;
-}
-
 fieldset {
   padding: 0;
   margin: 0;
   border: none;
 }
+
 h2,
 h3,
 h4,
@@ -17,6 +12,7 @@ legend {
   margin: 0;
   padding: 0;
 }
+
 .amountOfWaterText {
   margin-bottom: 5px;
 }

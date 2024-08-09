@@ -1,4 +1,4 @@
-import css from "./UserSettingsModal.module.css";
+import css from "../UserSettingsModal/UserSettingsModal.module.css";
 import UserSettingsForm from "../UserSettingsForm/UserSettingsForm.jsx";
 import Modal from "../Modal/Modal";
 
