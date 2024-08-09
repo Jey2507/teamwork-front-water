@@ -1,14 +1,9 @@
-*,
-*::before,
-*::after {
-  box-sizing: border-box;
-}
-
 fieldset {
   padding: 0;
   margin: 0;
   border: none;
 }
+
 h2,
 h3,
 h4,
@@ -17,6 +12,7 @@ legend {
   margin: 0;
   padding: 0;
 }
+
 .amountOfWaterText {
   margin-bottom: 5px;
 }
@@ -29,16 +25,14 @@ legend {
   cursor: pointer;
   padding: 0;
   width: auto;
-
 }
 
-.btnIconContainer{
+.btnIconContainer {
   display: flex;
   justify-content: center;
   align-items: center;
   column-gap: 8px;
 }
-
 
 .fileInput {
   position: absolute;
@@ -163,6 +157,7 @@ input[type="radio"] {
   background: rgb(155, 225, 160);
   border: none;
   margin-top: 40px;
+  cursor: pointer;
 }
 
 .userAvatarContainer {
@@ -203,7 +198,6 @@ input[type="radio"] {
 }
 
 @media screen and (min-width: 768px) {
-
   .inputText,
   .formulaDescription,
   .greenText {
@@ -229,7 +223,6 @@ input[type="radio"] {
     padding: 16px 50px 16px 50px;
   }
 
- 
   .normaWaterContainer {
     flex-direction: row;
     gap: 28px;
@@ -243,6 +236,10 @@ input[type="radio"] {
     width: 100px;
     height: 100px;
   }
+}
+.saveBtn:hover,
+.saveBtn:focus {
+  background: rgb(135, 210, 141);
 }
 
 @media screen and (min-width: 1440px) {
@@ -263,6 +260,9 @@ input[type="radio"] {
   border: 1px solid rgba(47, 47, 47, 0.15);
   border-radius: 15px;
 }
+.userInfoField.error {
+  border-color: rgb(239, 80, 80);
+}
 
 .error {
   color: rgb(239, 80, 80);
@@ -270,4 +270,8 @@ input[type="radio"] {
 svg {
   fill: transparent;
   stroke: currentColor;
+}
+.activeTimeContainer {
+  display: flex;
+  column-gap: 12.69px;
 }

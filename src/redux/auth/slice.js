@@ -1,11 +1,10 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { initialStateConstant } from "./constants";
-import { login, logout, refreshUser, register } from "./operations";
+import { login, logout, refreshUser, register, updateUser } from "./operations";
 import Cookies from "universal-cookie";
 
-
 const authSlice = createSlice({
-  name: 'auth',
+  name: "auth",
   initialState: initialStateConstant,
   reducers: {
     setToken(state, action) {
@@ -28,11 +27,12 @@ const authSlice = createSlice({
 
       .addCase(login.fulfilled, (state, action) => {
         const cookies = new Cookies();
-        state.user = action.payload.data
+        state.user = action.payload.user;
         state.token = action.payload.token;
-        // state.refreshToken = action.payload.refreshToken;
-        state.refreshToken = cookies.get('refreshToken');
+        // state.refreshToken = action.payload.user.refreshToken;
         state.isLoggedIn = true;
+
+        state.refreshToken = cookies.get("refreshToken");
       })
       .addCase(login.rejected, (state, action) => {
         state.error = action.payload;
@@ -56,7 +56,29 @@ const authSlice = createSlice({
       .addCase(refreshUser.rejected, (state) => {
         state.isRefreshing = false;
       })
-  }
+      .addCase(updateUser.fulfilled, (state, action) => {
+        console.log(action.payload.data);
+        let {
+          name,
+          email,
+          gender,
+          weight,
+          dailyTimeActivity,
+          dailyNorma,
+          avatar,
+        } = action.payload.data;
+        state.user.name = name;
+        state.user.email = email;
+        state.user.gender = gender;
+        state.user.weight = weight;
+        state.user.dailyTimeActivity = dailyTimeActivity;
+        state.user.dailyNorma = dailyNorma;
+        state.user.avatar = avatar;
+      })
+      .addCase(updateUser.rejected, (state, action) => {
+        state.error = action.payload;
+      });
+  },
 });
 
 export const { setToken } = authSlice.actions;
