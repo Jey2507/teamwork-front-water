@@ -1,13 +1,20 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useCallback } from 'react';
 import css from '../UserBar/UserBar.module.css';
 import { icons as sprite } from '../../assets/index.js';
-import { useAuth } from '../../hooks/useAut';
+import { useAuth } from '../../hooks/useAut'; // Виправлено імпорт
 import LogOutModal from '../LogOutModal/LogOutModal';
 import UserSettingsModal from '../UserSettingsModal/UserSettingsModal';
 import { useDispatch, useSelector } from 'react-redux';
 import { refreshUser } from '../../redux/auth/operations.js';
 import { selectUser } from '../../redux/auth/selectors.js';
 import { openModal } from '../../redux/ModalSlice.js';
+
+const MODAL_TYPES = {
+  LOGOUT: 'LOGOUT',
+  SETTING: 'SETTING',
+};
+
+const getFirstName = (fullName) => (fullName ? fullName.split(' ')[0] : 'User');
 
 const Userbar = () => {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -16,13 +23,13 @@ const Userbar = () => {
   const userInfo = useSelector(selectUser);
   const [isUserUpdated, setIsUserUpdated] = useState(false);
 
-  const { isModalOpen, modalType } = useSelector(state => state.modal);
+  const { isModalOpen, modalType } = useSelector((state) => state.modal);
 
   const renderModal = () => {
     switch (modalType) {
-      case 'LOGOUT':
+      case MODAL_TYPES.LOGOUT:
         return <LogOutModal />;
-      case 'SETTING':
+      case MODAL_TYPES.SETTING:
         return <UserSettingsModal />;
       default:
         return null;
@@ -42,13 +49,17 @@ const Userbar = () => {
     }
   }, [dispatch, isUserUpdated]);
 
-  const toggleMenu = () => {
-    setMenuOpen(!menuOpen);
-  };
+  const toggleMenu = useCallback(() => {
+    setMenuOpen((prevMenuOpen) => !prevMenuOpen);
+  }, []);
 
-  const getFirstName = fullName => {
-    return fullName ? fullName.split(' ')[0] : 'User';
-  };
+  const handleSettingsClick = useCallback(() => {
+    dispatch(openModal({ type: MODAL_TYPES.SETTING }));
+  }, [dispatch]);
+
+  const handleLogOutClick = useCallback(() => {
+    dispatch(openModal({ type: MODAL_TYPES.LOGOUT }));
+  }, [dispatch]);
 
   return (
     <div className={css.userBarMenu} data-tour="step-7">
@@ -67,10 +78,7 @@ const Userbar = () => {
         <div className={css.userBarOpenMenu}>
           <ul className={css.wrapperLink}>
             <li>
-              <a
-                onClick={() => dispatch(openModal({ type: 'SETTING' }))}
-                className={css.userBarLink}
-              >
+              <a onClick={handleSettingsClick} className={css.userBarLink}>
                 <svg width="16" height="16">
                   <use xlinkHref={`${sprite}#icon-settings`} />
                 </svg>
@@ -78,10 +86,7 @@ const Userbar = () => {
               </a>
             </li>
             <li>
-              <a
-                className={css.userBarLink}
-                onClick={() => dispatch(openModal({ type: 'LOGOUT' }))}
-              >
+              <a onClick={handleLogOutClick} className={css.userBarLink}>
                 <svg width="16" height="16">
                   <use xlinkHref={`${sprite}#icon-log-out`} />
                 </svg>
