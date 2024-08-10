@@ -1,3 +1,4 @@
+import React, { useState, useEffect } from "react";
 import css from "./WaterModal.module.css";
 import WaterForm from "../WaterForm/WaterForm";
 import svgSprite from "../../assets/sprite.svg";
@@ -8,11 +9,20 @@ const WaterModal = ({
   water = {},
   timestampFromUrl = "",
 }) => {
+  const [isVisible, setIsVisible] = useState(false);
+
+  useEffect(() => {
+    setIsVisible(true);
+    return () => {
+      setIsVisible(false);
+    };
+  }, [onClose]);
+
   const handleClose = () => {
-    const id = setTimeout(() => {
+    setIsVisible(false);
+    setTimeout(() => {
       onClose();
-      clearTimeout(id);
-    }, 300);
+    }, 300); 
   };
 
   const modalHeader = (operationType) => {
@@ -63,25 +73,29 @@ const WaterModal = ({
   };
 
   return (
-    <div className={css.WaterModal}>
-      <h1>{modalHeader(operationType)}</h1>
-      <WaterForm
-        operationType={operationType}
-        editTime={editTime(operationType)}
-        waterPortion={waterPortion(operationType)}
-        waterID={waterID(operationType)}
-        handleClose={handleClose}
-      />
-      <button
-        type="button"
-        onClick={handleClose}
-        aria-label="Close Water Modal"
-        className={css.WaterModalCloseBtn}>
-        <svg>
-          <use xlinkHref={svgSprite + "#icon-clear"}></use>
-        </svg>
-      </button>
-    </div>
+    <>
+      <div className={`${css.overlay} ${isVisible ? css.visible : ''}`} onClick={handleClose}></div>
+      <div className={`${css.WaterModal} ${isVisible ? css.visible : ''}`}>
+        <h1>{modalHeader(operationType)}</h1>
+        <WaterForm
+          operationType={operationType}
+          editTime={editTime(operationType)}
+          waterPortion={waterPortion(operationType)}
+          waterID={waterID(operationType)}
+          handleClose={handleClose}
+        />
+        <button
+          type="button"
+          onClick={handleClose}
+          aria-label="Close Water Modal"
+          className={css.WaterModalCloseBtn}
+        >
+          <svg>
+            <use xlinkHref={svgSprite + "#icon-clear"}></use>
+          </svg>
+        </button>
+      </div>
+    </>
   );
 };
 
