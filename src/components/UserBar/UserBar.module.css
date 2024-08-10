@@ -33,7 +33,7 @@
   border-radius: 30px;
   border-color: transparent;
   gap: 8px;
-  width: 137px;
+  width: auto;
   opacity: 1px;
   background-color: var(--dark-blue);
   font-size: 14px;
@@ -43,6 +43,7 @@
   color: var(--white);
   padding: 6px 12px;
   cursor: pointer;
+  box-sizing: content-box;
 }
 
 .avatar {
@@ -81,7 +82,7 @@
   width: 16px;
   height: 16px;
   text-align: center;
-  padding: 6px 3px;
+  padding-top: 4px;
 
   fill: transparent;
   stroke: var(--main-white);
@@ -90,6 +91,7 @@
 
 .chevron.open {
   transform: rotate(180deg);
+  padding-left: 4px;
 }
 
 .wrapperLink {
@@ -117,6 +119,13 @@
   color: var(--dark-blue);
 }
 
+@media screen and (min-width: 320px) {
+  .chevron {
+    min-width: 16px;
+    min-height: 16px;
+  }
+}
+
 @media screen and (min-width: 768px) {
   .wrapperLink {
     width: 157px;
@@ -124,7 +133,7 @@
   }
 
   .userBarBtn {
-    width: 157px;
+    width: auto;
     height: 50px;
     margin-top: 0;
   }
