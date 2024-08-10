@@ -33,7 +33,7 @@
   border-radius: 30px;
   border-color: transparent;
   gap: 8px;
-  width: 137px;
+  width: auto;
   opacity: 1px;
   background-color: var(--dark-blue);
   font-size: 14px;
@@ -124,7 +124,7 @@
   }
 
   .userBarBtn {
-    width: 157px;
+    width: auto;
     height: 50px;
     margin-top: 0;
   }
