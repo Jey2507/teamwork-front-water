@@ -1,6 +1,7 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import toast from 'react-hot-toast';
 import axios from "../../common/axiosConfig.js";
+import { logoutAction, setUpdatedToken } from "./slice.js";
 
 
 export const setAuthHeader = (token) => {
@@ -96,11 +97,13 @@ export const setupAxiosInterceptors = (store) => {
         originalRequest._retry = true;
         try {
           const { data } = await axios.post("auth/refresh");
-          console.log('Data: ', data);
-          setAuthHeader(data.accessToken);
-          originalRequest.headers.Authorization = `Bearer ${data.accessToken}`;
+          setAuthHeader(data.data.accessToken);
+          originalRequest.headers.Authorization = `Bearer ${data.data.accessToken}`;
+          store.dispatch(setUpdatedToken(data.data.accessToken));
           return axios(originalRequest);
+          //return axios.request(originalRequest);
         } catch (err) {
+          store.dispatch(logoutAction());
           return Promise.reject(err);
         }
       }
