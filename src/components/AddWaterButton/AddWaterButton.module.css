@@ -29,9 +29,15 @@
     color: var(--accent);
 }
 
-
-
 .wrapper:hover .icon {
+    color: var(--accent);
+}
+
+.wrapper:focus .text {
+    color: var(--accent);
+}
+
+.wrapper:focus .icon {
     color: var(--accent);
 }
 
