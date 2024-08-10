@@ -290,10 +290,13 @@ const UserSettingsForm = () => {
         </div>
         <div className={css.userInfoContainer}>
           <div className={css.amountOfWaterContainer}>
-            <p className={`${css.amountOfWaterText} ${css.inputText}`}> </p>
-            <span className={css.amountOfWaterText}>
-              {normaWater ? normaWater : getValues("dailyNorma")}L
-            </span>
+            <p
+              className={`${css.amountOfWaterText} ${css.inputText} ${css.formulaDescriptionContainer}`}>
+              The required amount of water in liters per <span>day:</span></p>
+              <span className={css.amountOfWaterText}>
+                {normaWater ? normaWater : getValues("dailyNorma")}L
+              </span>
+           
           </div>
           <label className={`${css.userInfoLabel} ${css.inputTitle}`}>
             Write down how much water you will drink:
