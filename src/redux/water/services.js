@@ -1,33 +1,30 @@
-import axios from '../../common/axiosConfig'
+import axios from '../../common/axiosConfig';
 
-export const addWaterReq = async (arg) => {
-  const { data } = await axios.post('/water/add-water', arg);
-  return data;
-}
+export const addWaterReq = async (waterData) => {
+  const { data } = await axios.post('/water/add-water', waterData);
+  return data.data; 
+};
+
 export const getWaterDayReq = async (date) => {
   const { data } = await axios.get(`/water/daily-water?date=${date}`);
-  return data;
+  return data.data; 
 };
 
 export const getWaterMonthReq = async (date) => {
   const { data } = await axios.get(`/water/monthly-water?date=${date}`);
-  return data;
+  return data.data; 
 };
 
-export const updateWaterReq = async water => {
-  const { data } = await axios.patch(`/water/update-water/${water.id}`, {
-    amount: water.formData.amount,
-    date: water.formData.date,
-  });
-  return data;
+export const deleteWaterReq = async (id) => {
+  const { data } = await axios.delete(`/water/delete-water/${id}`);
+  return data.data;
 };
 
-export const deleteWaterReq = async entryId => {
-  const { data } = await axios.delete(`/water/delete-water/${entryId}`);
-  return data;
+export const updateWaterIntakeReq = async (id, formData) => {
+  try {
+    const { data } = await axios.patch(`/water/update-water/${id}`, formData);
+    return data.data;
+  } catch (error) {
+    throw new Error(error.response ? error.response.data : 'Failed to update water intake record');
+  }
 };
-// export const getTodaySumamryWaterReq = async (date) => {
-//   const { data } = await axios.get(`/water/today/${date}`);
-//   return data;
-
-// };

@@ -11,9 +11,11 @@ export default function WaterList() {
 
   const dispatch = useDispatch();
 
-  useEffect(() => {
+    useEffect(() => {
     dispatch(getWaterDay(currentDay));
-  }, [currentDay, dispatch]);
+  }, [currentDay, dispatch]); 
+
+
 
   // const value = Object.keys(waterAmount).length;
 

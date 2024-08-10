@@ -1,32 +1,33 @@
-import css from './DeleteWaterModal.module.css';
 import { useDispatch, useSelector } from 'react-redux';
-import { deleteWaterEntry, getWaterDay } from '../../redux/water/operations';
+import { deleteWater } from '../../redux/water/operations';
 import { closeModal } from '../../redux/ModalSlice';
 import toast from 'react-hot-toast';
-import Modal from '../Modal/Modal';
-import { selectDate } from '../../redux/water/selectors';
+import Modal from '../Modal/Modal'; // 
+import css from './DeleteWaterModal.module.css';
 
 const DeleteWaterModal = () => {
   const dispatch = useDispatch();
   const isModalOpen = useSelector((state) => state.modal.isModalOpen);
-  const entryId = useSelector((state) => state.modal.modalData.entryId);
-  const currentDay = useSelector(selectDate);
-
-  if (!isModalOpen) return null;
+  const entryId = useSelector((state) => state.modal.entryId);
 
   const handleDelete = async () => {
     try {
-      await dispatch(deleteWaterEntry(entryId)).unwrap();
+      await dispatch(deleteWater(entryId)).unwrap();
       dispatch(closeModal());
-      dispatch(getWaterDay(currentDay));
       toast.success('Entry deleted successfully');
     } catch (error) {
       toast.error('Failed to delete entry');
     }
   };
 
+  const handleClose = () => {
+    dispatch(closeModal());
+  };
+
+  if (!isModalOpen) return null;
+
   return (
-    <Modal>
+    <Modal isOpen={isModalOpen} onClose={handleClose}>
       <div className={css.modalContainer}>
         <div className={css.coverText}>
           <h2 className={css.title}>Delete entry</h2>
@@ -36,7 +37,7 @@ const DeleteWaterModal = () => {
           <button className={css.deleteButton} onClick={handleDelete}>
             Delete
           </button>
-          <button className={css.cancelButton} onClick={() => dispatch(closeModal())}>
+          <button className={css.cancelButton} onClick={handleClose}>
             Cancel
           </button>
         </div>
@@ -46,6 +47,7 @@ const DeleteWaterModal = () => {
 };
 
 export default DeleteWaterModal;
+
 
 
 /* const DeleteWaterModal = () => {
