@@ -14,6 +14,7 @@ export const MonthInfo = () => {
         setCurrentDate={setCurrentDate}
         isActive={isActive}
       />
+      <Calendar />
     </div>
   );
 };
