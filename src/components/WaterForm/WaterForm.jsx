@@ -4,7 +4,7 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import * as Yup from 'yup';
 import css from './WaterForm.module.css';
 import clsx from 'clsx';
-import svgSprite from '../../assets/sprite.svg';
+import {icons as sprite} from "../../assets/index.js"
 import { useDispatch } from 'react-redux';
 import { addWater, updateWaterIntakeRecord, getWaterDay} from '../../redux/water/operations';
 import Loader from '../Loader/Loader';
@@ -115,7 +115,7 @@ const WaterForm = ({
           disabled={isMinusButtonDisabled}
         >
           <svg>
-            <use xlinkHref={svgSprite + '#icon-remove'}></use>
+            <use xlinkHref={`${sprite}#icon-remove`}></use>
           </svg>
         </button>
         <p className={css.TapAddWaterValue}>{waterAmount} ml</p>
@@ -125,8 +125,8 @@ const WaterForm = ({
           onClick={() => handleWaterAmountChange(Math.min(waterAmount + 50, 5000))}
           disabled={isPlusButtonDisabled}
         >
-          <svg>
-            <use xlinkHref={svgSprite + '#icon-add'}></use>
+          <svg className={css.plus}>
+            <use xlinkHref={`${sprite}#icon-x`}></use>
           </svg>
         </button>
       </div>

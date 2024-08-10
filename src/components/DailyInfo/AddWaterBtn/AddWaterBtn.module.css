@@ -9,9 +9,11 @@
   top: 612px;
   left: 462px;
 }
+
 .nowraper {
   gap: 10px;
 }
+
 .add_water_btn {
   size: inherit;
   background: none;
@@ -23,7 +25,10 @@
   text-align: center;
   height: 30px;
   white-space: nowrap;
+  cursor: pointer;
+  transition: color 300ms cubic-bezier(0.4, 0, 0.2, 1);
 }
+
 .circle_btn {
   display: inline-block;
   width: 30px;
@@ -33,6 +38,7 @@
   opacity: 0px;
   margin-right: 10px;
 }
+
 .icon {
   width: 15px;
   height: 15px;
@@ -41,8 +47,9 @@
   padding-top: 6px;
   padding-left: 6px;
   box-sizing: unset;
+  transition: stroke 300ms cubic-bezier(0.4, 0, 0.2, 1), fill 300ms cubic-bezier(0.4, 0, 0.2, 1); /* Додаємо плавність для stroke і fill */
 }
 
-.add_water_btn:hover {
-  cursor: pointer;
+.add_water_btn:hover .icon {
+  stroke: var(--main-white); 
 }
