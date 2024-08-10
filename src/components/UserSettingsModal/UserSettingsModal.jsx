@@ -1,6 +1,6 @@
 import css from "../UserSettingsModal/UserSettingsModal.module.css";
 import UserSettingsForm from "../UserSettingsForm/UserSettingsForm.jsx";
-import Modal from "../Modal/Modal";
+import UniversalModal from "../Modal/Modal.jsx";
 
 
 function UserSettingsModal() {
