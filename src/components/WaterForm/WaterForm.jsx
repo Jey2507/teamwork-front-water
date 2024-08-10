@@ -7,11 +7,12 @@ import clsx from 'clsx';
 import svgSprite from '../../assets/sprite.svg';
 import { useDispatch } from 'react-redux';
 import { addWater, updateWaterIntakeRecord } from '../../redux/water/operations';
+import Loader from '../Loader/Loader';
 
 const WaterForm = ({
   operationType = "add",
   editTime,
-  waterPortion = 50,  // Значение по умолчанию, если waterPortion не передан
+  waterPortion = 50, 
   waterID,
   handleClose,
 }) => {
@@ -20,7 +21,6 @@ const WaterForm = ({
   const [isLoading, setIsLoading] = useState(false);
 
   const dateFromUrl = editTime ? new Date(editTime) : new Date();
-
   const year = dateFromUrl.getFullYear();
   const month = String(dateFromUrl.getMonth() + 1).padStart(2, "0");
   const day = String(dateFromUrl.getDate()).padStart(2, "0");
@@ -51,7 +51,7 @@ const WaterForm = ({
     resolver: yupResolver(validationSchema),
     defaultValues: {
       recordingTime: `${formHours}:${formMinutes}`,
-      waterValue: waterAmount.toString(),  // Убедитесь, что waterAmount определен
+      waterValue: waterAmount.toString(),
     },
   });
 
@@ -68,27 +68,16 @@ const WaterForm = ({
 
     setIsLoading(true);
 
-    if (operationType === "add") {
-      dispatch(addWater(waterValue)).then(({ error }) => {
-        if (!error) {
-          setIsLoading(false);
-          handleClose();
-        } else {
-          setIsLoading(false);
-        }
-      });
-    } else if (operationType === "edit") {
-      dispatch(updateWaterIntakeRecord({ id: waterID, formData: waterValue })).then(({ error }) => {
-        if (!error) {
-          setIsLoading(false);
-          handleClose();
-        } else {
-          setIsLoading(false);
-        }
-      });
-    } else {
+    const action = operationType === "add" 
+      ? addWater(waterValue) 
+      : updateWaterIntakeRecord({ id: waterID, formData: waterValue });
+
+    dispatch(action).then(({ error }) => {
       setIsLoading(false);
-    }
+      if (!error) {
+        handleClose();
+      }
+    });
   };
 
   const FormHeader = () => {
@@ -104,7 +93,7 @@ const WaterForm = ({
 
   const handleWaterAmountChange = (amount) => {
     setWaterAmount(amount);
-    setValue("waterValue", amount.toString());  // Убедитесь, что amount определен
+    setValue("waterValue", amount.toString());
   };
 
   const isMinusButtonDisabled = waterAmount <= 50;
@@ -112,7 +101,10 @@ const WaterForm = ({
 
   return (
     <form className={css.WaterForm} onSubmit={handleSubmit(onSubmit)}>
+      {isLoading && <Loader />}
+      
       {FormHeader()}
+      
       <p className={css.AmountOfWater}>Amount of water:</p>
       <div className={css.TapAddWaterWrapper}>
         <button
@@ -151,8 +143,8 @@ const WaterForm = ({
               placeholder="HH:MM"
               onChange={(e) => {
                 const [newHours, newMinutes] = e.target.value.split(':');
-                setFormHours(newHours || hours); // Убедитесь, что newHours определен
-                setFormMinutes(newMinutes || minutes); // Убедитесь, что newMinutes определен
+                setFormHours(newHours || hours);
+                setFormMinutes(newMinutes || minutes);
                 field.onChange(e);
               }}
             />
@@ -181,8 +173,8 @@ const WaterForm = ({
           <p className={css.Error}>{errors.waterValue.message}</p>
         )}
       </label>
-      <button type="submit" className={css.SaveBtn}>
-        Save
+      <button type="submit" className={css.SaveBtn} disabled={isLoading}>
+        {isLoading ? 'Saving...' : 'Save'}
       </button>
     </form>
   );
