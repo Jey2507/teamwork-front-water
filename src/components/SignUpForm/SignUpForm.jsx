@@ -2,7 +2,7 @@ import styles from "./SignUpForm.module.css"; // оновлено імпорт
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { useForm } from "react-hook-form";
-import { useNavigate, Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as Yup from "yup";
 import toast from "react-hot-toast";
@@ -14,7 +14,6 @@ const SignUpForm = () => {
   const dispatch = useDispatch();
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
-  const navigate = useNavigate();
 
   const validationSchema = Yup.object().shape({
     email: Yup.string().email("Email is invalid").required("Email is required"),
@@ -43,9 +42,9 @@ const SignUpForm = () => {
     dispatch(registerUser({ email, password }))
       .unwrap()
       .then((res) => {
-        toast.success(res.message);
         reset();
-        navigate("/tracker");
+
+        toast.success(res.message);
       })
       .catch((err) => {
         toast.error("Registration failed");
