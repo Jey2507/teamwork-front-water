@@ -2,7 +2,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { deleteWater } from '../../redux/water/operations';
 import { closeModal } from '../../redux/ModalSlice';
 import toast from 'react-hot-toast';
-import Modal from '../Modal/Modal'; // 
+import Modal from '../Modal/Modal'; 
 import css from './DeleteWaterModal.module.css';
 
 const DeleteWaterModal = () => {
@@ -12,11 +12,15 @@ const DeleteWaterModal = () => {
 
   const handleDelete = async () => {
     try {
+        if (!entryId) {
+        throw new Error('No entry ID specified');
+      }
+      
       await dispatch(deleteWater(entryId)).unwrap();
       dispatch(closeModal());
       toast.success('Entry deleted successfully');
     } catch (error) {
-      toast.error('Failed to delete entry');
+      toast.error(`Failed to delete entry: ${error.message}`);
     }
   };
 
