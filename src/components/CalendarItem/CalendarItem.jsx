@@ -1,30 +1,27 @@
 import toast from 'react-hot-toast';
-import { selectDailyNorma } from '../../redux/auth/selectors';
+// import { selectDailyNorma } from '../../redux/auth/selectors';
 import { selectWaterDate } from '../../redux/water/selectors';
 import { getWaterDay } from '../../redux/water/operations';
 import css from './CalendarItem.module.css';
 import { useDispatch, useSelector } from 'react-redux';
 import { format, isSameDay } from 'date-fns';
+import { selectDailyNorma } from '../../redux/auth/selectors';
 
 export const CalendarItem = ({ day, getDayData }) => {
   const dispatch = useDispatch();
   const waterDate = useSelector(selectWaterDate);
-  const waterData = getDayData(day);
+  // const waterData = getDayData(day);
   const userNorma = useSelector(selectDailyNorma);
   let percentage = 0;
 
-  if (waterData) {
-    const consumption = waterData.totalDayWater || 0;
-    percentage = Math.floor(Math.min((consumption / userNorma) * 100, 100));
-  }
+  // if (waterData) {
+  //   const consumption = waterData.totalDayWater || 0;
+  //   percentage = Math.floor(Math.min((consumption / userNorma) * 100, 100));
+  // }
 
   const handleDayClick = () => {
     const timezoneOffset = new Date().getTimezoneOffset();
-    const utcDate = new Date(
-      day.getFullYear(),
-      day.getMonth(),
-      day.getDate()
-    ).getTime();
+    const utcDate = new Date(day.getFullYear(), day.getMonth(), day.getDate()).getTime();
 
     const offset = timezoneOffset * 60 * 1000;
 
@@ -41,19 +38,20 @@ export const CalendarItem = ({ day, getDayData }) => {
       });
 
     if (isSameDay(waterDate, utcDate - offset))
-      return toast.error(
-        `Your water is already from ${format(new Date(waterDate), 'd, MMMM')}`,
-        {
-          duration: 5000,
-          position: 'top-center',
-          style: {
-            textAlign: 'center',
-            boxShadow: '8px 11px 27px -8px rgba(66, 68, 90, 1)',
-          },
-        }
-      );
+      return toast.error(`Your water is already from ${format(new Date(waterDate), 'd, MMMM')}`, {
+        duration: 5000,
+        position: 'top-center',
+        style: {
+          textAlign: 'center',
+          boxShadow: '8px 11px 27px -8px rgba(66, 68, 90, 1)',
+        },
+      });
+    const NewDate = new Date(dateWithOffset);
+    const result = NewDate.getFullYear() + '-' + NewDate.getMonth() + '-' + NewDate.getDate();
+    //d.getFullYear()+"-"+d.getMonth()+"-"+d.getDate();
+    console.log(result);
 
-    dispatch(getWaterDay(dateWithOffset));
+    dispatch(getWaterDay(result));
   };
   const isFullConsumption = percentage === 100;
   const isToday = isSameDay(day, new Date());
