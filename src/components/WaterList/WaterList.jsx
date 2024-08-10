@@ -22,7 +22,7 @@ export default function WaterList() {
       {waterAmount.length ? (
         waterAmount.map(water => (
           <li key={water._id} className={css.water_item}>
-            <WaterItem amount={water.amount} date={water.date} />
+            <WaterItem water={water} />
           </li>
         ))
       ) : (

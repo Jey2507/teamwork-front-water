@@ -1,12 +1,40 @@
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(47, 47, 47, 0.6);
+  z-index: 999;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+.overlay.visible {
+  opacity: 1;
+  visibility: visible;
+}
+
 .WaterModal {
-  margin: 0 auto;
-  width: 343px;
+  max-width: 90vw;
+  width: 100%;
   height: auto;
   padding: 40px 20px;
   border-radius: 15px;
   background-color: #fff;
   box-shadow: 0 4px 50px 0 rgba(0, 0, 0, 0.1);
-  position: relative;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -55%);
+  z-index: 1000;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.WaterModal.visible {
+  opacity: 1;
 }
 
 .WaterModal h1 {
@@ -43,8 +71,10 @@
 
 @media screen and (min-width: 768px) {
   .WaterModal {
+    max-width: 518px;
     padding: 40px;
-    width: 518px;
+    top: 45%;
+    transform: translate(-50%, -56%);
   }
 
   .WaterModal h1 {
@@ -59,4 +89,10 @@
 }
 
 @media screen and (min-width: 1440px) {
+  .WaterModal {
+    max-width: 555px;
+    padding: 40px;
+    top: 55%;
+    transform: translate(-50%, -55%);
+  }
 }

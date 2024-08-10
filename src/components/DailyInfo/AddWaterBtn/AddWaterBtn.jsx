@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import css from './AddWaterBtn.module.css';
 import Icons from '../../../assets/sprite.svg';
-
+import WaterModal from '../../WaterModal/WaterModal';
 export default function AddWaterBtn({
   smallBtn,
   mainColor,
@@ -13,7 +13,14 @@ export default function AddWaterBtn({
   hoverText,
 }) {
   const [isHovered, setIsHovered] = useState(false);
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
+  const handleOpenModal = () => {
+    setIsModalOpen(true);
+  };
+  const handleCloseModal = () => {
+    setIsModalOpen(false);
+  };
   return (
     <div
       className={smallBtn ? css.nowraper : css.wrapper}
@@ -24,6 +31,7 @@ export default function AddWaterBtn({
         style={{ color: isHovered ? hoverText : colorText }}
         onMouseEnter={() => setIsHovered(true)}
         onMouseLeave={() => setIsHovered(false)}
+        onClick={handleOpenModal}
       >
         <span className={css.btn_wrapper}>
           <span
@@ -44,6 +52,9 @@ export default function AddWaterBtn({
           <span>Add water</span>
         </span>
       </button>
+      {isModalOpen && (
+        <WaterModal operationType="add" onClose={handleCloseModal} />
+      )}
     </div>
   );
 }
