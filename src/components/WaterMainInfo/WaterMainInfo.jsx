@@ -10,14 +10,28 @@ import {
   tp3xmb,
 } from '../../images/TrackerPage/index.js';
 import AddWaterButton from '../AddWaterButton/AddWaterButton.jsx';
+import React, { useState } from 'react';
 // import WaterDailyNorma from '../WaterDailyNorma/WaterDailyNorma.jsx';
 // import WaterProgressBar from '../WaterProgressBar/WaterProgressBar.jsx';
 import css from './WaterMainInfo.module.css';
 import Logo from '../Logo/Logo.jsx';
 import WaterDailyNorma from '../WaterDailyNorma/WaterDailyNorma.jsx';
 import WaterProgressBar from '../WaterProgressBar/WaterProgressBar.jsx';
+import WaterModal from '../WaterModal/WaterModal';
+
+
 
 export default function WaterMainInfo() {
+
+    const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const openModal = () => {
+    setIsModalOpen(true);
+  };
+
+  const closeModal = () => {
+    setIsModalOpen(false);
+  };
   return (
     <section className={css.container}>
       <div className={css.trackerLogo}>
@@ -38,7 +52,14 @@ export default function WaterMainInfo() {
           backgroundColorIcon={'none'}
           colorText={'var(--main-white'}
           colorIcon={'var(--main-white)'}
+          openModal={openModal}
         />
+              {isModalOpen && (
+        <WaterModal
+          operationType="add"
+          onClose={closeModal}
+        />
+      )}
       </div>
     </section>
   );

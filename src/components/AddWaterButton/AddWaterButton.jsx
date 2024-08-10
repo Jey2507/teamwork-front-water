@@ -1,47 +1,28 @@
-import React, { useState } from 'react';
+
 import css from './AddWaterButton.module.css';
 import Icons from '../../assets/sprite.svg';
-import WaterModal from '../WaterModal/WaterModal';
+
 
 export default function AddWaterButton({
   mainColor,
-  backgroundColorIcon,
   colorText,
   colorIcon,
+  openModal
 }) {
-  const [isModalOpen, setIsModalOpen] = useState(false);
 
-  const openModal = () => {
-    setIsModalOpen(true);
-  };
-
-  const closeModal = () => {
-    setIsModalOpen(false);
-  };
 
   return (
-    <div>
-      <div className={css.wrapper} style={{ backgroundColor: mainColor }}>
-        <button className={css.add_water_btn} style={{ color: colorText }} onClick={openModal}>
-          <span className={css.btn_wrapper}>
-            <span
-              className={css.circle_btn}
-              style={{ backgroundColor: backgroundColorIcon }}
-            >
-              <svg className={css.icon} stroke={colorIcon}>
-                <use href={Icons + '#icon-x'}></use>
-              </svg>
-            </span>
-            Add water
-          </span>
-        </button>
+    <button className={css.wrapper} style={{ backgroundColor: mainColor }} onClick={openModal}>
+      <div className={css.add_water_btn} style={{ color: colorText }}>
+ 
+ 
+            <svg className={css.icon} stroke={colorIcon}>
+              <use href={Icons + '#icon-x'}></use>
+            </svg>
+       <span className={css.text}>
+          Add water
+        </span>
       </div>
-      {isModalOpen && (
-        <WaterModal
-          operationType="add"
-          onClose={closeModal}
-        />
-      )}
-    </div>
-  );
+         
+    </button >);
 }
