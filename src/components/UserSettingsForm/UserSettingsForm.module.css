@@ -171,6 +171,10 @@ input[type="radio"] {
   gap: 10px;
   margin-bottom: 40px;
 }
+.formulaDescriptionContainer {
+  display: flex;
+  flex-direction: column;
+}
 
 .userAvatar {
   width: 75px;
@@ -226,6 +230,10 @@ input[type="radio"] {
   .normaWaterContainer {
     flex-direction: row;
     gap: 28px;
+  }
+
+  .formulaDescriptionContainer {
+    display: block;
   }
   .amountOfWaterContainer {
     display: flex;
