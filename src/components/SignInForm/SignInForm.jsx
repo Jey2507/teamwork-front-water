@@ -24,10 +24,16 @@ const SignInForm = () => {
   }, [isLoggedIn, dispatch]);
 
   const validationSchema = Yup.object().shape({
-    email: Yup.string().email("Email is invalid").required("Email is required"),
+    email: Yup.string()
+      .matches(
+        /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
+        "Invalid email format"
+      )
+      .required("Email is required"),
+
     password: Yup.string()
       .required("Password is required")
-      .min(6, "Password must be at least 6 characters"),
+      .min(8, "Password must be at least 8 characters long"),
   });
 
   const {
@@ -55,6 +61,16 @@ const SignInForm = () => {
   const togglePasswordVisibility = () => {
     setShowPassword(!showPassword);
   };
+
+  useEffect(() => {
+    if (errors.email) {
+      toast.error("Invalid email format - test@example.com");
+    }
+
+    if (errors.password) {
+      toast.error("Password must be at least 8 characters long");
+    }
+  }, [errors.email, errors.password]);
 
   const getInputClass = (fieldName) => {
     return errors[fieldName] ? css.error : "";

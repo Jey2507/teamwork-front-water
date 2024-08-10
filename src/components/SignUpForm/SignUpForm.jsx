@@ -1,5 +1,5 @@
 import styles from "./SignUpForm.module.css"; // оновлено імпорт
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { useForm } from "react-hook-form";
 import { Link } from "react-router-dom";
@@ -16,10 +16,15 @@ const SignUpForm = () => {
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
 
   const validationSchema = Yup.object().shape({
-    email: Yup.string().email("Email is invalid").required("Email is required"),
+    email: Yup.string()
+      .matches(
+        /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
+        "Invalid email format"
+      )
+      .required("Email is required"),
     password: Yup.string()
-      .min(6, "Password must be at least 6 characters")
-      .required("Password is required"),
+      .required("Password is required")
+      .min(8, "Password must be at least 8 characters long"),
     confirmPassword: Yup.string()
       .oneOf([Yup.ref("password"), null], "Passwords must match")
       .required("Confirm Password is required"),
@@ -58,6 +63,19 @@ const SignUpForm = () => {
   const toggleConfirmPasswordVisibility = () => {
     setShowConfirmPassword(!showConfirmPassword);
   };
+
+  useEffect(() => {
+    if (errors.email) {
+      toast.error("Invalid email format - test@example.com");
+    }
+
+    if (errors.password) {
+      toast.error("Password must be at least 8 characters long");
+    }
+    if (errors.confirmPassword) {
+      toast.error("Passwords must match");
+    }
+  }, [errors.email, errors.password, errors.confirmPassword]);
 
   return (
     <div className={styles.signUpContainer}>
