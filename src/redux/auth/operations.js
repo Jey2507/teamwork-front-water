@@ -1,7 +1,7 @@
- import { createAsyncThunk } from "@reduxjs/toolkit";
+import { createAsyncThunk } from "@reduxjs/toolkit";
 import toast from 'react-hot-toast';
 import axios from "../../common/axiosConfig.js";
-import { setToken } from "./slice";
+
 
 export const setAuthHeader = (token) => {
   axios.defaults.headers.common.Authorization = `Bearer ${token}`;
@@ -33,15 +33,13 @@ export const login = createAsyncThunk(
       toast.success(res.data.data.message);
 
       const profile = await axios.get('/user');
-      return {...res.data.data, user: profile.data.data };
+      return { ...res.data.data, user: profile.data.data };
     } catch (error) {
       toast.error(error.response.data.message);
       return thunkAPI.rejectWithValue(error.message);
     }
   }
 );
-
-
 
 export const logout = createAsyncThunk("auth/logout", async (_, thunkAPI) => {
   try {
@@ -53,7 +51,7 @@ export const logout = createAsyncThunk("auth/logout", async (_, thunkAPI) => {
 });
 
 export const refreshUser = createAsyncThunk(
-  "auth/refresh",
+  "auth/refresh-CurrentUser",
   async (_, thunkAPI) => {
     const state = thunkAPI.getState();
     const persistedToken = state.auth.token;
@@ -72,7 +70,7 @@ export const refreshUser = createAsyncThunk(
 );
 
 export const updateUser = createAsyncThunk(
-  "auth/update",
+  "auth/update-User",
   async (data, thunkAPI) => {
     const state = thunkAPI.getState();
     const persistedToken = state.auth.token;
@@ -89,8 +87,7 @@ export const updateUser = createAsyncThunk(
   }
 );
 
-
-/* export const setupAxiosInterceptors = (store) => {
+export const setupAxiosInterceptors = (store) => {
   axios.interceptors.response.use(
     (response) => response,
     async (error) => {
@@ -98,38 +95,15 @@ export const updateUser = createAsyncThunk(
       if (error.response.status === 401 && !originalRequest._retry) {
         originalRequest._retry = true;
         try {
-          const { refreshToken } = store.getState().auth;
-          const { data } = await axios.post("auth/refresh", { refreshToken });
-
+          const { data } = await axios.post("auth/refresh");
+          console.log('Data: ', data);
           setAuthHeader(data.accessToken);
-          store.dispatch(setToken({ token: data.accessToken, refreshToken: data.refreshToken }));
           originalRequest.headers.Authorization = `Bearer ${data.accessToken}`;
           return axios(originalRequest);
         } catch (err) {
           return Promise.reject(err);
         }
       }
-      return Promise.reject(error);
-    }
-  );
-};  */
-
-export const setupAxiosInterceptors = (store) => {
-  axios.interceptors.response.use(
-    (response) => response,
-    async (error) => {
-      const originalRequest = error.config;
-
-      // Блокування обробки 401 помилок, якщо ми тестуємо без авторизації
-      if (error.response.status === 401) {
-        console.warn("401 Unauthorized error intercepted. Temporarily bypassing authentication for testing.");
-        
-        // Це тимчасово дозволить пройти через запит без повторного запиту на токен
-        // Якщо ви хочете, щоб запит просто припинився без повторних спроб:
-        return Promise.reject(error);
-      }
-
-      // Усі інші помилки будуть оброблені як зазвичай
       return Promise.reject(error);
     }
   );
