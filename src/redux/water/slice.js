@@ -1,6 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { initialState } from "./constants";
-import { addWater, getWaterDay, getWaterMonth } from "./operations";
+import { addWater, getWaterDay, getWaterMonth, updateWaterIntakeRecord, deleteWaterEntry } from "./operations";
 
 const handlePending = (state) => {
   state.loading = true;
@@ -27,9 +27,7 @@ const waterSlice = createSlice({
         state.waterDay = [...state.waterDay, action.payload];
       })
       .addCase(addWater.rejected, handleRejected)
-      .addCase(getWaterDay.pending, (state) => {
-        state.error = false;
-      })
+      .addCase(getWaterDay.pending, handlePending)
       .addCase(getWaterDay.fulfilled, (state, action) => {
         state.date = action.payload.data;
         state.totalDayWater = action.payload.totalDayWater;
@@ -38,6 +36,29 @@ const waterSlice = createSlice({
       .addCase(getWaterDay.rejected, (state) => {
         state.error = true;
       })
+
+      .addCase(deleteWaterEntry.pending, handlePending)
+      .addCase(deleteWaterEntry.fulfilled, (state, action) => {
+        state.loading = false;
+        const index = state.entries.findIndex(
+          item => item.id === action.payload.id
+        );
+        state.entries.splice(index, 1);
+      })
+      .addCase(deleteWaterEntry.rejected, handleRejected)
+
+      .addCase(updateWaterIntakeRecord.pending, state => {
+        state.loading = true;
+      })
+      .addCase(updateWaterIntakeRecord.fulfilled, (state, action) => {
+        state.loading = false;
+        const index = state.entries.findIndex(
+          item => item.id === action.payload.id
+        );
+        state.entries[index] = action.payload;
+      })
+      .addCase(updateWaterIntakeRecord.rejected, handleRejected)
+
       // .addCase(getTodaySumamryWater.pending, (state) => {
       //   state.error = false;
       // })

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import css from "./WaterModal.module.css";
 import WaterForm from "../WaterForm/WaterForm";
 import svgSprite from "../../assets/sprite.svg";
@@ -22,7 +22,7 @@ const WaterModal = ({
     setIsVisible(false);
     setTimeout(() => {
       onClose();
-    }, 300); 
+    }, 300);
   };
 
   const modalHeader = (operationType) => {
@@ -66,7 +66,7 @@ const WaterModal = ({
       case "add":
         return null;
       case "edit":
-        return water.id;
+        return water._id;
       default:
         return null;
     }
@@ -91,7 +91,7 @@ const WaterModal = ({
           className={css.WaterModalCloseBtn}
         >
           <svg>
-            <use xlinkHref={svgSprite + "#icon-clear"}></use>
+            <use xlinkHref={svgSprite + "#icon-x"}></use>
           </svg>
         </button>
       </div>
