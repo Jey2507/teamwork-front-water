@@ -15,7 +15,7 @@ export const addWater = createAsyncThunk(
 );
 
 export const getWaterDay = createAsyncThunk(
-  'water/daily-water',
+  'water/get-DailyWater',
   async (date, thunkAPI) => {
     try {
       const response = await getWaterDayReq(date);
@@ -27,7 +27,7 @@ export const getWaterDay = createAsyncThunk(
 );
 
 export const getWaterMonth = createAsyncThunk(
-  'water/monthly-water',
+  'water/get-MonthlyWater',
   async (date, thunkAPI) => {
     try {
       const response = await getWaterMonthReq(date);
@@ -38,7 +38,7 @@ export const getWaterMonth = createAsyncThunk(
   }
 );
 export const deleteWaterEntry = createAsyncThunk(
-  'water/deleteWaterEntry',
+  'water/delete-WaterItem',
   async (entryId, thunkAPI) => {
     try {
       await axios.delete(`/api/water/${entryId}`);
@@ -50,7 +50,7 @@ export const deleteWaterEntry = createAsyncThunk(
 );
 
 export const updateWaterIntakeRecord = createAsyncThunk(
-  'water/updateWaterIntakeRecord',
+  'water/update-WaterItem',
   async (recordData, thunkAPI) => {
     try {
       const response = await axios.put(`/api/water/${recordData.id}`, recordData);
