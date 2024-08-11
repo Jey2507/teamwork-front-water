@@ -207,6 +207,7 @@ const UserSettingsForm = () => {
           <label className={`${css.userInfoLabel} ${css.inputTitle}`}>
             Email
             <input
+              disabled
               type="email"
               name="email"
               {...register("email")}

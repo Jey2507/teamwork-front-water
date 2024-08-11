@@ -76,7 +76,7 @@ const WaterModal = ({
     <>
       <div className={`${css.overlay} ${isVisible ? css.visible : ''}`} onClick={handleClose}></div>
       <div className={`${css.WaterModal} ${isVisible ? css.visible : ''}`}>
-        <h1>{modalHeader(operationType)}</h1>
+        <h1 className={css.title}>{modalHeader(operationType)}</h1>
         <WaterForm
           operationType={operationType}
           editTime={editTime(operationType)}
