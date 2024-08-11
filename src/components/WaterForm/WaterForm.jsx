@@ -114,7 +114,7 @@ const WaterForm = ({
           onClick={() => handleWaterAmountChange(Math.max(waterAmount - 50, 0))}
           disabled={isMinusButtonDisabled}
         >
-          <svg>
+          <svg className={css.minus}>
             <use xlinkHref={`${sprite}#icon-remove`}></use>
           </svg>
         </button>
@@ -125,14 +125,13 @@ const WaterForm = ({
           onClick={() => handleWaterAmountChange(Math.min(waterAmount + 50, 5000))}
           disabled={isPlusButtonDisabled}
         >
-          <svg className={css.plus}>
+          <svg className={css.plus} >
             <use xlinkHref={`${sprite}#icon-x`}></use>
           </svg>
         </button>
       </div>
-
       <label className={css.RecordingTimeLabel}>
-        Recording time
+      <p className={css.AmountOfWater}>Recording time</p>
         <Controller
           name="recordingTime"
           control={control}
@@ -156,7 +155,7 @@ const WaterForm = ({
         )}
       </label>
       <label className={css.WaterValueLabel}>
-        Enter the value of the water used:
+        <p className={css.descr}>Enter the value of the water used:</p>
         <Controller
           name="waterValue"
           control={control}
@@ -174,8 +173,8 @@ const WaterForm = ({
           <p className={css.Error}>{errors.waterValue.message}</p>
         )}
       </label>
-      <button type="submit" className={css.SaveBtn} disabled={isLoading}>
-        {isLoading ? 'Saving...' : 'Save'}
+      <button type="submit" className={css.SaveBtn} >
+        Save
       </button>
     </form>
   );

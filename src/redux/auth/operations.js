@@ -1,8 +1,7 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import toast from 'react-hot-toast';
+import toast from "react-hot-toast";
 import axios from "../../common/axiosConfig.js";
-import { logoutAction, setUpdatedToken } from "./slice.js";
-
+import { logoutAction } from "./slice.js";
 
 export const setAuthHeader = (token) => {
   axios.defaults.headers.common.Authorization = `Bearer ${token}`;
@@ -17,8 +16,11 @@ export const register = createAsyncThunk(
   async (newUser, thunkAPI) => {
     try {
       const response = await axios.post("/auth/register", newUser);
-      setAuthHeader(response.data.data.token);
-      return response.data.data;
+      // setAuthHeader(response.data.data.token);
+      const res = await axios.post("/auth/login", newUser);
+      setAuthHeader(res.data.data.token);
+
+      return { ...res.data.data };
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);
     }
@@ -31,9 +33,9 @@ export const login = createAsyncThunk(
     try {
       const res = await axios.post("/auth/login", userInfo);
       setAuthHeader(res.data.data.token);
-      toast.success(res.data.data.message);
+      toast.success(res.data.message);
 
-      const profile = await axios.get('/user');
+      const profile = await axios.get("/user");
       return { ...res.data.data, user: profile.data.data };
     } catch (error) {
       toast.error(error.response.data.message);
@@ -57,17 +59,16 @@ export const refreshUser = createAsyncThunk(
     const state = thunkAPI.getState();
     const persistedToken = state.auth.token;
     if (persistedToken === null) {
-      return thunkAPI.rejectWithValue('Unable to fetch user');
+      return thunkAPI.rejectWithValue("Unable to fetch user");
     }
     try {
       setAuthHeader(persistedToken);
-      const res = await axios.get('/user');
+      const res = await axios.get("/user");
       return res.data.data;
-    }
-    catch (error) {
+    } catch (error) {
       return thunkAPI.rejectWithValue(error.message);
     }
-  },
+  }
 );
 
 export const updateUser = createAsyncThunk(
@@ -99,7 +100,7 @@ export const setupAxiosInterceptors = (store) => {
           const { data } = await axios.post("auth/refresh");
           setAuthHeader(data.data.accessToken);
           originalRequest.headers.Authorization = `Bearer ${data.data.accessToken}`;
-          store.dispatch(setUpdatedToken(data.data.accessToken));
+          // store.dispatch(setUpdatedToken(data.data.accessToken));
           return axios(originalRequest);
           //return axios.request(originalRequest);
         } catch (err) {
