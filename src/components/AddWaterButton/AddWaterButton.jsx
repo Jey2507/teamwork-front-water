@@ -1,3 +1,4 @@
+// AddWaterButton.jsx
 import React, { useState } from 'react';
 import css from './AddWaterButton.module.css';
 import Icons from '../../assets/sprite.svg';
@@ -11,18 +12,17 @@ export default function AddWaterButton({
 }) {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
-  const openModal = () => {
-    setIsModalOpen(true);
-  };
-
-  const closeModal = () => {
-    setIsModalOpen(false);
-  };
+  const openModal = () => setIsModalOpen(true);
+  const closeModal = () => setIsModalOpen(false);
 
   return (
     <div>
       <div className={css.wrapper} style={{ backgroundColor: mainColor }}>
-        <button className={css.add_water_btn} style={{ color: colorText }} onClick={openModal}>
+        <button
+          className={css.add_water_btn}
+          style={{ color: colorText }}
+          onClick={openModal}
+        >
           <span className={css.btn_wrapper}>
             <span
               className={css.circle_btn}
