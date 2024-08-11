@@ -29,13 +29,12 @@ const waterSlice = createSlice({
       .addCase(addWater.rejected, handleRejected)
       .addCase(getWaterDay.pending, handlePending)
       .addCase(getWaterDay.fulfilled, (state, action) => {
+        state.loading = false;
         state.date = action.payload.data;
         state.totalDayWater = action.payload.totalDayWater;
         state.items = action.payload.consumedWaterData;
       })
-      .addCase(getWaterDay.rejected, (state) => {
-        state.error = true;
-      })
+      .addCase(getWaterDay.rejected, handleRejected)
 
       .addCase(deleteWaterEntry.pending, handlePending)
       .addCase(deleteWaterEntry.fulfilled, (state, action) => {
