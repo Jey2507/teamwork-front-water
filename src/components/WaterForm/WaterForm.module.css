@@ -163,6 +163,10 @@
   border: 1px solid rgba(47, 47, 47, 0.35);
 }
 
+.plus {
+  rotate: 45deg;
+}
+
 input[type="number"]::-webkit-outer-spin-button,
 input[type="number"]::-webkit-inner-spin-button {
   -webkit-appearance: none;

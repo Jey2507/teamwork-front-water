@@ -1,15 +1,14 @@
-// AddWaterButton.jsx
 import React, { useState } from 'react';
 import css from './AddWaterButton.module.css';
 import Icons from '../../assets/sprite.svg';
-import WaterModal from '../WaterModal/WaterModal';
 
 export default function AddWaterButton({
   mainColor,
-  backgroundColorIcon,
   colorText,
   colorIcon,
+  openModal
 }) {
+  
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const openModal = () => setIsModalOpen(true);
@@ -36,12 +35,6 @@ export default function AddWaterButton({
           </span>
         </button>
       </div>
-      {isModalOpen && (
-        <WaterModal
-          operationType="add"
-          onClose={closeModal}
-        />
-      )}
-    </div>
-  );
+         
+    </button >);
 }

@@ -4,15 +4,15 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import * as Yup from 'yup';
 import css from './WaterForm.module.css';
 import clsx from 'clsx';
-import svgSprite from '../../assets/sprite.svg';
+import {icons as sprite} from "../../assets/index.js"
 import { useDispatch } from 'react-redux';
-import { addWater, updateWaterIntakeRecord } from '../../redux/water/operations';
+import { addWater, updateWaterIntakeRecord, getWaterDay} from '../../redux/water/operations';
 import Loader from '../Loader/Loader';
 
 const WaterForm = ({
   operationType = "add",
   editTime,
-  waterPortion = 50, 
+  waterPortion = 50,
   waterID,
   handleClose,
 }) => {
@@ -59,23 +59,24 @@ const WaterForm = ({
     const combinedDateTime = new Date(
       `${year}-${month}-${day}T${formHours}:${formMinutes}:00`
     );
-    const timeToSend = combinedDateTime.getTime().toString();
+    //const timeToSend = combinedDateTime.getTime().toString();
 
     const waterValue = {
       amount: data.waterValue,
-      date: timeToSend,
+      date: combinedDateTime,
     };
 
     setIsLoading(true);
 
     const action = operationType === "add" 
-      ? addWater(waterValue) 
-      : updateWaterIntakeRecord({ id: waterID, formData: waterValue });
+        ? addWater(waterValue)
+        : updateWaterIntakeRecord({ id: waterID, formData: waterValue });
 
     dispatch(action).then(({ error }) => {
       setIsLoading(false);
       if (!error) {
         handleClose();
+        dispatch(getWaterDay(dateFromUrl));
       }
     });
   };
@@ -102,9 +103,9 @@ const WaterForm = ({
   return (
     <form className={css.WaterForm} onSubmit={handleSubmit(onSubmit)}>
       {isLoading && <Loader />}
-      
+
       {FormHeader()}
-      
+
       <p className={css.AmountOfWater}>Amount of water:</p>
       <div className={css.TapAddWaterWrapper}>
         <button
@@ -114,7 +115,7 @@ const WaterForm = ({
           disabled={isMinusButtonDisabled}
         >
           <svg>
-            <use xlinkHref={svgSprite + '#icon-remove'}></use>
+            <use xlinkHref={`${sprite}#icon-remove`}></use>
           </svg>
         </button>
         <p className={css.TapAddWaterValue}>{waterAmount} ml</p>
@@ -124,8 +125,8 @@ const WaterForm = ({
           onClick={() => handleWaterAmountChange(Math.min(waterAmount + 50, 5000))}
           disabled={isPlusButtonDisabled}
         >
-          <svg>
-            <use xlinkHref={svgSprite + '#icon-add'}></use>
+          <svg className={css.plus}>
+            <use xlinkHref={`${sprite}#icon-x`}></use>
           </svg>
         </button>
       </div>

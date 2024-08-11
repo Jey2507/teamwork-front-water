@@ -1,8 +1,7 @@
-// WaterModal.jsx
-import React, { useState, useEffect } from 'react';
-import css from './WaterModal.module.css';
-import WaterForm from '../WaterForm/WaterForm';
-import svgSprite from '../../assets/sprite.svg';
+import { useState, useEffect } from "react";
+import css from "./WaterModal.module.css";
+import WaterForm from "../WaterForm/WaterForm";
+import svgSprite from "../../assets/sprite.svg";
 
 const WaterModal = ({ operationType, onClose, water = {}, timestampFromUrl = "" }) => {
   const [isVisible, setIsVisible] = useState(false);

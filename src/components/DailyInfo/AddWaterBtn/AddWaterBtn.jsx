@@ -16,10 +16,16 @@ export default function AddWaterBtn({
 }) {
   const [isHovered, setIsHovered] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
-
   const openModal = () => setIsModalOpen(true);
   const closeModal = () => setIsModalOpen(false);
 
+
+  const handleOpenModal = () => {
+    setIsModalOpen(true);
+  };
+  const handleCloseModal = () => {
+    setIsModalOpen(false);
+  };
   return (
     <div
       className={smallBtn ? css.nowraper : css.wrapper}
@@ -41,7 +47,7 @@ export default function AddWaterBtn({
           >
             <svg
               className={css.icon}
-              stroke={isHovered ? hoverColorIcon : colorIcon}
+              fill={isHovered ? hoverColorIcon : colorIcon}
             >
               <use href={Icons + '#icon-x'}></use>
             </svg>

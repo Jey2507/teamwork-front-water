@@ -5,42 +5,16 @@
   font-size: 20px;
   font-weight: 700;
 }
-
-.settingsModal {
-  width: 343px;
-  top: 80px;
-  background-color: white;
-}
-
-@media screen and (min-width: 768px) {
-  .settingsModalTitle {
-    font-size: 28px;
-    line-height: 32px;
-  }
-  .settingsModal {
-    width: 648px;
-    top: 64px;
-  }
-}
-
-@media screen and (min-width: 1440px) {
-  .settingsModal {
-    width: 920px;
-  }
-}
 .settingsModal {
   scrollbar-width: 6px;
   scrollbar-color: rgb(240, 239, 244) inherit;
+  width: 343px;
+  background-color: white;
 }
 
 .settingsModal::-webkit-scrollbar {
   width: 6px;
 }
-
-.settingsModal::-webkit-scrollbar-track {
-  background-color: inherit;
-}
-
 .settingsModal::-webkit-scrollbar-thumb {
   background-color: rgb(240, 239, 244);
   border-radius: 30px;
@@ -51,44 +25,45 @@
   border-radius: 15px;
   box-shadow: 0px 4px 50px 0px rgba(0, 0, 0, 0.1);
   padding: 0px 7px 0px 20px;
-  position: absolute;
-  top: 80px;
-  left: 50%;
-  transform: translateX(-50%);
-  max-height: calc(100vh - 80px);
-  overflow: hidden;
+  position: relative;
+  padding-top: 15px;
+  padding-bottom: 15px;
+  top: 65vh;
 }
 
 .settingsModal {
-  overflow-y: auto;
   background-color: rgb(255, 255, 255);
-  max-height: calc(100vh - 80px);
+  overflow-y: auto;
+  max-height: 95vh;
   width: 343px;
-
   padding-right: 7px;
-  padding-top: 40px;
-  padding-bottom: 40px;
+  height: auto;
+  padding-bottom: 25px;
+  padding-top: 25px;
 }
-
 @media screen and (min-width: 768px) {
+  .settingsModalTitle {
+    font-size: 28px;
+    line-height: 32px;
+  }
   .settingsModal {
     width: 648px;
+    padding-bottom: 25px;
+    padding-top: 25px;
     scrollbar-width: 8px;
-  }
-  .modalContainer {
-    padding: 0px 16px 0px 40px;
-    top: 64px;
-    max-height: calc(100vh - 64px);
-  }
-  .settingsModal {
-    max-height: calc(100vh - 64px);
     padding-right: 16px;
   }
-  .settingsModal::-webkit-scrollbar {
-  width: 8px;
-}
-}
+  .settingsModal {
+    scrollbar-width: 8px;
+  }
 
+  .settingsModal::-webkit-scrollbar {
+    width: 8px;
+  }
+  .modalContainer {
+    padding: 15px 16px 15px 40px;
+  }
+}
 @media screen and (min-width: 1440px) {
   .settingsModal {
     width: 920px;

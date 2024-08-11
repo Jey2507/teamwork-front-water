@@ -14,6 +14,18 @@ export const getWaterMonthReq = async (date) => {
   return data;
 };
 
+export const updateWaterReq = async water => {
+  const { data } = await axios.patch(`/water/update-water/${water.id}`, {
+    amount: water.formData.amount,
+    date: water.formData.date,
+  });
+  return data;
+};
+
+export const deleteWaterReq = async entryId => {
+  const { data } = await axios.delete(`/water/delete-water/${entryId}`);
+  return data;
+};
 // export const getTodaySumamryWaterReq = async (date) => {
 //   const { data } = await axios.get(`/water/today/${date}`);
 //   return data;

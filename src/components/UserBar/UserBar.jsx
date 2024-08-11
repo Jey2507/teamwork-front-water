@@ -82,7 +82,7 @@ const Userbar = () => {
                 <svg width="16" height="16">
                   <use xlinkHref={`${sprite}#icon-settings`} />
                 </svg>
-                Settings
+                Setting
               </a>
             </li>
             <li>

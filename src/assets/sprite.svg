@@ -68,6 +68,9 @@
         <g transform="translate(13, 0)">
             <path stroke-linejoin="round" stroke-linecap="round" stroke-miterlimit="4" stroke-width="3.0316" d="M2.526 3.068v25.865"></path>
         </g>
+        <symbol id="icon-remove" viewBox="0 0 203 32">
+            <path stroke-linejoin="round" stroke-linecap="round" stroke-miterlimit="4" stroke-width="19.2" d="M19.427 16h163.809"></path>
+
         </symbol>
     </defs>
 </svg>

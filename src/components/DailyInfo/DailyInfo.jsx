@@ -1,6 +1,5 @@
 import AddWaterBtn from './AddWaterBtn/AddWaterBtn';
 import ChooseDate from '../ChooseDate/ChooseDate';
-import waters from '../../../dailyInfo.json';
 import WaterList from '../../components/WaterList/WaterList';
 
 import css from './DailyInfo.module.css';
