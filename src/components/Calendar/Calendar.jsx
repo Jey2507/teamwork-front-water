@@ -9,6 +9,7 @@ import { getWaterMonth } from '../../redux/water/operations.js';
 export const Calendar = () => {
   const data = useSelector(selectMonth);
   const selectedMonth = data.year + '-' + data.month;
+
   const dispatch = useDispatch();
   const monthData = useSelector(selectWaterMonth);
 
