@@ -1,7 +1,7 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import toast from "react-hot-toast";
 import axios from "../../common/axiosConfig.js";
-import { logoutAction, setUpdatedToken } from "./slice.js";
+import { logoutAction } from "./slice.js";
 
 export const setAuthHeader = (token) => {
   axios.defaults.headers.common.Authorization = `Bearer ${token}`;
@@ -16,9 +16,11 @@ export const register = createAsyncThunk(
   async (newUser, thunkAPI) => {
     try {
       const response = await axios.post("/auth/register", newUser);
-      setAuthHeader(response.data.data.token);
+      // setAuthHeader(response.data.data.token);
+      const res = await axios.post("/auth/login", newUser);
+      setAuthHeader(res.data.data.token);
 
-      return response.data;
+      return { ...res.data.data };
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);
     }
@@ -98,7 +100,7 @@ export const setupAxiosInterceptors = (store) => {
           const { data } = await axios.post("auth/refresh");
           setAuthHeader(data.data.accessToken);
           originalRequest.headers.Authorization = `Bearer ${data.data.accessToken}`;
-          store.dispatch(setUpdatedToken(data.data.accessToken));
+          // store.dispatch(setUpdatedToken(data.data.accessToken));
           return axios(originalRequest);
           //return axios.request(originalRequest);
         } catch (err) {

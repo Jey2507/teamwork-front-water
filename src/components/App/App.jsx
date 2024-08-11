@@ -34,7 +34,10 @@ function App() {
             path="/signin"
             element={<RestrictedRoute redirectTo="/tracker" component={<SignInPage />} />}
           />
-          <Route path="/signup" element={<SignUpPage />} />
+          <Route
+            path="/signup"
+            element={<RestrictedRoute redirectTo="/tracker" component={<SignUpPage />} />}
+          />
           <Route
             path="/tracker"
             element={<PrivateRoute redirectTo="/signin" component={<TrackerPage />} />}
