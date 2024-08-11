@@ -66,7 +66,7 @@ export const CalendarPagination = ({ isActive, setIsActive }) => {
           onClick={() => setIsActive(!isActive)}
         >
           <svg width="20" height="20">
-            <use xlinkHref={`${sprite}#pie-chart`} />
+            <use xlinkHref={`${sprite}#icon-pie-chart`} />
           </svg>
         </button>
       </div>

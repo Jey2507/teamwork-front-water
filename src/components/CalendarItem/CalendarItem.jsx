@@ -4,20 +4,19 @@ import { selectWaterDate } from '../../redux/water/selectors';
 import { getWaterDay } from '../../redux/water/operations';
 import css from './CalendarItem.module.css';
 import { useDispatch, useSelector } from 'react-redux';
-import { format, isSameDay } from 'date-fns';
+import { format, formatDate, isSameDay } from 'date-fns';
 import { selectDailyNorma } from '../../redux/auth/selectors';
+import { setCurrentDay } from '../../redux/water/slice';
 
 export const CalendarItem = ({ day, getDayData }) => {
   const dispatch = useDispatch();
   const waterDate = useSelector(selectWaterDate);
   // const waterData = getDayData(day);
   const userNorma = useSelector(selectDailyNorma);
-  let percentage = 0;
 
-  // if (waterData) {
-  //   const consumption = waterData.totalDayWater || 0;
-  //   percentage = Math.floor(Math.min((consumption / userNorma) * 100, 100));
-  // }
+  let percentage = 0;
+  // const consumption = waterData.totalDayWater || 0;
+  // percentage = Math.floor(Math.min((consumption / userNorma) * 100, 100));
 
   const handleDayClick = () => {
     const timezoneOffset = new Date().getTimezoneOffset();
@@ -47,11 +46,8 @@ export const CalendarItem = ({ day, getDayData }) => {
         },
       });
     const NewDate = new Date(dateWithOffset);
-    const result = NewDate.getFullYear() + '-' + NewDate.getMonth() + '-' + NewDate.getDate();
-    //d.getFullYear()+"-"+d.getMonth()+"-"+d.getDate();
-    console.log(result);
-
-    dispatch(getWaterDay(result));
+    const result = formatDate(NewDate, 'yyyy-MM-dd');
+    dispatch(setCurrentDay(result));
   };
   const isFullConsumption = percentage === 100;
   const isToday = isSameDay(day, new Date());

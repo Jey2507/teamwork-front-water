@@ -60,11 +60,13 @@
   font-weight: 700;
   letter-spacing: -0.14px;
 }
-.statisticBtn img {
+.statisticBtn {
+  border: none;
+  background-color: transparent;
   opacity: 0.4;
   transition: var(--animation);
 }
-.statisticBtn img:hover {
+.statisticBtn:hover {
   opacity: 1;
 }
 .statisticBtnActive img {

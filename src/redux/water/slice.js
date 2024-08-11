@@ -20,6 +20,9 @@ const waterSlice = createSlice({
       state.selectedMonth.year = action.payload.year;
       state.selectedMonth.month = action.payload.month;
     },
+    setCurrentDay(state, action) {
+      state.selectedDate = action.payload;
+    }
   },
   extraReducers: (builder) =>
     builder
@@ -86,5 +89,5 @@ const waterSlice = createSlice({
   // })
   // .addCase(deleteWaterEntry.rejected, handleRejected)
 });
-export const { setCurrentDate } = waterSlice.actions;
+export const { setCurrentDate, setCurrentDay } = waterSlice.actions;
 export const waterReducer = waterSlice.reducer;
