@@ -41,7 +41,7 @@ export const Calendar = () => {
         if (!item) {
           return;
         }
-        item.amount ? (percentDaily = percentDailyCalc(item.amount, dailyNorma)) : 0;
+        percentDaily = percentDailyCalc(item.amount, dailyNorma);
         return (
           <li className={css.itemCalendar} key={day}>
             <CalendarItem day={day} percentDaily={percentDaily} />
