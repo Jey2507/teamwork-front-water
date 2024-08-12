@@ -40,7 +40,7 @@
 
 @media screen and (max-width: 767px) {
     .container{
-width: 343px;
+max-width: 343px;
 height: 415px;
     }
   .trackerImage {

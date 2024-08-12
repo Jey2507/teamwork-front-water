@@ -18,6 +18,8 @@
     
         .text {
             font-size: 10px;
+            color: var(--main-text);
+            opacity: 60%;
             line-height: 10px;
             margin: 0;
         }
