@@ -39,7 +39,7 @@ export const Calendar = () => {
       {days.map(day => {
         const item = items[day.getDate() - 1];
         if (!item) {
-          return console.log('stop', item);
+          return;
         }
         item.amount ? (percentDaily = percentDailyCalc(item.amount, dailyNorma)) : 0;
         return (
