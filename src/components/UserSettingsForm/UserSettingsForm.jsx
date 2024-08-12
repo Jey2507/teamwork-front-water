@@ -145,7 +145,7 @@ const UserSettingsForm = () => {
         />
         <button className={css.uploadPhotoBtn}>
           <div className={css.btnIconContainer}>
-            <svg width="20" height="20">
+            <svg className={css.uploadBtn} width="20" height="20">
               <use href={`${sprite}#${`icon-upload`}`} />
             </svg>
             <span className={css.inputText}>Upload a photo</span>
