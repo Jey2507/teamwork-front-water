@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import {useState, useEffect} from "react";
 import css from "./WaterModal.module.css";
 import WaterForm from "../WaterForm/WaterForm";
 import svgSprite from "../../assets/sprite.svg";
@@ -13,7 +13,17 @@ const WaterModal = ({
 
   useEffect(() => {
     setIsVisible(true);
+
+    const handleKeyDown = (e) => {
+      if (e.key === "Escape") {
+        handleClose();
+      }
+    };
+
+    document.addEventListener("keydown", handleKeyDown);
+
     return () => {
+      document.removeEventListener("keydown", handleKeyDown);
       setIsVisible(false);
     };
   }, [onClose]);
@@ -66,7 +76,7 @@ const WaterModal = ({
       case "add":
         return null;
       case "edit":
-        return water._id;
+        return water.id;
       default:
         return null;
     }
@@ -76,7 +86,7 @@ const WaterModal = ({
     <>
       <div className={`${css.overlay} ${isVisible ? css.visible : ''}`} onClick={handleClose}></div>
       <div className={`${css.WaterModal} ${isVisible ? css.visible : ''}`}>
-        <h1 className={css.title}>{modalHeader(operationType)}</h1>
+        <h1>{modalHeader(operationType)}</h1>
         <WaterForm
           operationType={operationType}
           editTime={editTime(operationType)}
@@ -88,10 +98,9 @@ const WaterModal = ({
           type="button"
           onClick={handleClose}
           aria-label="Close Water Modal"
-          className={css.WaterModalCloseBtn}
-        >
+          className={css.WaterModalCloseBtn}>
           <svg>
-            <use xlinkHref={svgSprite + "#icon-x"}></use>
+            <use xlinkHref={svgSprite + "#icon-clear"} />
           </svg>
         </button>
       </div>
