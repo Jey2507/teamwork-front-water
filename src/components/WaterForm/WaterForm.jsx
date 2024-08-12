@@ -12,8 +12,8 @@ import {
   getWaterDay,
   getWaterMonth,
 } from '../../redux/water/operations';
-import Loader from '../Loader/Loader';
 import { selectMonth } from '../../redux/water/selectors.js';
+// import Loader from "../Loader/Loader";
 
 const WaterForm = ({
   operationType = 'add',
@@ -53,7 +53,7 @@ const WaterForm = ({
     control,
     handleSubmit,
     setValue,
-    formState: { errors },
+    formState: {errors},
   } = useForm({
     resolver: yupResolver(validationSchema),
     defaultValues: {
@@ -74,11 +74,11 @@ const WaterForm = ({
     setIsLoading(true);
 
     const action =
-      operationType === 'add'
+      operationType === "add"
         ? addWater(waterValue)
-        : updateWaterIntakeRecord({ id: waterID, formData: waterValue });
+        : updateWaterIntakeRecord({id: waterID, formData: waterValue});
 
-    dispatch(action).then(({ error }) => {
+    dispatch(action).then(({error}) => {
       setIsLoading(false);
       if (!error) {
         handleClose();
@@ -109,7 +109,7 @@ const WaterForm = ({
 
   return (
     <form className={css.WaterForm} onSubmit={handleSubmit(onSubmit)}>
-      {isLoading && <Loader />}
+      {/* {isLoading && <Loader />} */}
 
       {FormHeader()}
 
@@ -119,8 +119,7 @@ const WaterForm = ({
           type="button"
           className={css.TapAddWater}
           onClick={() => handleWaterAmountChange(Math.max(waterAmount - 50, 0))}
-          disabled={isMinusButtonDisabled}
-        >
+          disabled={isMinusButtonDisabled}>
           <svg className={css.minus}>
             <use xlinkHref={`${sprite}#icon-remove`}></use>
           </svg>
@@ -129,9 +128,10 @@ const WaterForm = ({
         <button
           type="button"
           className={css.TapAddWater}
-          onClick={() => handleWaterAmountChange(Math.min(waterAmount + 50, 5000))}
-          disabled={isPlusButtonDisabled}
-        >
+          onClick={() =>
+            handleWaterAmountChange(Math.min(waterAmount + 50, 5000))
+          }
+          disabled={isPlusButtonDisabled}>
           <svg className={css.plus}>
             <use xlinkHref={`${sprite}#icon-x`}></use>
           </svg>
@@ -142,14 +142,14 @@ const WaterForm = ({
         <Controller
           name="recordingTime"
           control={control}
-          render={({ field }) => (
+          render={({field}) => (
             <input
               {...field}
               type="text"
               className={clsx(css.RecordingTime)}
               placeholder="HH:MM"
-              onChange={e => {
-                const [newHours, newMinutes] = e.target.value.split(':');
+              onChange={(e) => {
+                const [newHours, newMinutes] = e.target.value.split(":");
                 setFormHours(newHours || hours);
                 setFormMinutes(newMinutes || minutes);
                 field.onChange(e);
@@ -164,12 +164,12 @@ const WaterForm = ({
         <Controller
           name="waterValue"
           control={control}
-          render={({ field }) => (
+          render={({field}) => (
             <input
               {...field}
               type="number"
-              value={waterAmount || ''}
-              onChange={e => handleWaterAmountChange(Number(e.target.value))}
+              value={waterAmount || ""}
+              onChange={(e) => handleWaterAmountChange(Number(e.target.value))}
               className={css.WaterValue}
             />
           )}
