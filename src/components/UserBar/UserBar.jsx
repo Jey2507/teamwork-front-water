@@ -79,7 +79,7 @@ const Userbar = () => {
           <ul className={css.wrapperLink}>
             <li>
               <a onClick={handleSettingsClick} className={css.userBarLink}>
-                <svg width="16" height="16">
+                <svg className={css.popupIcon} width="16" height="16">
                   <use xlinkHref={`${sprite}#icon-settings`} />
                 </svg>
                 Setting
@@ -87,7 +87,7 @@ const Userbar = () => {
             </li>
             <li>
               <a onClick={handleLogOutClick} className={css.userBarLink}>
-                <svg width="16" height="16">
+                <svg className={css.popupIcon} width="16" height="16">
                   <use xlinkHref={`${sprite}#icon-log-out`} />
                 </svg>
                 Log Out
