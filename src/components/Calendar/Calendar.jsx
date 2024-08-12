@@ -36,17 +36,16 @@ export const Calendar = () => {
 
   return (
     <ul className={css.listCalendar}>
-      {days
-        ? days.map(day => {
-            const item = items[day.getDate() - 1];
-            percentDaily = percentDailyCalc(item.amount, dailyNorma);
-            return (
-              <li className={css.itemCalendar} key={day}>
-                <CalendarItem day={day} percentDaily={percentDaily} />
-              </li>
-            );
-          })
-        : []}
+      {days.map(day => {
+        const item = items[day.getDate() - 1];
+        console.log(item);
+        item.amount ? (percentDaily = percentDailyCalc(item.amount, dailyNorma)) : 0;
+        return (
+          <li className={css.itemCalendar} key={day}>
+            <CalendarItem day={day} percentDaily={percentDaily} />
+          </li>
+        );
+      })}
     </ul>
   );
 };
