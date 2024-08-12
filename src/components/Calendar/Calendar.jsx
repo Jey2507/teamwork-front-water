@@ -33,15 +33,14 @@ export const Calendar = () => {
     start: startOfMonth(new Date(selectedMonth)),
     end: endOfMonth(new Date(selectedMonth)),
   });
-  if (!items) {
-    return console.log('loading');
-  }
 
   return (
     <ul className={css.listCalendar}>
       {days.map(day => {
         const item = items[day.getDate() - 1];
-        console.log(item);
+        if (!item) {
+          return console.log('stop', item);
+        }
         item.amount ? (percentDaily = percentDailyCalc(item.amount, dailyNorma)) : 0;
         return (
           <li className={css.itemCalendar} key={day}>
