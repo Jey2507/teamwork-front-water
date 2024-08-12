@@ -21,7 +21,7 @@ export const Calendar = () => {
   function percentDailyCalc(waterDay, norma) {
     return Math.round((waterDay / norma) * 100);
   }
-  const items = useSelector(selectWaterMonth);
+  const items = useSelector(selectWaterMonth) || [];
   const data = useSelector(selectMonth);
   const selectedMonth = data.year + '-' + data.month;
 
@@ -36,17 +36,17 @@ export const Calendar = () => {
 
   return (
     <ul className={css.listCalendar}>
-      {days.map(day => {
-        // if (items) {
-        const item = items[day.getDate() - 1];
-        percentDaily = percentDailyCalc(item.amount, dailyNorma);
-        // }
-        return (
-          <li className={css.itemCalendar} key={day}>
-            <CalendarItem day={day} percentDaily={percentDaily} />
-          </li>
-        );
-      })}
+      {days
+        ? days.map(day => {
+            const item = items[day.getDate() - 1];
+            percentDaily = percentDailyCalc(item.amount, dailyNorma);
+            return (
+              <li className={css.itemCalendar} key={day}>
+                <CalendarItem day={day} percentDaily={percentDaily} />
+              </li>
+            );
+          })
+        : []}
     </ul>
   );
 };
