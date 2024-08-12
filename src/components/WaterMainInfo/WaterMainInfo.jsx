@@ -10,7 +10,7 @@ import {
   tp3xmb,
 } from '../../images/TrackerPage/index.js';
 import AddWaterButton from '../AddWaterButton/AddWaterButton.jsx';
-import React, { useState } from 'react';
+import { useState } from 'react';
 // import WaterDailyNorma from '../WaterDailyNorma/WaterDailyNorma.jsx';
 // import WaterProgressBar from '../WaterProgressBar/WaterProgressBar.jsx';
 import css from './WaterMainInfo.module.css';

@@ -8,21 +8,21 @@ const WaterModal = ({ operationType, onClose, water = {}, timestampFromUrl = '' 
 
   useEffect(() => {
     setIsVisible(true);
-
+  
     const handleKeyDown = e => {
       if (e.key === 'Escape') {
         handleClose();
       }
     };
-
+  
     document.addEventListener('keydown', handleKeyDown);
-
+  
+    // Чисто видаляємо слухача подій
     return () => {
       document.removeEventListener('keydown', handleKeyDown);
-      setIsVisible(false);
     };
-  }, [onClose]);
-
+  }, []);
+  
   const handleClose = () => {
     setIsVisible(false);
     setTimeout(() => {

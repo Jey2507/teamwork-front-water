@@ -68,12 +68,10 @@
 }
 
 .WaterModalCloseBtn:hover {
-  fill: #87d28d;
   transform: scale(1.1);
 }
 
 .WaterModalCloseBtn:active {
-  fill: #5a9b60;
   transform: scale(1);
 }
 
