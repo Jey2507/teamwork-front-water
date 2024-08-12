@@ -12,8 +12,6 @@ export default function WaterProgressBar() {
   waterDailyNormaBar !== null
     ? (waterDailyNorma = waterDailyNormaBar.dailyNorma)
     : (waterDailyNorma = 1.5);
-  
-
 
   let amount = 0;
   const items = useSelector(selectWaterDate);
@@ -22,30 +20,25 @@ export default function WaterProgressBar() {
     amount = items.reduce((total, item) => total + item.amount, 0);
   }
 
-
   const dailyNormaMl = waterDailyNorma * 1000;
 
   function percentDailyCalc(waterDay, norma) {
-  return  Math.round((waterDay / norma) * 100);
-}
+    return Math.round((waterDay / norma) * 100);
+  }
 
   let percentDaily = percentDailyCalc(amount, dailyNormaMl);
 
-
-  if (!percentDaily || percentDaily < 0 || typeof (percentDaily) !== "number") {
+  if (!percentDaily || percentDaily < 0 || typeof percentDaily !== 'number') {
     percentDaily = 0;
-    console.log(percentDaily )
+    // console.log(percentDaily )
   } else if (percentDaily > 100) {
     percentDaily = 100;
-  } 
-
-
-
+  }
 
   return (
     <div className={css.container}>
       <p className={css.text}>Today</p>
- 
+
       <div className={css.backBar}>
         <div
           className={css.frontBar}
@@ -53,16 +46,10 @@ export default function WaterProgressBar() {
             width: `${percentDaily}%`,
           }}
         >
-
           <div className={css.frontBarCircle}>
-                                  <div
-          className={css.floatPercent}
-        >
-          {Math.round(percentDaily)}%
-        </div>
+            <div className={css.floatPercent}>{Math.round(percentDaily)}%</div>
           </div>
         </div>
- 
       </div>
 
       <ul className={css.percentage}>

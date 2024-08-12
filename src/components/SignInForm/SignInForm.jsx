@@ -1,20 +1,20 @@
-import css from '../SignInForm/SignInForm.module.css';
-import { useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { useForm } from 'react-hook-form';
-import { useNavigate, Link } from 'react-router-dom';
-import { yupResolver } from '@hookform/resolvers/yup';
-import * as Yup from 'yup';
-import toast from 'react-hot-toast';
-import Logo from '../Logo/Logo.jsx';
-import { icons as sprite } from '../../assets/index.js';
-import { login, refreshUser } from '../../redux/auth/operations.js';
-import { selectIsLoggegIn } from '../../redux/auth/selectors.js';
+import css from "../SignInForm/SignInForm.module.css";
+import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { useForm } from "react-hook-form";
+import { Link } from "react-router-dom";
+import { yupResolver } from "@hookform/resolvers/yup";
+import * as Yup from "yup";
+import toast from "react-hot-toast";
+import Logo from "../Logo/Logo.jsx";
+import { icons as sprite } from "../../assets/index.js";
+import { login, refreshUser } from "../../redux/auth/operations.js";
+import { selectIsLoggegIn } from "../../redux/auth/selectors.js";
 
 const SignInForm = () => {
   const dispatch = useDispatch();
   const [showPassword, setShowPassword] = useState(false);
-  const navigate = useNavigate();
+
   const isLoggedIn = useSelector(selectIsLoggegIn);
 
   useEffect(() => {
@@ -24,10 +24,16 @@ const SignInForm = () => {
   }, [isLoggedIn, dispatch]);
 
   const validationSchema = Yup.object().shape({
-    email: Yup.string().email('Email is invalid').required('Email is required'),
+    email: Yup.string()
+      .matches(
+        /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
+        "Invalid email format"
+      )
+      .required("Email is required"),
+
     password: Yup.string()
       .required("Password is required")
-      .min(6, "Password must be at least 6 characters"),
+      .min(8, "Password must be at least 8 characters long"),
   });
 
   const {
@@ -41,22 +47,30 @@ const SignInForm = () => {
     resolver: yupResolver(validationSchema),
   });
 
-  const onSubmit = async data => {
+  const onSubmit = async (data) => {
     dispatch(login(data))
       .unwrap()
-      .then(res => {
-        toast.success(res.message);
+      .then((res) => {
         reset();
-        navigate('/tracker');
       })
-      .catch(err => {
-        toast.error('Login failed');
+      .catch((err) => {
+        toast.error("Login failed");
       });
   };
 
   const togglePasswordVisibility = () => {
     setShowPassword(!showPassword);
   };
+
+  useEffect(() => {
+    if (errors.email) {
+      toast.error("Invalid email format - test@example.com");
+    }
+
+    if (errors.password) {
+      toast.error("Password must be at least 8 characters long");
+    }
+  }, [errors.email, errors.password]);
 
   const getInputClass = (fieldName) => {
     return errors[fieldName] ? css.error : "";
@@ -86,7 +100,7 @@ const SignInForm = () => {
               <label className={css.formLabel}>Password</label>
               <div className={css.inputWrapper}>
                 <input
-                  type={showPassword ? 'text' : 'password'}
+                  type={showPassword ? "text" : "password"}
                   placeholder="Enter your password"
                   className={getInputClass("password")}
                   {...register("password")}
@@ -98,12 +112,22 @@ const SignInForm = () => {
                   className={css.togglePassword}
                   onClick={togglePasswordVisibility}
                 >
-                  <use xlinkHref={`${sprite}#${showPassword ? 'icon-eye' : 'icon-eye-off'}`} />
+                  <use
+                    xlinkHref={`${sprite}#${
+                      showPassword ? "icon-eye" : "icon-eye-off"
+                    }`}
+                  />
                 </svg>
               </div>
-              {errors.password && <p className={css.errorText}>{errors.password.message}</p>}
+              {errors.password && (
+                <p className={css.errorText}>{errors.password.message}</p>
+              )}
             </div>
-            <button disabled={!isDirty || !isValid} className={css.btnform} type="submit">
+            <button
+              disabled={!isDirty || !isValid}
+              className={css.btnform}
+              type="submit"
+            >
               Sign In
             </button>
             <div className={css.spanSignIn}>

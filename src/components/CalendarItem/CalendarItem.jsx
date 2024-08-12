@@ -1,30 +1,19 @@
 import toast from 'react-hot-toast';
-// import { selectDailyNorma } from '../../redux/auth/selectors';
-import { selectWaterDate } from '../../redux/water/selectors';
-import { getWaterDay } from '../../redux/water/operations';
+import { selectDate, selectWaterDate } from '../../redux/water/selectors';
 import css from './CalendarItem.module.css';
 import { useDispatch, useSelector } from 'react-redux';
-import { format, isSameDay } from 'date-fns';
-import { selectDailyNorma } from '../../redux/auth/selectors';
+import { format, formatDate, isSameDay } from 'date-fns';
+import { setCurrentDay } from '../../redux/water/slice';
 
-export const CalendarItem = ({ day, getDayData }) => {
+export const CalendarItem = ({ day, percentDaily }) => {
   const dispatch = useDispatch();
   const waterDate = useSelector(selectWaterDate);
-  // const waterData = getDayData(day);
-  const userNorma = useSelector(selectDailyNorma);
-  let percentage = 0;
-
-  // if (waterData) {
-  //   const consumption = waterData.totalDayWater || 0;
-  //   percentage = Math.floor(Math.min((consumption / userNorma) * 100, 100));
-  // }
+  const selectedData = useSelector(selectDate);
 
   const handleDayClick = () => {
     const timezoneOffset = new Date().getTimezoneOffset();
     const utcDate = new Date(day.getFullYear(), day.getMonth(), day.getDate()).getTime();
-
     const offset = timezoneOffset * 60 * 1000;
-
     const dateWithOffset = utcDate - offset;
 
     if (dateWithOffset > Date.now() - offset)
@@ -47,30 +36,27 @@ export const CalendarItem = ({ day, getDayData }) => {
         },
       });
     const NewDate = new Date(dateWithOffset);
-    const result = NewDate.getFullYear() + '-' + NewDate.getMonth() + '-' + NewDate.getDate();
-    //d.getFullYear()+"-"+d.getMonth()+"-"+d.getDate();
-    console.log(result);
-
-    dispatch(getWaterDay(result));
+    const result = formatDate(NewDate, 'yyyy-MM-dd');
+    dispatch(setCurrentDay(result));
   };
-  const isFullConsumption = percentage === 100;
+  const isFullConsumption = percentDaily === 100;
   const isToday = isSameDay(day, new Date());
-
-  const isSelected = isSameDay(day, waterDate);
+  const isSelected = isSameDay(day, selectedData);
   const getDayStyles = (isFullConsumption, isToday, isSelected) => {
-    if (isFullConsumption && isToday) {
+    if (isFullConsumption && isSelected) {
       return {
-        backgroundColor: '#9be1a0',
-        color: '#323F47',
-        border: '2px solid #323F47',
+        backgroundColor: '#323F47',
+        color: '#9BE1A0',
+        border: 'none',
       };
     }
     if (isFullConsumption) {
       return {
-        backgroundColor: '#9be1a0',
+        backgroundColor: '#FFFFFF',
+        border: 'none',
       };
     }
-    if (isToday) {
+    if (isToday && isSelected) {
       return {
         backgroundColor: '#323F47',
         color: '#9BE1A0',
@@ -78,10 +64,11 @@ export const CalendarItem = ({ day, getDayData }) => {
     }
     if (isSelected) {
       return {
-        border: '2px solid #9BE1A0',
+        backgroundColor: '#323F47',
+        color: '#9BE1A0',
+        border: '2px solid #323F47',
       };
     }
-
     return {};
   };
 
@@ -98,7 +85,7 @@ export const CalendarItem = ({ day, getDayData }) => {
       >
         <div className={css.number}>{day.getDate()}</div>
       </button>
-      <div className={css.percentage}>{percentage}%</div>
+      <div className={css.percentage}>{percentDaily}%</div>
     </div>
   );
 };
