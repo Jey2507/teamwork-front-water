@@ -4,7 +4,6 @@ import { Calendar } from '../Calendar/Calendar.jsx';
 import css from './MonthInfo.module.css';
 
 export const MonthInfo = () => {
-  // const [currentDate, setCurrentDate] = useState(new Date());
   const [isActive, setIsActive] = useState(true);
   return (
     <div className={css.calendar}>

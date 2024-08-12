@@ -6,6 +6,7 @@ import { selectMonth, selectWaterMonth } from '../../redux/water/selectors.js';
 import { useEffect } from 'react';
 import { getWaterMonth } from '../../redux/water/operations.js';
 import { selectUser } from '../../redux/auth/selectors.js';
+import { setCurrentDate } from '../../redux/water/slice.js';
 
 export const Calendar = () => {
   const dispatch = useDispatch();
@@ -14,13 +15,13 @@ export const Calendar = () => {
   waterDailyNormaBar !== null
     ? (waterDailyNorma = waterDailyNormaBar.dailyNorma)
     : (waterDailyNorma = 1.5);
-  const items = useSelector(selectWaterMonth);
 
   let percentDaily = 0;
   const dailyNorma = waterDailyNorma * 1000;
   function percentDailyCalc(waterDay, norma) {
     return Math.round((waterDay / norma) * 100);
   }
+  const items = useSelector(selectWaterMonth);
   const data = useSelector(selectMonth);
   const selectedMonth = data.year + '-' + data.month;
 
@@ -36,9 +37,10 @@ export const Calendar = () => {
   return (
     <ul className={css.listCalendar}>
       {days.map(day => {
+        // if (items) {
         const item = items[day.getDate() - 1];
         percentDaily = percentDailyCalc(item.amount, dailyNorma);
-
+        // }
         return (
           <li className={css.itemCalendar} key={day}>
             <CalendarItem day={day} percentDaily={percentDaily} />
