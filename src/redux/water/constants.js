@@ -14,7 +14,6 @@ export const initialState = {
     errorMonth: null,
     isLoadingMonth: false,
     toggleInfo: true,
-    waterDay: [],
     percentDay: null,
     isLoadingWaterDay: false,
     errorWaterDay: null,
