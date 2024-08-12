@@ -1,6 +1,6 @@
 .wrapper {
   display: grid;
-  grid-template-columns: repeat(3, minmax(25px, 1fr));
+  grid-template-columns: minmax(50px, 1fr) minmax(30px, 2fr) minmax(30px, 1fr);
   align-items: center;
   border-radius: 15px;
   padding: 18px 14px;
@@ -49,6 +49,8 @@
   flex-wrap: nowrap;
   flex-direction: column;
   width: fit-content;
+  align-items: center;
+  justify-content: space-evenly;
 }
 .button:hover {
   cursor: pointer;
@@ -68,7 +70,7 @@
 
 @media screen and (min-width: 768px) {
   .wrapper {
-    gap: 20px;
+    gap: 0px;
     padding: 20px;
   }
   .water_volume {

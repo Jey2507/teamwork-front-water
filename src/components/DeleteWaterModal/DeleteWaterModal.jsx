@@ -11,7 +11,7 @@ const DeleteWaterModal = () => {
   const dispatch = useDispatch();
   const isModalOpen = useSelector((state) => state.modal.isModalOpen);
   const entryId = useSelector((state) => state.modal.modalData.entryId);
-  const currentDay = useSelector(selectDate);
+  const selectedDate = useSelector(selectDate);
 
   if (!isModalOpen) return null;
 
@@ -19,7 +19,7 @@ const DeleteWaterModal = () => {
     try {
       await dispatch(deleteWaterEntry(entryId)).unwrap();
       dispatch(closeModal());
-      dispatch(getWaterDay(currentDay));
+      dispatch(getWaterDay(selectedDate));
       toast.success('Entry deleted successfully');
     } catch (error) {
       toast.error('Failed to delete entry');

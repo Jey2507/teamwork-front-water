@@ -71,7 +71,7 @@ const WaterModal = ({ operationType, onClose, water = {}, timestampFromUrl = '' 
       case 'add':
         return null;
       case 'edit':
-        return water.id;
+        return water._id;
       default:
         return null;
     }
