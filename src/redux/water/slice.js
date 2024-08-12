@@ -20,6 +20,9 @@ const waterSlice = createSlice({
       state.selectedMonth.year = action.payload.year;
       state.selectedMonth.month = action.payload.month;
     },
+    setCurrentDay(state, action) {
+      state.selectedDate = action.payload;
+    }
   },
   extraReducers: (builder) =>
     builder
@@ -60,30 +63,12 @@ const waterSlice = createSlice({
         state.entries[index] = action.payload;
       })
       .addCase(updateWaterIntakeRecord.rejected, handleRejected)
-
-      // .addCase(getTodaySumamryWater.pending, (state) => {
-      //   state.error = false;
-      // })
-      // .addCase(getTodaySumamryWater.fulfilled, (state, action) => {
-      //   state.todaySumamryWater = action.payload; // Оновлення поля todaySumamryWater
-      // })
-      // .addCase(getTodaySumamryWater.rejected, (state) => {
-      //   state.error = true;
-      // })
       .addCase(getWaterMonth.fulfilled, (state, action) => {
         state.monthData = action.payload;
       })
       .addCase(getWaterMonth.rejected, (state) => {
         state.error = true;
       })
-  // .addCase(deleteWaterEntry.pending, handlePending)
-  // .addCase(deleteWaterEntry.fulfilled, (state, action) => {
-  //   state.loading = false;
-  //   state.error = null;
-  //   state.waterDay = state.waterDay.filter(item => item.id !== action.payload);
-  //   // Update water progress and calendar items when get them ready
-  // })
-  // .addCase(deleteWaterEntry.rejected, handleRejected)
 });
-export const { setCurrentDate } = waterSlice.actions;
+export const { setCurrentDate, setCurrentDay } = waterSlice.actions;
 export const waterReducer = waterSlice.reducer;
