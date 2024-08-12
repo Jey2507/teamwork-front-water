@@ -1,16 +1,14 @@
 import toast from 'react-hot-toast';
-// import { selectDailyNorma } from '../../redux/auth/selectors';
-import { selectDate, selectWaterDate, selectWaterMonth } from '../../redux/water/selectors';
-import { getWaterDay } from '../../redux/water/operations';
+import { selectDate, selectWaterDate } from '../../redux/water/selectors';
 import css from './CalendarItem.module.css';
 import { useDispatch, useSelector } from 'react-redux';
 import { format, formatDate, isSameDay } from 'date-fns';
-import { selectDailyNorma, selectUser } from '../../redux/auth/selectors';
 import { setCurrentDay } from '../../redux/water/slice';
 
 export const CalendarItem = ({ day, percentDaily }) => {
   const dispatch = useDispatch();
   const waterDate = useSelector(selectWaterDate);
+  const selectedData = useSelector(selectDate);
 
   const handleDayClick = () => {
     const timezoneOffset = new Date().getTimezoneOffset();
@@ -43,21 +41,22 @@ export const CalendarItem = ({ day, percentDaily }) => {
   };
   const isFullConsumption = percentDaily === 100;
   const isToday = isSameDay(day, new Date());
-  const isSelected = isSameDay(day, waterDate);
+  const isSelected = isSameDay(day, selectedData);
   const getDayStyles = (isFullConsumption, isToday, isSelected) => {
-    if (isFullConsumption && isToday) {
+    if (isFullConsumption && isSelected) {
       return {
-        backgroundColor: '#9be1a0',
-        color: '#323F47',
-        border: '2px solid #323F47',
+        backgroundColor: '#323F47',
+        color: '#9BE1A0',
+        border: 'none',
       };
     }
     if (isFullConsumption) {
       return {
-        backgroundColor: '#9be1a0',
+        backgroundColor: '#FFFFFF',
+        border: 'none',
       };
     }
-    if (isToday) {
+    if (isToday && isSelected) {
       return {
         backgroundColor: '#323F47',
         color: '#9BE1A0',
@@ -65,10 +64,11 @@ export const CalendarItem = ({ day, percentDaily }) => {
     }
     if (isSelected) {
       return {
-        border: '2px solid #9BE1A0',
+        backgroundColor: '#323F47',
+        color: '#9BE1A0',
+        border: '2px solid #323F47',
       };
     }
-
     return {};
   };
 

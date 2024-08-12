@@ -1,12 +1,11 @@
 import { CalendarItem } from '../CalendarItem/CalendarItem.jsx';
-import { startOfMonth, endOfMonth, eachDayOfInterval, isSameDay } from 'date-fns';
+import { startOfMonth, endOfMonth, eachDayOfInterval } from 'date-fns';
 import css from './Calendar.module.css';
 import { useDispatch, useSelector } from 'react-redux';
 import { selectMonth, selectWaterMonth } from '../../redux/water/selectors.js';
 import { useEffect } from 'react';
 import { getWaterMonth } from '../../redux/water/operations.js';
 import { selectUser } from '../../redux/auth/selectors.js';
-import { setCurrentDate } from '../../redux/water/slice.js';
 
 export const Calendar = () => {
   const dispatch = useDispatch();
@@ -42,6 +41,7 @@ export const Calendar = () => {
           return;
         }
         percentDaily = percentDailyCalc(item.amount, dailyNorma);
+        percentDaily > 100 ? (percentDaily = 100) : percentDaily;
         return (
           <li className={css.itemCalendar} key={day}>
             <CalendarItem day={day} percentDaily={percentDaily} />
