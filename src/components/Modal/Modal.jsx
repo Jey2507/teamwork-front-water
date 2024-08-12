@@ -2,7 +2,6 @@ import { useEffect, useRef } from 'react';
 import css from './Modal.module.css';
 import { useDispatch, useSelector } from 'react-redux';
 import { closeModal } from '../../redux/ModalSlice';
-import sprite from '../../assets/sprite.svg'; 
 
 const Modal = ({ children }) => {
   const dispatch = useDispatch();
@@ -42,11 +41,6 @@ const Modal = ({ children }) => {
       tabIndex="-1"
     >
       <div className={css.modalContainer}>
-        <button className={css.closeButton} onClick={handleClose}>
-          <svg className={css.icon}>
-            <use xlinkHref={`${sprite}#icon-x`} />
-          </svg>
-        </button>
         {children}
       </div>
     </div>

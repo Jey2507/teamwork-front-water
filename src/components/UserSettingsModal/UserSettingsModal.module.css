@@ -6,6 +6,7 @@
   font-weight: 700;
 }
 .settingsModal {
+  position: relative;
   scrollbar-width: 6px;
   scrollbar-color: rgb(240, 239, 244) inherit;
   width: 343px;

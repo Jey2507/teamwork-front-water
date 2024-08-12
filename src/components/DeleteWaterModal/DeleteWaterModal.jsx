@@ -5,6 +5,7 @@ import { closeModal } from '../../redux/ModalSlice';
 import toast from 'react-hot-toast';
 import Modal from '../Modal/Modal';
 import { selectDate } from '../../redux/water/selectors';
+import Button from '../Button/Button';
 
 const DeleteWaterModal = () => {
   const dispatch = useDispatch();
@@ -28,6 +29,7 @@ const DeleteWaterModal = () => {
   return (
     <Modal>
       <div className={css.modalContainer}>
+      <Button />
         <div className={css.coverText}>
           <h2 className={css.title}>Delete entry</h2>
           <p className={css.text}>Are you sure you want to delete the entry?</p>

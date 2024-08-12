@@ -5,6 +5,7 @@ import { closeModal } from '../../redux/ModalSlice';
 import toast from 'react-hot-toast';
 import Modal from '../Modal/Modal';
 import { logout } from '../../redux/auth/operations.js';
+import Button from '../Button/Button.jsx';
 
 const LogOutModal = () => {
   const dispatch = useDispatch();
@@ -28,6 +29,7 @@ const LogOutModal = () => {
     <Modal>
       <div className={css.modalContainer}>
         <div className={css.coverText}>
+          <Button />
           <h2 className={css.title}>Log Out</h2>
           <p className={css.text}>Do you really want to leave?</p>
         </div>
