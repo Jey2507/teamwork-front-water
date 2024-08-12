@@ -1,24 +1,29 @@
-import { useState, useEffect } from "react";
+import {useState, useEffect} from "react";
 import css from "./WaterModal.module.css";
 import WaterForm from "../WaterForm/WaterForm";
 import svgSprite from "../../assets/sprite.svg";
 
-const WaterModal = ({ operationType, onClose, water = {}, timestampFromUrl = "" }) => {
+const WaterModal = ({
+  operationType,
+  onClose,
+  water = {},
+  timestampFromUrl = "",
+}) => {
   const [isVisible, setIsVisible] = useState(false);
 
   useEffect(() => {
     setIsVisible(true);
 
     const handleKeyDown = (e) => {
-      if (e.key === 'Escape') {
+      if (e.key === "Escape") {
         handleClose();
       }
     };
 
-    document.addEventListener('keydown', handleKeyDown);
+    document.addEventListener("keydown", handleKeyDown);
 
     return () => {
-      document.removeEventListener('keydown', handleKeyDown);
+      document.removeEventListener("keydown", handleKeyDown);
       setIsVisible(false);
     };
   }, [onClose]);
@@ -32,12 +37,12 @@ const WaterModal = ({ operationType, onClose, water = {}, timestampFromUrl = "" 
 
   const modalHeader = (operationType) => {
     switch (operationType) {
-      case 'add':
-        return 'Add Water';
-      case 'edit':
-        return 'Edit Water Amount';
+      case "add":
+        return "Add Water";
+      case "edit":
+        return "Edit Water Amount";
       default:
-        return 'Add Water';
+        return "Add Water";
     }
   };
 
@@ -46,9 +51,9 @@ const WaterModal = ({ operationType, onClose, water = {}, timestampFromUrl = "" 
 
   const editTime = (operationType) => {
     switch (operationType) {
-      case 'add':
+      case "add":
         return curentTimestamp;
-      case 'edit':
+      case "edit":
         return recordTimestamp;
       default:
         return curentTimestamp;
@@ -57,9 +62,9 @@ const WaterModal = ({ operationType, onClose, water = {}, timestampFromUrl = "" 
 
   const waterPortion = (operationType) => {
     switch (operationType) {
-      case 'add':
+      case "add":
         return 50;
-      case 'edit':
+      case "edit":
         return water.amount;
       default:
         return 50;
@@ -68,9 +73,9 @@ const WaterModal = ({ operationType, onClose, water = {}, timestampFromUrl = "" 
 
   const waterID = (operationType) => {
     switch (operationType) {
-      case 'add':
+      case "add":
         return null;
-      case 'edit':
+      case "edit":
         return water.id;
       default:
         return null;
@@ -80,10 +85,10 @@ const WaterModal = ({ operationType, onClose, water = {}, timestampFromUrl = "" 
   return (
     <>
       <div
-        className={`${css.overlay} ${isVisible ? css.visible : ''}`}
+        className={`${css.overlay} ${isVisible ? css.visible : ""}`}
         onClick={handleClose}
       />
-      <div className={`${css.WaterModal} ${isVisible ? css.visible : ''}`}>
+      <div className={`${css.WaterModal} ${isVisible ? css.visible : ""}`}>
         <h1>{modalHeader(operationType)}</h1>
         <WaterForm
           operationType={operationType}
@@ -96,10 +101,9 @@ const WaterModal = ({ operationType, onClose, water = {}, timestampFromUrl = "" 
           type="button"
           onClick={handleClose}
           aria-label="Close Water Modal"
-          className={css.WaterModalCloseBtn}
-        >
+          className={css.WaterModalCloseBtn}>
           <svg>
-            <use xlinkHref={svgSprite + '#icon-clear'} />
+            <use xlinkHref={svgSprite + "#icon-clear"} />
           </svg>
         </button>
       </div>

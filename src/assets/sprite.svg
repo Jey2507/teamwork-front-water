@@ -63,14 +63,8 @@
             <path stroke-linejoin="round" stroke-linecap="round" stroke-miterlimit="4" stroke-width="5.3333" d="M3.556 3.556l24.889 24.889"></path>
             <path stroke-linejoin="round" stroke-linecap="round" stroke-miterlimit="4" stroke-width="5.3333" d="M28.444 3.556l-24.889 24.889"></path>
         </symbol>
-        <symbol id="icon-add" viewBox="0 0 32 32">
-            <path stroke-linejoin="round" stroke-linecap="round" stroke-miterlimit="4" stroke-width="3.0316" d="M3.067 16h25.865"></path>
-        <g transform="translate(13, 0)">
-            <path stroke-linejoin="round" stroke-linecap="round" stroke-miterlimit="4" stroke-width="3.0316" d="M2.526 3.068v25.865"></path>
-        </g>
         <symbol id="icon-remove" viewBox="0 0 203 32">
             <path stroke-linejoin="round" stroke-linecap="round" stroke-miterlimit="4" stroke-width="19.2" d="M19.427 16h163.809"></path>
-
         </symbol>
     </defs>
 </svg>

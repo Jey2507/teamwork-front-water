@@ -58,15 +58,22 @@
   border: none;
   background-color: transparent;
   fill: #323f47;
+  transition: transform 0.2s ease, fill 0.2s ease;
+}
+
+.WaterModalCloseBtn:hover {
+  fill: #87d28d;
+  transform: scale(1.1);
+}
+
+.WaterModalCloseBtn:active {
+  fill: #5a9b60;
+  transform: scale(1);
 }
 
 .WaterModalCloseBtn svg {
   width: 100%;
   height: 100%;
-}
-
-.WaterModalCloseBtn:hover {
-  fill: #87d28d;
 }
 
 @media screen and (min-width: 768px) {
@@ -85,6 +92,11 @@
   .WaterModalCloseBtn {
     width: 28px;
     height: 28px;
+  }
+
+  .WaterModalCloseBtn svg {
+    width: 14px;
+    height: 14px;
   }
 }
 

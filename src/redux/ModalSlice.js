@@ -1,7 +1,7 @@
-import { createSlice } from '@reduxjs/toolkit';
+import {createSlice} from "@reduxjs/toolkit";
 
 const modalSlice = createSlice({
-  name: 'modal',
+  name: "modal",
   initialState: {
     isModalOpen: false,
     modalType: null, // Can be 'LOGOUT', 'DELETE_WATER', etc.
@@ -21,7 +21,7 @@ const modalSlice = createSlice({
   },
 });
 
-export const { openModal, closeModal } = modalSlice.actions;
+export const {openModal, closeModal} = modalSlice.actions;
 export default modalSlice.reducer;
 
 /* import { createSlice } from '@reduxjs/toolkit';
