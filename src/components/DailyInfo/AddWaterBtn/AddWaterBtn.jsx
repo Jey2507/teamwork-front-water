@@ -44,7 +44,7 @@ export default function AddWaterBtn({
           >
             <svg
               className={css.icon}
-              fill={isHovered ? hoverColorIcon : colorIcon}
+              stroke={isHovered ? hoverColorIcon : colorIcon}
             >
               <use href={Icons + '#icon-x'}></use>
             </svg>

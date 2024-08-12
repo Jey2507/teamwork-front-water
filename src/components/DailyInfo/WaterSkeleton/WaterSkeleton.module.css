@@ -1,0 +1,25 @@
+.waterSkeleton {
+  display: grid;
+  grid-template-columns: 1fr 2fr 1fr;
+  border-radius: 15px;
+  padding: 14px 14px;
+  gap: 10px;
+  justify-items: center;
+}
+.leftCol {
+  grid-column: 1;
+}
+.centerCol {
+  width: 100%;
+  grid-column: 2;
+}
+.rightCol {
+  width: 100%;
+
+  grid-column: 3;
+}
+.leftCol,
+.centerCol,
+.rightCol {
+  width: 100%;
+}
