@@ -12,29 +12,29 @@
     display: block;
     margin-left: auto;
     margin-right: auto;
-   
 }
- .trackerLogo {
-            display: inline-block;
-            position: absolute;
-            top: 24px;
-            left: 16px;
-           
-        }
 
-        .btn {
+.trackerLogo {
+    display: inline-block;
     position: absolute;
+    top: 24px;
+    left: 16px;
+}
+
+.btn {
+    position: absolute;
+    width: max-content;
     top: 337px;
-   right: 16px;
+    right: 16px;
     display: block;
     font-size: 14px;
     line-height: 1.29;
-  
+
     font-weight: 700;
     border-radius: 30px;
- 
+
     cursor: pointer;
-        }
+}
 
     
 

@@ -8,7 +8,6 @@ import { refreshUser } from '../../redux/auth/operations.js';
 import { selectIsRefreshing } from '../../redux/auth/selectors.js';
 import Loader from '../Loader/Loader.jsx';
 
-const TestPage = lazy(() => import('../../pages/TestPage/TestPage.jsx'));
 const HomePage = lazy(() => import('../../pages/HomePage/HomePage.jsx'));
 const NotFoundPage = lazy(() => import('../../pages/NotFoundPage/NotFoundPage.jsx'));
 const TrackerPage = lazy(() => import('../../pages/TrackerPage/TrackerPage.jsx'));
@@ -42,7 +41,6 @@ function App() {
             path="/tracker"
             element={<PrivateRoute redirectTo="/signin" component={<TrackerPage />} />}
           />
-          <Route path="/test" element={<TestPage />} />
           <Route path="*" element={<NotFoundPage />} />
         </Route>
       </Routes>
