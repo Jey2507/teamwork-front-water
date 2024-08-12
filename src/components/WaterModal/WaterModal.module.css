@@ -4,7 +4,7 @@
   left: 0;
   width: 100vw;
   height: 100vh;
-  background:rgba(0, 0, 0, 0.3); 
+  background: rgba(0, 0, 0, 0.3);
   z-index: 999;
   opacity: 0;
   visibility: hidden;
@@ -63,6 +63,7 @@
   border: none;
   background-color: transparent;
   fill: #323f47;
+  stroke: currentColor;
   transition: transform 0.2s ease, fill 0.2s ease;
 }
 
