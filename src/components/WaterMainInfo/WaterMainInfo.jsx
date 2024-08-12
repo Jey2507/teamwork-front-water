@@ -40,7 +40,7 @@ export default function WaterMainInfo() {
 
       <img
         className={css.trackerImage}
-        srcSet={`${tp1xmb} 262w, ${tp1xtb} 374w, ${tp1xdt} 472w, ${tp2xmb} 524w, ${tp2xtb} 748w, ${tp3xmb} 786w, ${tp2xdt} 944w, ${tp3xtb} 1122w, ${tp3xdt} 1416w`}
+             srcSet={`${tp1xmb} 262w, ${tp1xtb} 374w, ${tp1xdt} 472w, ${tp2xmb} 524w, ${tp2xtb} 748w, ${tp3xmb} 786w, ${tp2xdt} 944w, ${tp3xtb} 1122w, ${tp3xdt} 1416w`}
         src={tp1xmb}
         alt=""
       />

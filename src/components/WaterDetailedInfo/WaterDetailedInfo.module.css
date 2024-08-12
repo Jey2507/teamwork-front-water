@@ -1,8 +1,15 @@
 .waterInfoBox  {
     border-radius: 30px;
-    width: 343px;
+  
     background: var(--background);
     padding: 40px 20px;
+}
+
+@media screen and (max-width: 767px) {
+    .waterInfoBox{
+max-width: 343px;
+    }
+  
 }
 
 @media screen and (min-width:768px) {
