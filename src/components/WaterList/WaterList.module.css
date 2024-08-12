@@ -1,6 +1,7 @@
 .water_list {
   width: 100%;
   display: flex;
+  box-sizing: content-box;
   gap: 8px;
   margin: 0;
   padding: 0;
@@ -9,13 +10,19 @@
   overflow-x: scroll;
   overflow: auto;
   padding-bottom: 32px;
-  padding-top: 24px;
+  margin-top: 24px;
+  height: 86px;
 }
 .water_item {
   flex-basis: calc(50% - 4px);
   flex-shrink: 0;
   width: calc(50% - 8px);
   height: 73px;
+}
+.water_none {
+  padding: inherit;
+  font-size: 16px;
+  line-height: normal;
 }
 .water_list::-webkit-scrollbar {
   height: 8px;
@@ -44,6 +51,7 @@
 @media screen and (min-width: 768px) {
   .water_list {
     gap: 32px;
+    height: 93px;
   }
   .water_item {
     flex-basis: calc(33.33% - 22px);
