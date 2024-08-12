@@ -1,67 +1,67 @@
 .wrapper {
-    padding: 14px 20px;
- 
-    border-radius: 30px;
-    opacity: 0px;
-    max-height: 66px;
-    max-width: 178px;
-    border: none;
+  padding: 14px 20px;
+
+  border-radius: 30px;
+  opacity: 0px;
+  max-height: 66px;
+  max-width: 178px;
+  border: none;
 }
 
 .add_water_btn {
-    display: flex;
-    align-items:center;
-    background: none;
-    gap: 10px;
+  display: flex;
+  align-items:center;
+  background: none;
+  gap: 10px;
 }
 
 .text{
-    display: block;
-    font-size: 14px;
-        font-weight: 700;
-        line-height: 1.29;
-        letter-spacing: -0.01em;
-        text-align: center;
-        white-space: nowrap;
+  display: block;
+  font-size: 14px;
+  font-weight: 700;
+  line-height: 1.29;
+  letter-spacing: -0.01em;
+  text-align: center;
+  white-space: nowrap;
 }
 
 .wrapper:hover  .text  {
-    color: var(--accent);
+  color: var(--accent);
 }
 
 .wrapper:hover .icon {
-    color: var(--accent);
+  stroke: var(--accent);
 }
 
 .wrapper:focus .text {
-    color: var(--accent);
+  color: var(--accent);
 }
 
 .wrapper:focus .icon {
-    color: var(--accent);
+  color: var(--accent);
 }
 
 
 .icon {
-    display: block;
-    width: 15px;
-    height: 15px;
-    transform: rotate(45deg);
-    border-radius: 50px;
- 
-    box-sizing: unset;
+  display: block;
+  width: 15px;
+  height: 15px;
+  transform: rotate(45deg);
+  border-radius: 50px;
+
+  box-sizing: unset;
 }
 
 .add_water_btn:hover {
-    cursor: pointer;
+  cursor: pointer;
 }
 
 @media screen and (min-width: 768px) {
-    .wrapper {
-padding: 18px 30px;
-        font-size: 16px;
-        line-height: 1.5;
-    }
+  .wrapper {
+    padding: 18px 30px;
+    font-size: 16px;
+    line-height: 1.5;
+  }
 
 }
 
