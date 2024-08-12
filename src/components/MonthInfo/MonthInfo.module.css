@@ -1,6 +1,6 @@
 .calendar {
     background-color: #f0eff4;
-    padding: 46px 0;
+    padding-top: 46px;
     max-height: 431px;
   }
   @media (--tablet-bp) {
