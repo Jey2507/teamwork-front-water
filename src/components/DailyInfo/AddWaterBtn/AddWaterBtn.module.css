@@ -28,6 +28,10 @@
   cursor: pointer;
   transition: color 300ms cubic-bezier(0.4, 0, 0.2, 1);
 }
+.add_water_btn:disabled {
+  opacity: 0.5; 
+  cursor: not-allowed; 
+}
 
 .circle_btn {
   display: inline-block;
@@ -50,6 +54,9 @@
   transition: stroke 300ms cubic-bezier(0.4, 0, 0.2, 1), fill 300ms cubic-bezier(0.4, 0, 0.2, 1); /* Додаємо плавність для stroke і fill */
 }
 
+.add_water_btn:disabled:hover .icon {
+  stroke: var(--main);
+}
 .add_water_btn:hover .icon {
   stroke: var(--main-white); 
 }

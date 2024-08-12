@@ -50,7 +50,7 @@ export default function AddWaterBtn({
           >
             <svg
               className={css.icon}
-              stroke={isHovered ? hoverColorIcon : colorIcon}
+              stroke={isHovered && !isTodayData ? hoverColorIcon : colorIcon}
             >
               <use href={Icons + '#icon-x'}></use>
             </svg>
