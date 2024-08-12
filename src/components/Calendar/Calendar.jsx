@@ -21,7 +21,7 @@ export const Calendar = () => {
   function percentDailyCalc(waterDay, norma) {
     return Math.round((waterDay / norma) * 100);
   }
-  const items = useSelector(selectWaterMonth) || [];
+  const items = useSelector(selectWaterMonth);
   const data = useSelector(selectMonth);
   const selectedMonth = data.year + '-' + data.month;
 
@@ -33,6 +33,9 @@ export const Calendar = () => {
     start: startOfMonth(new Date(selectedMonth)),
     end: endOfMonth(new Date(selectedMonth)),
   });
+  if (!items) {
+    return console.log('loading');
+  }
 
   return (
     <ul className={css.listCalendar}>
