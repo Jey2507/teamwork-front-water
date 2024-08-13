@@ -1,4 +1,5 @@
 import { Helmet } from 'react-helmet-async';
+import css from "../NotFoundPage/NotFoundPage.module.css"
 
 export default function NotFoundPage() {
   return (
@@ -6,7 +7,7 @@ export default function NotFoundPage() {
       <Helmet>
         <title>Not found</title>
       </Helmet>
-      <p>Not Found Page</p>
+      <div className={css.not}></div>
     </div>
   );
 }

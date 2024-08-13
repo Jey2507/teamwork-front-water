@@ -50,10 +50,11 @@ const SignInForm = () => {
   const onSubmit = async (data) => {
     dispatch(login(data))
       .unwrap()
-      .then((res) => {
+      .then(() => {
         reset();
+        toast.success("Successfully logged in a user!");
       })
-      .catch((err) => {
+      .catch(() => {
         toast.error("Login failed");
       });
   };

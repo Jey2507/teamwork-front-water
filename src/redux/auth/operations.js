@@ -33,7 +33,6 @@ export const login = createAsyncThunk(
     try {
       const res = await axios.post("/auth/login", userInfo);
       setAuthHeader(res.data.data.token);
-      toast.success(res.data.message);
 
       const profile = await axios.get("/user");
       return { ...res.data.data, user: profile.data.data };

@@ -43,11 +43,11 @@ const SignUpForm = () => {
 
     dispatch(registerUser({ email, password }))
       .unwrap()
-      .then(res => {
+      .then(() => {
         reset();
-        toast.success(res.message);
+        toast.success("Welcome to Aqua Track!");
       })
-      .catch(err => {
+      .catch(() => {
         toast.error('Registration failed');
       });
   };

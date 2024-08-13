@@ -1,0 +1,9 @@
+.not {
+    width: 320px;
+    height: 200px;
+    margin: 40px auto 0 auto;
+    background-image: url("../../assets/images/not_found.png");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
