@@ -12,3 +12,6 @@ export const selectPercentDay = (state) => state.water.percentDay;
 export const selectEntries = (state) => state.water.entries;
 export const selectLoading = (state) => state.water.loading;
 export const selectError = (state) => state.water.error;
+
+
+export const getMonthStatistics = (state) => state.water.showMonthStatistics;
