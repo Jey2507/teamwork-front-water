@@ -84,7 +84,7 @@
   transition: opacity var(--animation);
   cursor: pointer;
 }
-.statisticBtnActive img {
+.statisticBtnActive {
   opacity: 1;
 }
 
