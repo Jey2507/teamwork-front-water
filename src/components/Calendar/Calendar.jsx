@@ -6,17 +6,14 @@ import { getMonthStatistics, selectMonth, selectWaterMonth } from '../../redux/w
 import { useEffect } from 'react';
 import { getWaterMonth } from '../../redux/water/operations.js';
 import { selectUser } from '../../redux/auth/selectors.js';
-import { LineChart, Line, CartesianGrid, AreaChart, XAxis, YAxis, Tooltip, Area } from 'recharts';
-import { setCurrentDay } from '../../redux/water/slice.js';
+import { ResponsiveContainer, AreaChart, XAxis, YAxis, Tooltip, Area } from 'recharts';
 
 export const Calendar = () => {
   const selectWaterMonthInfo = useSelector(selectWaterMonth);
   const monthStatistic = [];
-
   selectWaterMonthInfo.map(item => {
     monthStatistic.push({ day: item.date.slice(-2), amount: item.amount });
   });
-  console.log(monthStatistic);
 
   const dispatch = useDispatch();
   const isMonthStatistic = useSelector(getMonthStatistics);
@@ -70,38 +67,41 @@ export const Calendar = () => {
           })}
         </ul>
       ) : (
-        <AreaChart
-          width={640}
-          height={300}
-          data={monthStatistic}
-          margin={{ top: 10, right: 30, left: 10, bottom: 0 }}
-        >
-          <defs>
-            <linearGradient id="colorPv" x1="0" y1="0" x2="0" y2="1">
-              <stop offset="3%" stopColor="#9be1a0" stopOpacity={1} />
-              <stop offset="75%" stopColor="#9be1a0" stopOpacity={0.8} />
-              <stop offset="99%" stopColor="#9be1a0" stopOpacity={0} />
-            </linearGradient>
-          </defs>
-          <XAxis dataKey="day" axisLine={false} tickLine={false} tickCount={11} interval={3} />
-          <YAxis
-            axisLine={false}
-            tickLine={false}
-            width={40}
-            padding={{ bottom: 5 }}
-            tickFormatter={formatYAxis}
-            tickCount={6}
-          />
-          <Tooltip />
-          <Area
-            type="monotone"
-            dataKey="amount"
-            stroke="#9be1a0"
-            fillOpacity={1}
-            fill="url(#colorPv)"
-            activeDot={{ r: 9 }}
-          />
-        </AreaChart>
+        <div className={css.statistic}>
+          <ResponsiveContainer width="100%" height="100%">
+            <AreaChart
+              className={css.statistic}
+              data={monthStatistic}
+              margin={{ top: 10, right: 30, left: 10, bottom: 0 }}
+            >
+              <defs>
+                <linearGradient id="colorPv" x1="0" y1="0" x2="0" y2="1">
+                  <stop offset="3%" stopColor="#9be1a0" stopOpacity={1} />
+                  <stop offset="75%" stopColor="#9be1a0" stopOpacity={0.8} />
+                  <stop offset="99%" stopColor="#9be1a0" stopOpacity={0} />
+                </linearGradient>
+              </defs>
+              <XAxis dataKey="day" axisLine={false} tickLine={false} tickCount={11} interval={3} />
+              <YAxis
+                axisLine={false}
+                tickLine={false}
+                width={40}
+                padding={{ bottom: 5 }}
+                tickFormatter={formatYAxis}
+                tickCount={6}
+              />
+              <Tooltip />
+              <Area
+                type="monotone"
+                dataKey="amount"
+                stroke="#9be1a0"
+                fillOpacity={1}
+                fill="url(#colorPv)"
+                activeDot={{ r: 9 }}
+              />
+            </AreaChart>
+          </ResponsiveContainer>
+        </div>
       )}
     </div>
   );
