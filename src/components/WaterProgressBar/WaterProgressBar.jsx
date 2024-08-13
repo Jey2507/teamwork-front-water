@@ -1,10 +1,12 @@
 // import { selectDailyNorma } from "../../redux/auth/selectors";
 // import { selectPercentDay } from "../../redux/water/selectors";
 import { number } from 'yup';
+import { format, isToday, parseISO } from 'date-fns';
 import { selectUser } from '../../redux/auth/selectors';
-import { selectWaterDate } from '../../redux/water/selectors';
+import { selectDate, selectWaterDate } from '../../redux/water/selectors';
 import css from './WaterProgressBar.module.css';
 import { useSelector } from 'react-redux';
+import ChooseDate from '../ChooseDate/ChooseDate';
 
 export default function WaterProgressBar() {
   let waterDailyNormaBar = useSelector(selectUser);
@@ -59,10 +61,15 @@ export default function WaterProgressBar() {
     floatPercentMod = -6.5;
   }
 
+  const selectedData = useSelector(selectDate);
+  const parsedDate = parseISO(selectedData);
+  const isTodayData = isToday(parsedDate);
+
+  const formattedDate = isTodayData ? 'Today' : format(parsedDate, 'd, MMMM');
+
   return (
     <div className={css.container}>
-      <p className={css.text}>Today</p>
-
+      <p className={css.text}>{formattedDate}</p>
       <div className={css.backBar}>
         <div
           className={css.frontBar}
