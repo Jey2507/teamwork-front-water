@@ -10,6 +10,7 @@
   --main-white: #fff;
   --dark-blue: #323f47;
   --userbar-color: #323f4766;
+  --animation: 0.4s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 p {

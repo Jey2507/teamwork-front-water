@@ -1,15 +1,14 @@
 import css from './CalendarPagination.module.css';
 import { BsChevronLeft, BsChevronRight } from 'react-icons/bs';
-import { format, addMonths, subMonths, startOfMonth } from 'date-fns';
+import { format, addMonths, subMonths, startOfMonth, formatDate } from 'date-fns';
 import { icons as sprite } from '../../assets/index.js';
 import { useDispatch, useSelector } from 'react-redux';
 import { selectDate, selectMonth } from '../../redux/water/selectors.js';
-import { setCurrentDate } from '../../redux/water/slice.js';
+import { setCurrentDate, setCurrentDay } from '../../redux/water/slice.js';
 
 export const CalendarPagination = ({ isActive, setIsActive }) => {
   const dispatch = useDispatch();
   const currentDate = useSelector(selectMonth);
-  const selectDate = useSelector(selectDate);
   const monthQuery = new Date(currentDate.year, currentDate.month - 1);
   const monthNext = new Date(currentDate.year, currentDate.month);
   const minDate = new Date('2020-01-01');
@@ -44,7 +43,16 @@ export const CalendarPagination = ({ isActive, setIsActive }) => {
   return (
     <div className={css.paginationSection}>
       {isActive ? <p className={css.month}>Month</p> : <p className={css.month}>Statistic</p>}
-      <button className={css.today_btn} onClick={() => setIsActive(!isActive)}>
+      <button
+        className={css.today_btn}
+        onClick={() => {
+          const date = formatDate(new Date(), 'yyyy-MM-dd');
+          dispatch(
+            setCurrentDate({ year: new Date().getFullYear(), month: new Date().getMonth() + 1 })
+          );
+          dispatch(setCurrentDay(date));
+        }}
+      >
         Today
       </button>
       <div className={css.chooseMonth}>

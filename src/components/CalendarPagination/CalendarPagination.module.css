@@ -1,3 +1,13 @@
+.today_btn {
+  border: none;
+}
+
+.today_btn:hover {
+  color: var(--accent);
+  transition: color var(--animation);
+  background-color: transparent;
+  cursor: pointer;
+}
 .paginationSection {
   display: flex;
   justify-content: flex-end;
@@ -16,7 +26,7 @@
 .chevron {
   stroke: var(--color-darkblue);
   stroke-width: 1;
-  transition: var(--animation);
+  transition: stroke var(--animation);
 }
 .chevronDisabled {
   border: none;
@@ -39,6 +49,10 @@
 .button:hover .chevron {
   stroke: var(--color-lightgreen);
 }
+.button:hover {
+  stroke: var(--accent);
+}
+
 .buttonDisabled {
   border: none;
   background-color: transparent;
@@ -64,10 +78,11 @@
   border: none;
   background-color: transparent;
   opacity: 0.4;
-  transition: var(--animation);
 }
 .statisticBtn:hover {
   opacity: 1;
+  transition: opacity var(--animation);
+  cursor: pointer;
 }
 .statisticBtnActive img {
   opacity: 1;
