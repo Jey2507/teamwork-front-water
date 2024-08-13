@@ -20,6 +20,7 @@ export const initialState = {
     entries: [],
     loading: false,
     error: null,
+    showMonthStatistics: false,
 };
 /* 
     waterProgress: 0,

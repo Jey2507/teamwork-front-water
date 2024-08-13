@@ -22,6 +22,9 @@ const waterSlice = createSlice({
     },
     setCurrentDay(state, action) {
       state.selectedDate = action.payload;
+    },
+    setShowStatistic(state, action) {
+      state.showMonthStatistics = action.payload;
     }
   },
   extraReducers: (builder) =>
@@ -70,5 +73,5 @@ const waterSlice = createSlice({
         state.error = true;
       })
 });
-export const { setCurrentDate, setCurrentDay } = waterSlice.actions;
+export const { setCurrentDate, setCurrentDay, setShowStatistic } = waterSlice.actions;
 export const waterReducer = waterSlice.reducer;

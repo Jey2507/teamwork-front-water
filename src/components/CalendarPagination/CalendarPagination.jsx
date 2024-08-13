@@ -3,11 +3,11 @@ import { BsChevronLeft, BsChevronRight } from 'react-icons/bs';
 import { format, addMonths, subMonths, startOfMonth, formatDate } from 'date-fns';
 import { icons as sprite } from '../../assets/index.js';
 import { useDispatch, useSelector } from 'react-redux';
-import { selectDate, selectMonth } from '../../redux/water/selectors.js';
-import { setCurrentDate, setCurrentDay } from '../../redux/water/slice.js';
+import { getMonthStatistics, selectDate, selectMonth } from '../../redux/water/selectors.js';
+import { setCurrentDate, setCurrentDay, setShowStatistic } from '../../redux/water/slice.js';
 import { useMedia } from '../../hooks/useMedia.js';
 
-export const CalendarPagination = ({ isActive, setIsActive }) => {
+export const CalendarPagination = () => {
   const dispatch = useDispatch();
   const selectedDate = useSelector(selectDate);
   const currentDate = useSelector(selectMonth);
@@ -15,6 +15,7 @@ export const CalendarPagination = ({ isActive, setIsActive }) => {
   const monthNext = new Date(currentDate.year, currentDate.month);
   const minDate = new Date('2020-01-01');
   const { isDesktop, isTablet } = useMedia();
+  const isMonthStatistic = useSelector(getMonthStatistics);
 
   const handlePrevMonth = () => {
     let newMonth;
@@ -50,7 +51,11 @@ export const CalendarPagination = ({ isActive, setIsActive }) => {
 
   return (
     <div className={css.paginationSection}>
-      {isActive ? <p className={css.month}>Month</p> : <p className={css.month}>Statistic</p>}
+      {!isMonthStatistic ? (
+        <p className={css.month}>Month</p>
+      ) : (
+        <p className={css.month}>Statistic</p>
+      )}
       {(isDesktop || isTablet) && !isTodayVisible() && (
         <button
           className={css.today_btn}
@@ -67,25 +72,25 @@ export const CalendarPagination = ({ isActive, setIsActive }) => {
       )}
 
       <div className={css.chooseMonth}>
-        {isActive ? (
-          <>
-            <button className={css.button} disabled={isPrevDisabled} onClick={handlePrevMonth}>
-              <BsChevronLeft className={isPrevDisabled ? css.chevronDisabled : css.chevron} />
-            </button>
-            <span className={css.span}>{format(monthQuery, 'MMMM, yyyy')}</span>
-            <button
-              className={isNextDisabled ? css.buttonDisabled : css.button}
-              onClick={handleNextMonth}
-              disabled={isNextDisabled}
-            >
-              <BsChevronRight className={isNextDisabled ? css.chevronDisabled : css.chevron} />
-            </button>
-          </>
-        ) : null}
+        <>
+          <button className={css.button} disabled={isPrevDisabled} onClick={handlePrevMonth}>
+            <BsChevronLeft className={isPrevDisabled ? css.chevronDisabled : css.chevron} />
+          </button>
+          <span className={css.span}>{format(monthQuery, 'MMMM, yyyy')}</span>
+          <button
+            className={isNextDisabled ? css.buttonDisabled : css.button}
+            onClick={handleNextMonth}
+            disabled={isNextDisabled}
+          >
+            <BsChevronRight className={isNextDisabled ? css.chevronDisabled : css.chevron} />
+          </button>
+        </>
 
         <button
-          className={`${css.statisticBtn} ${!isActive ? css.statisticBtnActive : ''}`}
-          onClick={() => setIsActive(!isActive)}
+          className={`${css.statisticBtn} ${isMonthStatistic ? css.statisticBtnActive : ''}`}
+          onClick={() =>
+            isMonthStatistic ? dispatch(setShowStatistic(false)) : dispatch(setShowStatistic(true))
+          }
         >
           <svg width="20" height="20">
             <use xlinkHref={`${sprite}#icon-pie-chart`} />
