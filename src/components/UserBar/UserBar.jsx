@@ -14,7 +14,7 @@ const MODAL_TYPES = {
   SETTING: 'SETTING',
 };
 
-const getFirstName = (fullName) => (fullName ? fullName.split(' ')[0] : 'User');
+const getFirstName = fullName => (fullName ? fullName.split(' ')[0] : 'User');
 
 const Userbar = () => {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -23,7 +23,7 @@ const Userbar = () => {
   const userInfo = useSelector(selectUser);
   const [isUserUpdated, setIsUserUpdated] = useState(false);
 
-  const { isModalOpen, modalType } = useSelector((state) => state.modal);
+  const { isModalOpen, modalType } = useSelector(state => state.modal);
 
   const renderModal = () => {
     switch (modalType) {
@@ -50,15 +50,17 @@ const Userbar = () => {
   }, [dispatch, isUserUpdated]);
 
   const toggleMenu = useCallback(() => {
-    setMenuOpen((prevMenuOpen) => !prevMenuOpen);
+    setMenuOpen(prevMenuOpen => !prevMenuOpen);
   }, []);
 
   const handleSettingsClick = useCallback(() => {
     dispatch(openModal({ type: MODAL_TYPES.SETTING }));
+    setMenuOpen(false);
   }, [dispatch]);
 
   const handleLogOutClick = useCallback(() => {
     dispatch(openModal({ type: MODAL_TYPES.LOGOUT }));
+    setMenuOpen(false);
   }, [dispatch]);
 
   return (

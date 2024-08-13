@@ -1,17 +1,19 @@
 import css from './DeleteWaterModal.module.css';
 import { useDispatch, useSelector } from 'react-redux';
-import { deleteWaterEntry, getWaterDay } from '../../redux/water/operations';
+import { deleteWaterEntry, getWaterDay, getWaterMonth } from '../../redux/water/operations';
 import { closeModal } from '../../redux/ModalSlice';
 import toast from 'react-hot-toast';
 import Modal from '../Modal/Modal';
-import { selectDate } from '../../redux/water/selectors';
+import { selectDate, selectMonth } from '../../redux/water/selectors';
 import Button from '../Button/Button';
 
 const DeleteWaterModal = () => {
   const dispatch = useDispatch();
-  const isModalOpen = useSelector((state) => state.modal.isModalOpen);
-  const entryId = useSelector((state) => state.modal.modalData.entryId);
+  const isModalOpen = useSelector(state => state.modal.isModalOpen);
+  const entryId = useSelector(state => state.modal.modalData.entryId);
   const selectedDate = useSelector(selectDate);
+  const data = useSelector(selectMonth);
+  const selectedMonth = data.year + '-' + data.month;
 
   if (!isModalOpen) return null;
 
@@ -20,6 +22,7 @@ const DeleteWaterModal = () => {
       await dispatch(deleteWaterEntry(entryId)).unwrap();
       dispatch(closeModal());
       dispatch(getWaterDay(selectedDate));
+      dispatch(getWaterMonth(selectedMonth));
       toast.success('Entry deleted successfully');
     } catch (error) {
       toast.error('Failed to delete entry');
@@ -29,7 +32,7 @@ const DeleteWaterModal = () => {
   return (
     <Modal>
       <div className={css.modalContainer}>
-      <Button />
+        <Button />
         <div className={css.coverText}>
           <h2 className={css.title}>Delete entry</h2>
           <p className={css.text}>Are you sure you want to delete the entry?</p>
@@ -48,7 +51,6 @@ const DeleteWaterModal = () => {
 };
 
 export default DeleteWaterModal;
-
 
 /* const DeleteWaterModal = () => {
   const dispatch = useDispatch();
