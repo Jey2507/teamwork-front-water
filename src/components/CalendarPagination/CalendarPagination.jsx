@@ -1,17 +1,20 @@
 import css from './CalendarPagination.module.css';
 import { BsChevronLeft, BsChevronRight } from 'react-icons/bs';
-import { format, addMonths, subMonths, startOfMonth } from 'date-fns';
+import { format, addMonths, subMonths, startOfMonth, formatDate } from 'date-fns';
 import { icons as sprite } from '../../assets/index.js';
 import { useDispatch, useSelector } from 'react-redux';
-import { selectMonth } from '../../redux/water/selectors.js';
-import { setCurrentDate } from '../../redux/water/slice.js';
+import { selectDate, selectMonth } from '../../redux/water/selectors.js';
+import { setCurrentDate, setCurrentDay } from '../../redux/water/slice.js';
+import { useMedia } from '../../hooks/useMedia.js';
 
 export const CalendarPagination = ({ isActive, setIsActive }) => {
   const dispatch = useDispatch();
+  const selectedDate = useSelector(selectDate);
   const currentDate = useSelector(selectMonth);
   const monthQuery = new Date(currentDate.year, currentDate.month - 1);
   const monthNext = new Date(currentDate.year, currentDate.month);
   const minDate = new Date('2020-01-01');
+  const { isDesktop, isTablet } = useMedia();
 
   const handlePrevMonth = () => {
     let newMonth;
@@ -40,9 +43,29 @@ export const CalendarPagination = ({ isActive, setIsActive }) => {
   const isPrevDisabled = monthQuery <= startOfMonth(minDate);
   const isNextDisabled = monthNext > new Date();
 
+  const isTodayVisible = () => {
+    const today = selectedDate === new Date().toLocaleDateString('sv-SE');
+    return today;
+  };
+
   return (
     <div className={css.paginationSection}>
       {isActive ? <p className={css.month}>Month</p> : <p className={css.month}>Statistic</p>}
+      {(isDesktop || isTablet) && !isTodayVisible() && (
+        <button
+          className={css.today_btn}
+          onClick={() => {
+            const date = formatDate(new Date(), 'yyyy-MM-dd');
+            dispatch(
+              setCurrentDate({ year: new Date().getFullYear(), month: new Date().getMonth() + 1 })
+            );
+            dispatch(setCurrentDay(date));
+          }}
+        >
+          Today
+        </button>
+      )}
+
       <div className={css.chooseMonth}>
         {isActive ? (
           <>
