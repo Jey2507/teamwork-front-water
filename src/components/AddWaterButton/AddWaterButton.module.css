@@ -29,8 +29,10 @@
   font-weight: 700;
   line-height: 1.29;
   letter-spacing: -0.01em;
+  color: var(--main-white);
   text-align: center;
   white-space: nowrap;
+    transition: color var(--animation);
 }
 .wrapper:disabled .add_water_btn_disabled {
   opacity: 0.5; 
@@ -47,18 +49,22 @@
 
 .wrapper:hover .text  {
   color: var(--accent);
+  transition: color var(--animation);
 }
 
 .wrapper:hover .icon {
   stroke: var(--accent);
+  transition: stroke var(--animation);
 }
 
 .wrapper:focus .text {
   color: var(--accent);
+  transition: color var(--animation);
 }
 
 .wrapper:focus .icon {
   color: var(--accent);
+  transition: color var(--animation);
 }
 
 
@@ -68,7 +74,8 @@
   height: 15px;
   transform: rotate(45deg);
   border-radius: 50px;
-
+  stroke: var(--main-white);
+  transition: stroke var(--animation);
   box-sizing: unset;
 }
 
