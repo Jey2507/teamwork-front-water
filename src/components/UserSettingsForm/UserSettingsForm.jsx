@@ -3,7 +3,7 @@ import css from './UserSettingsForm.module.css';
 import { useForm } from 'react-hook-form';
 import { icons as sprite } from '../../assets/index.js';
 import { useDispatch, useSelector } from 'react-redux';
-import { selectUser } from '../../redux/auth/selectors.js';
+import { selectDailyNorma, selectUser } from '../../redux/auth/selectors.js';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 import toast from 'react-hot-toast';
@@ -33,7 +33,7 @@ const schema = yup.object().shape({
 
 const UserSettingsForm = () => {
   const [selectedAvatarFile, setSelectedAvatarFile] = useState(null);
-
+  const DailyNorma = useSelector(selectDailyNorma);
   const { name, gender, avatar, weight, email, dailyTimeActivity, dailyNorma } =
     useSelector(selectUser);
   const {
@@ -113,7 +113,7 @@ const UserSettingsForm = () => {
       } else if (userGender === 'male') {
         normaWater = roundUpToTwoDecimalPlaces(userWeight * 0.04 + userSportTime * 0.6);
       }
-      setValue('dailyNorma', normaWater);
+      setValue('dailyNorma', DailyNorma);
       return normaWater;
     }
     return normaWater;
