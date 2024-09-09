@@ -8,9 +8,9 @@
 .settingsModal {
   position: relative;
   scrollbar-width: 6px;
-  scrollbar-color: rgb(240, 239, 244) inherit;
   width: 343px;
   background-color: white;
+  scrollbar-color: rgb(240, 239, 244) inherit;
 }
 
 .settingsModal::-webkit-scrollbar {
@@ -26,9 +26,7 @@
   border-radius: 15px;
   box-shadow: 0px 4px 50px 0px rgba(0, 0, 0, 0.1);
   padding: 20px;
-  margin: 20px 0; /* Optional: Additional margin */
-  max-height: 90vh; /* Maximum height set to 90% of the viewport */
-  overflow-y: auto; /* Allow content to scroll within the modal */
+  margin: 20px 0;
   box-sizing: border-box;
 }
 
@@ -68,4 +66,21 @@
   .settingsModal {
     width: 920px;
   }
+}
+.settingsModal {
+  max-height: 90vh;
+  overflow-y: auto;
+}
+
+.settingsModal::-webkit-scrollbar {
+  width: 8px;
+}
+
+.settingsModal::-webkit-scrollbar-track {
+  background-color: inherit;
+}
+
+.settingsModal::-webkit-scrollbar-thumb {
+  background-color: rgb(240, 239, 244);
+  border-radius: 30px;
 }
